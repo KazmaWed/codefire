@@ -1,10 +1,10 @@
-import 'dart:io';
+import 'package:codefire/view/main_screen/compiler.dart';
 import 'package:flutter/material.dart';
-import 'package:dart_eval/dart_eval.dart';
 import 'package:code_text_field/code_text_field.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/dart.dart';
+import 'operation_methods.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -15,13 +15,21 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   static String initialValue = '''
-int n = 1;
-int m = 10;
-int result = n;
-for(var idx = n; idx <= m; idx++) {
-  result *= idx;
+int main() {
+  int n = 1;
+  int m = 5;
+  int result = 1;
+  for(var idx = n; idx <= m; idx++) {
+    result = result * idx;
+  }
+  return result;
 }
-return result.runtimeType;
+''';
+
+  String hiddenFunc = '''
+int multi(int a, int b) {
+ return a * b;
+}
 ''';
 
   final controller = CodeController(
@@ -33,26 +41,6 @@ return result.runtimeType;
   final style = const TextStyle(fontSize: 21);
 
   String result = '';
-
-  // String execute(String code) {
-  //   final compiler = Compiler();
-
-  //   final program = compiler.compile({
-  //     'my_package': {'main.dart': code}
-  //   });
-
-  //   final bytecode = program.write();
-
-  //   final file = File('program.evc');
-  //   file.writeAsBytesSync(bytecode);
-
-  //   // final _file = File('program.evc');
-  //   final _bytecode = file.readAsBytesSync().buffer.asByteData();
-
-  //   final runtime = Runtime(_bytecode);
-  //   runtime.setup();
-  //   return runtime.executeLib('package:my_package/main.dart', 'main').toString();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +87,15 @@ return result.runtimeType;
                             style: style,
                           ),
                           onPressed: () {
-                            final fixed = controller.text.replaceAll('·', ' ');
+                            final fixed = fix(controller.text);
+                            final multize = multiplize(fixed);
+                            final withFunc = multize + hiddenFunc;
                             try {
-                              setState(() => result = eval(fixed).toString());
+                              // setState(() => result = eval(fixed).toString());
+                              final executed = comp(withFunc);
+                              setState(() {
+                                result = executed;
+                              });
                             } catch (e) {
                               setState(() => result = e.toString());
                             }
