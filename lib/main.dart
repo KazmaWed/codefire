@@ -1,5 +1,5 @@
-import 'package:codefire/view/code_editing_field.dart';
 import 'package:flutter/material.dart';
+import 'package:codefire/view/main_screen/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'NotoSansMono',
         primarySwatch: Colors.blue,
       ),
-      home: const CodeEditorField(),
+      home: const MainScreen(),
     );
   }
 }
