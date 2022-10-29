@@ -10,7 +10,7 @@ extension StringExtention on String {
     return jsResult;
   }
 
-  String toPlayerCommand() {
+  List<String> toPlayerCommand() {
     const header = '''
 var playerCommandOutput = [];
 
@@ -40,6 +40,10 @@ function moveRight(d = 1) {
 ''';
     const footer = 'playerCommandOutput';
 
-    return (header + this + footer).evalJS();
+    try {
+      return (header + this + footer).evalJS().split(',');
+    } catch (e) {
+      return [e.toString()];
+    }
   }
 }
