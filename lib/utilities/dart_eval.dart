@@ -17,5 +17,4 @@ void compile(String code) {
 
   final runtime = Runtime(bytedata);
   runtime.setup();
-  print(runtime.executeLib('package:my_package/main.dart', 'main'));
 }

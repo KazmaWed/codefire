@@ -1,3 +1,4 @@
+import 'package:codefire/view/main_screen/command_generater.dart';
 import 'package:codefire/view/main_screen/compiler.dart';
 import 'package:flutter/material.dart';
 import 'package:code_text_field/code_text_field.dart';
@@ -14,23 +15,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static String initialValue = '''
-int main() {
-  int n = 1;
-  int m = 5;
-  int result = 1;
-  for(var idx = n; idx <= m; idx++) {
-    result = result * idx;
-  }
-  return result;
-}
-''';
-
-  String hiddenFunc = '''
-int multi(int a, int b) {
- return a * b;
-}
-''';
+  static String initialValue = sampleCode;
 
   final controller = CodeController(
     text: initialValue,
@@ -62,7 +47,7 @@ int multi(int a, int b) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SelectableText(
-                    result == '' ? 'null' : result,
+                    result == '' ? 'no output...' : result,
                     style: style,
                   ),
                 ],
@@ -87,12 +72,15 @@ int multi(int a, int b) {
                             style: style,
                           ),
                           onPressed: () {
-                            final fixed = fix(controller.text);
-                            final multize = multiplize(fixed);
-                            final withFunc = multize + hiddenFunc;
+                            String fixed = spaceFix(controller.text);
+                            fixed = spacifyAll(fixed);
+                            fixed = multiplize(fixed);
+                            fixed = moveupify(fixed);
+                            fixed = generateCommand(fixed);
+                            print(fixed);
                             try {
                               // setState(() => result = eval(fixed).toString());
-                              final executed = comp(withFunc);
+                              final executed = comp(fixed);
                               setState(() {
                                 result = executed;
                               });
