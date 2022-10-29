@@ -1,11 +1,11 @@
-import 'package:codefire/view/main_screen/command_generater.dart';
-import 'package:codefire/view/main_screen/compiler.dart';
+import 'package:codefire/view/main_screen/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:code_text_field/code_text_field.dart';
+import 'package:flutter_highlight/themes/arduino-light.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
+import 'package:flutter_highlight/themes/solarized-light.dart';
 // ignore: depend_on_referenced_packages
-import 'package:highlight/languages/dart.dart';
-import 'operation_methods.dart';
+import 'package:highlight/languages/javascript.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -15,17 +15,35 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static String initialValue = sampleCode;
+  static String initialValue = '''
+moveDown(1);
+for (let idx = 0; idx < 3; idx++) {
+  if(idx % 2 == 0) {
+    moveLeft(2);
+  } else {
+    moveRight(2);
+  }
+  moveUp(4);
+}''';
+  // static const codeTheme = atomOneLightTheme;
+  static const codeTheme = arduinoLightTheme;
 
+  static const colorThemeName = 'code';
   final controller = CodeController(
     text: initialValue,
-    language: dart,
-    theme: atomOneLightTheme,
+    language: javascript,
+    theme: codeTheme,
+    patternMap: {
+      'moveUp': TextStyle(color: codeTheme[colorThemeName]!.color),
+      'moveDown': TextStyle(color: codeTheme[colorThemeName]!.color),
+      'moveLeft': TextStyle(color: codeTheme[colorThemeName]!.color),
+      'moveRight': TextStyle(color: codeTheme[colorThemeName]!.color),
+    },
     onChange: (value) {},
   );
   final style = const TextStyle(fontSize: 21);
 
-  String result = '';
+  String _result = '';
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SelectableText(
-                    result == '' ? 'no output...' : result,
+                    _result == '' ? 'no output...' : _result,
                     style: style,
                   ),
                 ],
@@ -71,21 +89,16 @@ class _MainScreenState extends State<MainScreen> {
                             'EXECUTE',
                             style: style,
                           ),
-                          onPressed: () {
-                            String fixed = spaceFix(controller.text);
-                            fixed = spacifyAll(fixed);
-                            fixed = multiplize(fixed);
-                            fixed = moveupify(fixed);
-                            fixed = generateCommand(fixed);
-                            print(fixed);
+                          onPressed: () async {
+                            String code = controller.text;
                             try {
-                              // setState(() => result = eval(fixed).toString());
-                              final executed = comp(fixed);
                               setState(() {
-                                result = executed;
+                                _result = code.toPlayerCommand();
                               });
-                            } catch (e) {
-                              setState(() => result = e.toString());
+                            } catch (error) {
+                              setState(() {
+                                _result = error.toString();
+                              });
                             }
                           },
                         ),

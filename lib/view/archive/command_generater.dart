@@ -22,18 +22,27 @@ String multiString(String g, int h) {
 
 String header = '''
 int main() {
-String playerCommandListString = multiString('a', 4);
+String playerCommandListString = '';
 ''';
 
+// String sampleCode = '''
+// void main() {
+//   int n = 1;
+//   int m = 5;
+//   int result = 1;
+//   // moveUp(1);
+//   for(var idx = n; idx <= m; idx++) {
+//     result = 2 *result* idx+ 1;
+//   }
+//   // print(playerCommandListString);
+//   print('isolate');
+//   return result;
+// }
+// ''';
 String sampleCode = '''
-int n = 1;
-int m = 5;
-int result = 1;
-for(var idx = n; idx <= m; idx++) {
-  result = 2 *result* idx+ 1;
+void main() {
+  print("Hellooooooo from the other side!");
 }
-print(playerCommandListString);
-return result;
 ''';
 
 String footer = '''
@@ -46,7 +55,7 @@ String moveupify(String code) {
   playerCommandListString = addString(playerCommandListString, 'u');
 }''';
 
-  final regUp = RegExp(r'moveUp\(.*?\)\;');
+  final regUp = RegExp(r'moveUp\(.*?\)');
   code = code.replaceAllMapped(regUp, (match) {
     String matchStr = match.group(0).toString();
     String count = matchStr.replaceAll('moveUp(', '').replaceAll(');', '');
