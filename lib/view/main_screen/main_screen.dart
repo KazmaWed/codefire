@@ -1,3 +1,4 @@
+import 'package:codefire/maps/dungeon_01.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:flutter/material.dart';
 import 'package:code_text_field/code_text_field.dart';
@@ -50,13 +51,11 @@ for (let idx = 0; idx < 3; idx++) {
           Expanded(
             child: CodeFireField(
               controller: controller,
-              callback: (result) {
-                print(result);
-              },
+              callback: (result) {},
             ),
           ),
           const VerticalDivider(width: 0),
-          Expanded(child: Container()),
+          const Expanded(child: Dungeon01()),
         ],
       ),
     );

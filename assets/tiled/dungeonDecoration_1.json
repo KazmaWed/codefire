@@ -1,0 +1,14 @@
+{ "columns":32,
+ "image":"..\/images\/maps\/dungeonDecoration_1.png",
+ "imageheight":224,
+ "imagewidth":512,
+ "margin":0,
+ "name":"dungeonDecoration_1",
+ "spacing":0,
+ "tilecount":448,
+ "tiledversion":"1.9.2",
+ "tileheight":16,
+ "tilewidth":16,
+ "type":"tileset",
+ "version":"1.9"
+}

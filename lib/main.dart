@@ -1,7 +1,12 @@
+import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:codefire/view/main_screen/main_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await PlayerBanditSprite.load();
+
   runApp(const MyApp());
 }
 
