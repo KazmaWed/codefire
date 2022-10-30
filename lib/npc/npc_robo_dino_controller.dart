@@ -25,7 +25,7 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
   }
 
   void commandInput(List<String> input) {
-    if (moving != null && commandList.isEmpty) {
+    if (moving == null && commandList.isEmpty) {
       commandList = input;
     }
   }
@@ -58,7 +58,6 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
         component.moveRight(component.speed);
         haveMoved = (component.position.x - startPosition!.x).abs();
       }
-      print(haveMoved);
     }
 
     if (component.tileSize <= haveMoved) {

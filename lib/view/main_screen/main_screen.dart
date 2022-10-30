@@ -41,10 +41,6 @@ for (let idx = 0; idx < 3; idx++) {
       'moveLeft': TextStyle(color: codeTheme[colorThemeName]?.color),
       'moveRight': TextStyle(color: codeTheme[colorThemeName]?.color),
     },
-    onChange: (value) {
-      final controller = BonfireInjector().get<NpcRoboDinoController>();
-      controller.commandInput(value.split(','));
-    },
   );
 
   @override
@@ -56,7 +52,10 @@ for (let idx = 0; idx < 3; idx++) {
           Expanded(
             child: CodeFireField(
               controller: controller,
-              callback: (result) {},
+              callback: (result) {
+                final controller = BonfireInjector().get<NpcRoboDinoController>();
+                controller.commandInput(result);
+              },
             ),
           ),
           const VerticalDivider(width: 0),

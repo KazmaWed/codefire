@@ -17,7 +17,7 @@ class _Dungeon01State extends State<Dungeon01> {
   static const tileSize = 48.0; // タイルのサイズ定義
 
   final player = PlayerBandit(
-    Vector2(tileSize * 12, tileSize * 9),
+    Vector2(tileSize * 9, tileSize * 7),
     spriteSheet: PlayerBanditSprite.sheet,
     initDirection: Direction.up,
     tileSize: tileSize,
@@ -33,7 +33,7 @@ class _Dungeon01State extends State<Dungeon01> {
   Widget build(BuildContext context) {
     // 画面
     return BonfireWidget(
-      showCollisionArea: true,
+      // showCollisionArea: true,
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
         'tiled/dungeon_01.json',
