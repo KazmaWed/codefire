@@ -8,6 +8,39 @@
  "tilecount":448,
  "tiledversion":"1.9.2",
  "tileheight":16,
+ "tiles":[
+        {
+         "class":"above",
+         "id":33
+        }, 
+        {
+         "class":"above",
+         "id":34
+        }, 
+        {
+         "class":"above",
+         "id":35
+        }, 
+        {
+         "class":"above",
+         "id":65
+        }, 
+        {
+         "class":"above",
+         "id":66
+        }, 
+        {
+         "class":"above",
+         "id":67
+        }, 
+        {
+         "class":"dynamicAbove",
+         "id":97
+        }, 
+        {
+         "class":"dynamicAbove",
+         "id":99
+        }],
  "tilewidth":16,
  "type":"tileset",
  "version":"1.9"

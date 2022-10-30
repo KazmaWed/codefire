@@ -22,14 +22,14 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     String defaultCode = widget.initialCode ??
         '''
-moveDown(1);
 for (let idx = 0; idx < 3; idx++) {
+  moveUp(1);
   if(idx % 2 == 0) {
-    moveLeft(2);
+    moveLeft(5);
   } else {
-    moveRight(2);
+    moveRight(5);
   }
-  moveUp(4);
+  moveUp(2);
 }''';
 
     // static const codeTheme = atomOneLightTheme;
@@ -51,6 +51,7 @@ for (let idx = 0; idx < 3; idx++) {
       body: Row(
         children: [
           Expanded(
+            flex: 2,
             child: CodeFireField(
               controller: controller,
               parentWidget: widget,
@@ -61,11 +62,10 @@ for (let idx = 0; idx < 3; idx++) {
             ),
           ),
           const VerticalDivider(width: 0),
-          Expanded(child: Dungeon01(
-            commandInput: (value) {
-              value = controller.text;
-            },
-          )),
+          const Expanded(
+            flex: 3,
+            child: Dungeon01(),
+          ),
         ],
       ),
     );

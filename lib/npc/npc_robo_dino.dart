@@ -6,7 +6,7 @@ class NpcRoboDino extends SimpleNpc
   NpcRoboDino(
     Vector2 initialPosition, {
     required this.spriteSheet,
-    Direction initDirection = Direction.right,
+    Direction initDirection = Direction.left,
     required this.tileSize,
   }) : super(
           animation: SimpleDirectionAnimation(
@@ -39,7 +39,8 @@ class NpcRoboDino extends SimpleNpc
 
   static const spriteShift = 14.0;
 
-  List<String> commandList = ['up', 'left', 'left', 'down', 'right', 'right'];
+  @override
+  int get priority => LayerPriority.getComponentPriority(1);
 
   @override
   bool onCollision(GameComponent component, bool active) {

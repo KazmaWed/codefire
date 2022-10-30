@@ -21,7 +21,8 @@ class CodeFireField extends StatefulWidget {
 }
 
 class _CodeFireFieldState extends State<CodeFireField> {
-  List<String> _result = [];
+  List<String> _commandList = [];
+  String _commandListInStr = '';
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class _CodeFireFieldState extends State<CodeFireField> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SelectableText(
-                        _result.isEmpty ? 'no command' : _result.toString(),
+                        _commandListInStr,
                         style: consoleStyle,
                       ),
                     ],
@@ -74,12 +75,19 @@ class _CodeFireFieldState extends State<CodeFireField> {
                   child: const SizedBox(height: 64, width: 64, child: Icon(Icons.play_arrow)),
                   onTap: () async {
                     String code = widget.controller.text;
+                    final List<String> playerCommand = code.toPlayerCommand();
                     try {
-                      setState(() => _result = code.toPlayerCommand());
+                      _commandList = playerCommand;
+                      setState(() {
+                        _commandListInStr = playerCommand.toString();
+                      });
                     } catch (error) {
-                      setState(() => _result = [error.toString()]);
+                      _commandList = [];
+                      setState(() {
+                        _commandListInStr = error.toString();
+                      });
                     }
-                    widget.callback(_result);
+                    widget.callback(_commandList);
                   },
                 ),
               ),

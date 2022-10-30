@@ -420,6 +420,32 @@
             }
         }, 
         {
+         "id":75,
+         "objectgroup":
+            {
+             "draworder":"index",
+             "id":2,
+             "name":"",
+             "objects":[
+                    {
+                     "class":"",
+                     "height":16,
+                     "id":1,
+                     "name":"",
+                     "rotation":0,
+                     "visible":true,
+                     "width":16,
+                     "x":0,
+                     "y":0
+                    }],
+             "opacity":1,
+             "type":"objectgroup",
+             "visible":true,
+             "x":0,
+             "y":0
+            }
+        }, 
+        {
          "class":"dynamicAbove",
          "id":85,
          "objectgroup":
@@ -502,6 +528,32 @@
          "objectgroup":
             {
              "draworder":"index",
+             "name":"",
+             "objects":[
+                    {
+                     "class":"",
+                     "height":16,
+                     "id":1,
+                     "name":"",
+                     "rotation":0,
+                     "visible":true,
+                     "width":16,
+                     "x":0,
+                     "y":0
+                    }],
+             "opacity":1,
+             "type":"objectgroup",
+             "visible":true,
+             "x":0,
+             "y":0
+            }
+        }, 
+        {
+         "id":89,
+         "objectgroup":
+            {
+             "draworder":"index",
+             "id":2,
              "name":"",
              "objects":[
                     {
