@@ -1,3 +1,5 @@
+import 'package:codefire/npc/npc_robo_dino.dart';
+import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
 import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:flutter/material.dart';
@@ -5,35 +7,49 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/services.dart';
 
 class Dungeon01 extends StatefulWidget {
-  const Dungeon01({Key? key}) : super(key: key);
+  const Dungeon01({Key? key, required this.commandInput}) : super(key: key);
+  final ValueSetter<String> commandInput;
   @override
   State<Dungeon01> createState() => _Dungeon01State();
 }
 
 class _Dungeon01State extends State<Dungeon01> {
-  final tileSize = 32.0; // タイルのサイズ定義
+  static const tileSize = 48.0; // タイルのサイズ定義
+
+  final player = PlayerBandit(
+    Vector2(tileSize * 12, tileSize * 9),
+    spriteSheet: PlayerBanditSprite.sheet,
+    initDirection: Direction.up,
+    tileSize: tileSize,
+  );
+
+  final robo = NpcRoboDino(
+    Vector2(tileSize * 6, tileSize * 9),
+    spriteSheet: NpcRoboDinoSprite.sheet,
+    tileSize: tileSize,
+  );
 
   @override
   Widget build(BuildContext context) {
     // 画面
     return BonfireWidget(
-      // showCollisionArea: true,
+      showCollisionArea: true,
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
-        'dungeon_01.json',
+        'tiled/dungeon_01.json',
         forceTileSize: Vector2(tileSize, tileSize),
         objectsBuilder: {},
       ),
       // プレイヤーキャラクター
-      player: PlayerBandit(
-        Vector2(tileSize * 12, tileSize * 10),
-        spriteSheet: PlayerBanditSprite.sheet,
-        initDirection: Direction.up,
-      ),
+      player: player,
+      onReady: (bonfireGame) {
+        bonfireGame.add(robo);
+      },
       // カメラ設定
       cameraConfig: CameraConfig(
-        moveOnlyMapArea: true,
+        // moveOnlyMapArea: true,
         sizeMovementWindow: Vector2.zero(),
+        target: player,
         smoothCameraEnabled: true,
         smoothCameraSpeed: 10,
       ),

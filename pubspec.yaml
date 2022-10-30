@@ -27,12 +27,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/tiled/
-    - assets/images/
-    - assets/images/decorations/
-    - assets/images/maps/
     - assets/images/charactors/
+    - assets/images/maps/
+    - assets/images/tiled/
   fonts:
+      
     - family: NotoSansMono
       fonts:
         - asset: assets/fonts/NotoSansMono-Regular.ttf

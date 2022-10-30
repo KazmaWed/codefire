@@ -1,4 +1,6 @@
+import 'package:bonfire/bonfire.dart';
 import 'package:codefire/maps/dungeon_01.dart';
+import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:flutter/material.dart';
 import 'package:code_text_field/code_text_field.dart';
@@ -39,7 +41,10 @@ for (let idx = 0; idx < 3; idx++) {
       'moveLeft': TextStyle(color: codeTheme[colorThemeName]?.color),
       'moveRight': TextStyle(color: codeTheme[colorThemeName]?.color),
     },
-    onChange: (value) {},
+    onChange: (value) {
+      final controller = BonfireInjector().get<NpcRoboDinoController>();
+      controller.commandInput(value.split(','));
+    },
   );
 
   @override
@@ -55,7 +60,11 @@ for (let idx = 0; idx < 3; idx++) {
             ),
           ),
           const VerticalDivider(width: 0),
-          const Expanded(child: Dungeon01()),
+          Expanded(child: Dungeon01(
+            commandInput: (value) {
+              value = controller.text;
+            },
+          )),
         ],
       ),
     );
