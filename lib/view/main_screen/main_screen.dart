@@ -10,14 +10,18 @@ import 'package:flutter_highlight/themes/arduino-light.dart';
 import 'package:highlight/languages/javascript.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  const MainScreen({super.key, this.initialCode});
+  final String? initialCode;
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static String initialValue = '''
+  @override
+  Widget build(BuildContext context) {
+    String defaultCode = widget.initialCode ??
+        '''
 moveDown(1);
 for (let idx = 0; idx < 3; idx++) {
   if(idx % 2 == 0) {
@@ -28,23 +32,20 @@ for (let idx = 0; idx < 3; idx++) {
   moveUp(4);
 }''';
 
-  // static const codeTheme = atomOneLightTheme;
-  static const codeTheme = arduinoLightTheme;
-  static const colorThemeName = 'code';
-  final controller = CodeController(
-    text: initialValue,
-    language: javascript,
-    theme: codeTheme,
-    patternMap: {
-      'moveUp': TextStyle(color: codeTheme[colorThemeName]?.color),
-      'moveDown': TextStyle(color: codeTheme[colorThemeName]?.color),
-      'moveLeft': TextStyle(color: codeTheme[colorThemeName]?.color),
-      'moveRight': TextStyle(color: codeTheme[colorThemeName]?.color),
-    },
-  );
-
-  @override
-  Widget build(BuildContext context) {
+    // static const codeTheme = atomOneLightTheme;
+    const codeTheme = arduinoLightTheme;
+    const colorThemeName = 'code';
+    final controller = CodeController(
+      text: defaultCode,
+      language: javascript,
+      theme: codeTheme,
+      patternMap: {
+        'moveUp': TextStyle(color: codeTheme[colorThemeName]?.color),
+        'moveDown': TextStyle(color: codeTheme[colorThemeName]?.color),
+        'moveLeft': TextStyle(color: codeTheme[colorThemeName]?.color),
+        'moveRight': TextStyle(color: codeTheme[colorThemeName]?.color),
+      },
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       body: Row(
@@ -52,6 +53,7 @@ for (let idx = 0; idx < 3; idx++) {
           Expanded(
             child: CodeFireField(
               controller: controller,
+              parentWidget: widget,
               callback: (result) {
                 final controller = BonfireInjector().get<NpcRoboDinoController>();
                 controller.commandInput(result);

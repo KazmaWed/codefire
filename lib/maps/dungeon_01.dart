@@ -1,3 +1,4 @@
+import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
@@ -38,7 +39,14 @@ class _Dungeon01State extends State<Dungeon01> {
       map: WorldMapByTiled(
         'tiled/dungeon_01.json',
         forceTileSize: Vector2(tileSize, tileSize),
-        objectsBuilder: {},
+        objectsBuilder: {
+          'button': (properties) => ButtonBlueDecoration(
+                initPosition: properties.position,
+                tileSize: tileSize,
+                id: 0,
+                player: player,
+              ),
+        },
       ),
       // プレイヤーキャラクター
       player: player,

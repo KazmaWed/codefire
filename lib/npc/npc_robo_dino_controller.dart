@@ -2,7 +2,6 @@ import 'package:bonfire/bonfire.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 
 class NpcRoboDinoController extends StateController<NpcRoboDino> {
-  // List<String> commandList = ['up', 'left', 'left', 'down', 'right', 'right'];
   List<String> commandList = [];
   Vector2? startPosition;
   String? moving;
@@ -28,6 +27,14 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
     if (moving == null && commandList.isEmpty) {
       commandList = input;
     }
+  }
+
+  void initialize() {
+    commandList = [];
+    startPosition = null;
+    moving = null;
+    haveMoved = 0;
+    nextPosition = null;
   }
 
   @override

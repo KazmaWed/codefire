@@ -1,4 +1,26 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_js/flutter_js.dart';
+
+extension BuildContextExtensions on BuildContext {
+  Future goTo(Widget widget) {
+    return Navigator.pushAndRemoveUntil(
+      this,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => widget,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return Container(
+            color: Colors.black,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+          );
+        },
+      ),
+      (Route<dynamic> route) => false,
+    );
+  }
+}
 
 extension StringExtention on String {
   String evalJS() {
