@@ -19,14 +19,14 @@ class _Dungeon02State extends State<Dungeon02> {
   static const tileSize = 48.0; // タイルのサイズ定義
 
   final player = PlayerBandit(
-    Vector2(tileSize * 14, tileSize * 12),
+    Vector2(tileSize * 10, tileSize * 12),
     spriteSheet: PlayerBanditSprite.sheet,
     initDirection: Direction.up,
     tileSize: tileSize,
   );
 
   final robo = NpcRoboDino(
-    Vector2(tileSize * 11, tileSize * 12),
+    Vector2(tileSize * 8, tileSize * 12),
     spriteSheet: NpcRoboDinoSprite.sheet,
     tileSize: tileSize,
   );
@@ -41,7 +41,7 @@ class _Dungeon02State extends State<Dungeon02> {
 
     // 画面
     return BonfireWidget(
-      // showCollisionArea: true,
+      showCollisionArea: true,
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
         'tiled/dungeon_02.json',

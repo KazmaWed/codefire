@@ -1,9 +1,10 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/maps/dungeon_02_screen.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:flutter/material.dart';
-import 'package:codefire/view/main_screen/main_screen.dart';
+import 'package:codefire/maps/dungeon_01_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'NotoSansMono',
         primarySwatch: Colors.blue,
       ),
-      home: const MainScreen(),
+      home: const Dungeon02Screen(),
     );
   }
 }

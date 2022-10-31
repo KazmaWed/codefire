@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/dungeon_01.dart';
+import 'package:codefire/maps/dungeon_02.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:flutter/material.dart';
@@ -9,27 +9,24 @@ import 'package:flutter_highlight/themes/arduino-light.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key, this.initialCode});
+class Dungeon02Screen extends StatefulWidget {
+  const Dungeon02Screen({super.key, this.initialCode});
   final String? initialCode;
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<Dungeon02Screen> createState() => _Dungeon02ScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _Dungeon02ScreenState extends State<Dungeon02Screen> {
   @override
   Widget build(BuildContext context) {
     String defaultCode = widget.initialCode ??
         '''
-for (let idx = 0; idx < 3; idx++) {
-  moveUp(1);
-  if(idx % 2 == 0) {
-    moveLeft(5);
-  } else {
-    moveRight(5);
-  }
-  moveUp(2);
+for (let idx = 0; idx < 2; idx++) {
+  moveLeft(7 - idx);
+  moveUp(10);
+  moveRight(9);
+  moveDown(7)
 }''';
 
     // static const codeTheme = atomOneLightTheme;
@@ -64,7 +61,7 @@ for (let idx = 0; idx < 3; idx++) {
           const VerticalDivider(width: 0),
           const Expanded(
             flex: 3,
-            child: Dungeon01(),
+            child: Dungeon02(),
           ),
         ],
       ),

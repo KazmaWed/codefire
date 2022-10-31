@@ -1,7 +1,7 @@
 import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/maps/dungeon_01_controller.dart';
-import 'package:codefire/maps/dungeon_02.dart';
+import 'package:codefire/maps/dungeon_02_screen.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
@@ -72,7 +72,7 @@ class _Dungeon01State extends State<Dungeon01> {
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
                 size: properties.size,
-                nextMap: const Dungeon02(),
+                nextMap: const Dungeon02Screen(),
               ),
         },
       ),

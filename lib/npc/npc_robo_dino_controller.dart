@@ -39,6 +39,12 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
 
   @override
   void update(double dt, NpcRoboDino component) {
+    if (component.tileSize <= haveMoved) {
+      moving = null;
+      nextPosition = null;
+      haveMoved = 0;
+    }
+
     if (moving == null) {
       component.idle();
     }
@@ -65,12 +71,6 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
         component.moveRight(component.speed);
         haveMoved = (component.position.x - startPosition!.x).abs();
       }
-    }
-
-    if (component.tileSize <= haveMoved) {
-      moving = null;
-      nextPosition = null;
-      haveMoved = 0;
     }
   }
 }
