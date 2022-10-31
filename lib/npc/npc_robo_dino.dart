@@ -45,7 +45,7 @@ class NpcRoboDino extends SimpleNpc
   @override
   bool onCollision(GameComponent component, bool active) {
     controller.moving = null;
-    controller.nextPosition = null;
+    // controller.nextPosition = null;
     controller.haveMoved = 0;
 
     return true;

@@ -41,8 +41,11 @@ class _Dungeon02State extends State<Dungeon02> {
 
     // 画面
     return BonfireWidget(
-      showCollisionArea: true,
+      // showCollisionArea: true,
       // マップ用jsonファイル読み込み
+      onTapDown: ((game, screenPosition, worldPosition) {
+        // (game.player! as PlayerBandit).moveOnPoint(worldPosition);
+      }),
       map: WorldMapByTiled(
         'tiled/dungeon_02.json',
         forceTileSize: Vector2(tileSize, tileSize),

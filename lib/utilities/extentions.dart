@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_js/flutter_js.dart';
 
@@ -23,46 +25,69 @@ extension BuildContextExtensions on BuildContext {
 }
 
 extension StringExtention on String {
-  String evalJS() {
+  String runAsJS() {
     final JavascriptRuntime javascriptRuntime = getJavascriptRuntime();
     String jsResult = javascriptRuntime.evaluate(this).stringResult;
     return jsResult;
   }
 
-  List<String> toPlayerCommand() {
+  String toPlayerCommandStr() {
     const header = '''
 var playerCommandOutput = [];
 
 function moveUp(d = 1) {
-  for(let idx = 0; idx < d; idx++) {
-    playerCommandOutput.push('up');
-  }
+  const newCommand = {
+    direction: 'up',
+    count: d
+  };
+  playerCommandOutput.push(newCommand);
 }
 
 function moveDown(d = 1) {
-  for(let idx = 0; idx < d; idx++) {
-    playerCommandOutput.push('down');
-  }
+  const newCommand = {
+    direction: 'down',
+    count: d
+  };
+  playerCommandOutput.push(newCommand);
 }
 
 function moveLeft(d = 1) {
-  for(let idx = 0; idx < d; idx++) {
-    playerCommandOutput.push('left');
-  }
+  const newCommand = {
+    direction: 'left',
+    count: d
+  };
+  playerCommandOutput.push(newCommand);
 }
 
 function moveRight(d = 1) {
-  for(let idx = 0; idx < d; idx++) {
-    playerCommandOutput.push('right');
-  }
+  const newCommand = {
+    direction: 'right',
+    count: d
+  };
+  playerCommandOutput.push(newCommand);
 }
 ''';
-    const footer = 'playerCommandOutput';
+    const footer = '''
+const json = {data: playerCommandOutput};
+JSON.stringify(playerCommandOutput)
+''';
 
     try {
-      return (header + this + footer).evalJS().split(',');
+      return (header + this + footer).runAsJS();
     } catch (e) {
-      return [e.toString()];
+      return e.toString();
     }
+  }
+
+  List<Map<String, dynamic>> toPlayerCommandMap() {
+    List<dynamic> jsonDecoded = json.decode(toPlayerCommandStr());
+
+    List<Map<String, dynamic>> casted = jsonDecoded.map((entity) {
+      final String direction = entity['direction'];
+      final int count = entity['count'];
+      return {'direction': direction, 'count': count};
+    }).toList();
+
+    return casted;
   }
 }

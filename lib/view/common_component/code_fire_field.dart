@@ -13,14 +13,14 @@ class CodeFireField extends StatefulWidget {
   });
   final Widget parentWidget;
   final CodeController controller;
-  final ValueChanged<List<String>> callback;
+  final ValueChanged<List<Map<String, dynamic>>> callback;
 
   @override
   State<CodeFireField> createState() => _CodeFireFieldState();
 }
 
 class _CodeFireFieldState extends State<CodeFireField> {
-  List<String> _commandList = [];
+  List<Map<String, dynamic>> _commandList = [];
   String _commandListInStr = '';
 
   @override
@@ -74,11 +74,11 @@ class _CodeFireFieldState extends State<CodeFireField> {
                   child: const SizedBox(height: 64, width: 64, child: Icon(Icons.play_arrow)),
                   onTap: () async {
                     String code = widget.controller.text;
-                    final List<String> playerCommand = code.toPlayerCommand();
+                    final List<Map<String, dynamic>> playerCommandMap = code.toPlayerCommandMap();
                     try {
-                      _commandList = playerCommand;
+                      _commandList = playerCommandMap;
                       setState(() {
-                        _commandListInStr = playerCommand.toString();
+                        _commandListInStr = playerCommandMap.toString();
                       });
                     } catch (error) {
                       _commandList = [];

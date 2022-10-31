@@ -1,7 +1,9 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/player/player_bandit_controller.dart';
 import 'package:flutter/material.dart';
 
-class PlayerBandit extends SimplePlayer with ObjectCollision {
+class PlayerBandit extends SimplePlayer
+    with ObjectCollision, UseStateController<PlayerBanditController> {
   PlayerBandit(
     position, {
     required this.tileSize,
