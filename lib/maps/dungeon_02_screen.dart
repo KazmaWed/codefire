@@ -23,7 +23,7 @@ class _Dungeon02ScreenState extends State<Dungeon02Screen> {
     String defaultCode = widget.initialCode ??
         '''
 for (let idx = 0; idx < 2; idx++) {
-  moveLeft(7 - idx);
+  moveLeft(7);
   moveUp(10);
   moveRight(9);
   moveDown(7)
