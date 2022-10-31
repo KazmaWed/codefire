@@ -97,6 +97,17 @@
                  "width":16,
                  "x":16,
                  "y":32
+                }, 
+                {
+                 "class":"",
+                 "height":24,
+                 "id":3,
+                 "name":"exitSensor",
+                 "rotation":0,
+                 "visible":true,
+                 "width":48,
+                 "x":176,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -105,7 +116,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":3,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

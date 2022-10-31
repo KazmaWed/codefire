@@ -1,41 +1,39 @@
 import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/decorations/button_blue.dart';
-import 'package:codefire/maps/dungeon_01_controller.dart';
-import 'package:codefire/maps/dungeon_02.dart';
+import 'package:codefire/maps/dungeon_02_controller.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
 import 'package:codefire/player/player_bandit_sprite.dart';
-import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/services.dart';
 
-class Dungeon01 extends StatefulWidget {
-  const Dungeon01({Key? key}) : super(key: key);
+class Dungeon02 extends StatefulWidget {
+  const Dungeon02({Key? key}) : super(key: key);
   @override
-  State<Dungeon01> createState() => _Dungeon01State();
+  State<Dungeon02> createState() => _Dungeon02State();
 }
 
-class _Dungeon01State extends State<Dungeon01> {
+class _Dungeon02State extends State<Dungeon02> {
   static const tileSize = 48.0; // タイルのサイズ定義
 
   final player = PlayerBandit(
-    Vector2(tileSize * 9, tileSize * 7),
+    Vector2(tileSize * 14, tileSize * 12),
     spriteSheet: PlayerBanditSprite.sheet,
     initDirection: Direction.up,
     tileSize: tileSize,
   );
 
   final robo = NpcRoboDino(
-    Vector2(tileSize * 6, tileSize * 9),
+    Vector2(tileSize * 11, tileSize * 12),
     spriteSheet: NpcRoboDinoSprite.sheet,
     tileSize: tileSize,
   );
 
   late final ArchGateDecoration archGate;
 
-  late Dungeon01Controller controller;
+  late Dungeon02Controller controller;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,7 @@ class _Dungeon01State extends State<Dungeon01> {
       // showCollisionArea: true,
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
-        'tiled/dungeon_01.json',
+        'tiled/dungeon_02.json',
         forceTileSize: Vector2(tileSize, tileSize),
         objectsBuilder: {
           'archGate': (properties) {
@@ -56,7 +54,7 @@ class _Dungeon01State extends State<Dungeon01> {
             );
             return archGate;
           },
-          'button': (properties) {
+          'buttonBlue': (properties) {
             allButtons.add(properties.id!);
             return ButtonBlueDecoration(
               initPosition: properties.position,
@@ -69,18 +67,13 @@ class _Dungeon01State extends State<Dungeon01> {
               },
             );
           },
-          'exitSensor': (properties) => ExitMapSensor(
-                position: properties.position,
-                size: properties.size,
-                nextMap: const Dungeon02(),
-              ),
         },
       ),
       // プレイヤーキャラクター
       player: player,
       onReady: (bonfireGame) {
         bonfireGame.add(robo);
-        controller = Dungeon01Controller(allButtons: allButtons);
+        controller = Dungeon02Controller(allButtons: allButtons);
       },
       // カメラ設定
       cameraConfig: CameraConfig(
