@@ -20,7 +20,7 @@ class PlayerBandit extends SimplePlayer
           size: Vector2.all(tileSize * 2),
           position: position + imageShift,
           initDirection: initDirection,
-          speed: tileSize * 5,
+          speed: tileSize * 4,
         ) {
     setupCollision(
       CollisionConfig(

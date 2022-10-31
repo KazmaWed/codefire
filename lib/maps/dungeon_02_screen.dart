@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/maps/dungeon_02.dart';
+import 'package:codefire/maps/dungeon_02_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +30,11 @@ for (let idx = 0; idx < 2; idx++) {
   moveDown(7)
 }''';
 
-    // static const codeTheme = atomOneLightTheme;
+    // const codeTheme = atomOneLightTheme;
+    // const colorThemeName = 'name';
     const codeTheme = arduinoLightTheme;
     const colorThemeName = 'code';
-    final controller = CodeController(
+    final codeController = CodeController(
       text: defaultCode,
       language: javascript,
       theme: codeTheme,
@@ -43,15 +45,17 @@ for (let idx = 0; idx < 2; idx++) {
         'moveRight': TextStyle(color: codeTheme[colorThemeName]?.color),
       },
     );
+    final focus = FocusNode();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Row(
         children: [
           Expanded(
-            flex: 2,
+            flex: 1,
             child: CodeFireField(
-              controller: controller,
+              controller: codeController,
               parentWidget: widget,
+              gameScreenFocus: focus,
               callback: (result) {
                 final controller = BonfireInjector().get<NpcRoboDinoController>();
                 controller.commandInput(result);
@@ -59,10 +63,7 @@ for (let idx = 0; idx < 2; idx++) {
             ),
           ),
           const VerticalDivider(width: 0),
-          const Expanded(
-            flex: 3,
-            child: Dungeon02(),
-          ),
+          Expanded(flex: 2, child: Dungeon02(focus: focus)),
         ],
       ),
     );

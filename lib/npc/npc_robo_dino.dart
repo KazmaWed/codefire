@@ -40,6 +40,12 @@ class NpcRoboDino extends SimpleNpc
   static const spriteShift = 14.0;
 
   @override
+  void onMount() {
+    super.onMount();
+    controller.initialize();
+  }
+
+  @override
   int get priority => LayerPriority.getComponentPriority(1);
 
   @override

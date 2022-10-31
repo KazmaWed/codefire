@@ -45,6 +45,7 @@ for (let idx = 0; idx < 3; idx++) {
         'moveRight': TextStyle(color: codeTheme[colorThemeName]?.color),
       },
     );
+    final focus = FocusNode();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Row(
@@ -54,6 +55,7 @@ for (let idx = 0; idx < 3; idx++) {
             child: CodeFireField(
               controller: controller,
               parentWidget: widget,
+              gameScreenFocus: focus,
               callback: (result) {
                 final controller = BonfireInjector().get<NpcRoboDinoController>();
                 controller.commandInput(result);
@@ -61,10 +63,7 @@ for (let idx = 0; idx < 3; idx++) {
             ),
           ),
           const VerticalDivider(width: 0),
-          const Expanded(
-            flex: 3,
-            child: Dungeon01(),
-          ),
+          Expanded(flex: 3, child: Dungeon01(focus: focus)),
         ],
       ),
     );

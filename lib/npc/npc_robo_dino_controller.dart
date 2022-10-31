@@ -6,22 +6,22 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
   Vector2? startPosition;
   Map<String, dynamic>? moving;
   double haveMoved = 0;
-  // Vector2? nextPosition;
+  Vector2? _nextPosition;
 
-  // Vector2 getNextPosition() {
-  //   final now = component!.position;
-  //   late Vector2 dif;
-  //   if (moving!['direction'] == 'up') {
-  //     dif = Vector2(0, -component!.tileSize * moving!['count']);
-  //   } else if (moving!['direction'] == 'down') {
-  //     dif = Vector2(0, component!.tileSize * moving!['count']);
-  //   } else if (moving!['direction'] == 'left') {
-  //     dif = Vector2(-component!.tileSize * moving!['count'], 0);
-  //   } else {
-  //     dif = Vector2(component!.tileSize * moving!['count'], 0);
-  //   }
-  //   return now + dif;
-  // }
+  Vector2 getNextPosition() {
+    final now = component!.position;
+    late Vector2 dif;
+    if (moving!['direction'] == 'up') {
+      dif = Vector2(0, -component!.tileSize * moving!['count']);
+    } else if (moving!['direction'] == 'down') {
+      dif = Vector2(0, component!.tileSize * moving!['count']);
+    } else if (moving!['direction'] == 'left') {
+      dif = Vector2(-component!.tileSize * moving!['count'], 0);
+    } else {
+      dif = Vector2(component!.tileSize * moving!['count'], 0);
+    }
+    return now + dif;
+  }
 
   void commandInput(List<Map<String, dynamic>> input) {
     if (moving == null && commandList.isEmpty) {
@@ -34,7 +34,7 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
     startPosition = null;
     moving = null;
     haveMoved = 0;
-    // nextPosition = null;
+    _nextPosition = null;
   }
 
   @override
@@ -47,7 +47,7 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
     if (commandList.isNotEmpty && moving == null) {
       startPosition = component.position.xy;
       moving = commandList.first;
-      // nextPosition = getNextPosition();
+      _nextPosition = getNextPosition();
       commandList.removeAt(0);
       haveMoved = 0;
     }
@@ -70,6 +70,7 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
 
     // 移動距離を満たしたらコマンド終了
     if (moving != null && component.tileSize * moving!['count'] <= haveMoved) {
+      component.position = _nextPosition!;
       moving = null;
       haveMoved = 0;
     }

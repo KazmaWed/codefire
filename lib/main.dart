@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/dungeon_02_screen.dart';
+import 'package:codefire/maps/dungeon_01_screen.dart';
 import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:codefire/player/player_bandit_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
@@ -14,6 +14,7 @@ void main() async {
   await NpcRoboDinoSprite.load();
 
   BonfireInjector().put((i) => NpcRoboDinoController());
+  // BonfireInjector().putFactory((i) => NpcRoboDinoController());
   BonfireInjector().put((i) => PlayerBanditController());
 
   runApp(const MyApp());
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'NotoSansMono',
         primarySwatch: Colors.blue,
       ),
-      home: const Dungeon02Screen(),
+      home: const Dungeon01Screen(),
     );
   }
 }
