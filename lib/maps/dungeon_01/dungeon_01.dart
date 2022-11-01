@@ -81,7 +81,7 @@ class _Dungeon01State extends State<Dungeon01> {
                 controller.activate(properties.id!);
                 if (controller.allActivated()) archGate.openGate();
               },
-            );
+            )..changePriorityWithoutResorting(-19);
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
@@ -93,7 +93,7 @@ class _Dungeon01State extends State<Dungeon01> {
       // プレイヤーキャラクター
       player: player,
       onReady: (bonfireGame) async {
-        await bonfireGame.add(robo);
+        await bonfireGame.add(robo..changePriorityWithoutResorting(10));
         await bonfireGame.add(cameraTarget);
         controller = Dungeon01Controller(allButtons: allButtons);
       },
