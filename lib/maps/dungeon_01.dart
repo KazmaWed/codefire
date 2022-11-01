@@ -1,7 +1,8 @@
 import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/maps/dungeon_01_controller.dart';
-import 'package:codefire/maps/dungeon_02_screen.dart';
+// import 'package:codefire/maps/dungeon_02_screen.dart';
+import 'package:codefire/maps/dungeon_03_screen.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
@@ -10,7 +11,6 @@ import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
-import 'package:flutter/services.dart';
 
 class Dungeon01 extends StatefulWidget {
   const Dungeon01({Key? key, required this.focus}) : super(key: key);
@@ -70,7 +70,7 @@ class _Dungeon01State extends State<Dungeon01> {
             );
             return archGate;
           },
-          'button': (properties) {
+          'buttonBlue': (properties) {
             allButtons.add(properties.id!);
             return ButtonBlueDecoration(
               initPosition: properties.position,
@@ -86,7 +86,7 @@ class _Dungeon01State extends State<Dungeon01> {
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
                 size: properties.size,
-                nextMap: const Dungeon02Screen(),
+                nextMap: const Dungeon03Screen(),
               ),
         },
       ),
@@ -122,7 +122,7 @@ class _Dungeon01State extends State<Dungeon01> {
         // キーボード用入力の設定
         keyboardConfig: KeyboardConfig(
           keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // キーボードの矢印とWASDを有効化
-          acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
+          // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
         ),
       ),
       // ロード中の画面の設定

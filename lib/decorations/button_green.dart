@@ -1,9 +1,9 @@
-import 'package:bonfire/bonfire.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/player/player_bandit.dart';
+import 'package:bonfire/bonfire.dart';
 
-class ButtonBlueDecoration extends GameDecoration with Sensor {
-  ButtonBlueDecoration({
+class ButtonGreenDecoration extends GameDecoration with Sensor {
+  ButtonGreenDecoration({
     required this.initPosition,
     required this.tileSize,
     required this.id,
@@ -30,8 +30,8 @@ class ButtonBlueDecoration extends GameDecoration with Sensor {
   final Function callback;
   bool activated = false;
 
-  static const imagePathOff = 'decorations/button_blue_off.png';
-  static const imagePathOn = 'decorations/button_blue_on.png';
+  static const imagePathOff = 'decorations/button_geen_off.png';
+  static const imagePathOn = 'decorations/button_green_on.png';
 
   @override
   void onContact(GameComponent component) async {
@@ -42,8 +42,12 @@ class ButtonBlueDecoration extends GameDecoration with Sensor {
     }
   }
 
-  void deactivate() async {
-    sprite = await Sprite.load(imagePathOff);
-    activated = false;
+  @override
+  void onContactExit(GameComponent component) async {
+    super.onContactExit(component);
+    if (activated && component is! CameraTarget) {
+      sprite = await Sprite.load(imagePathOff);
+      activated = false;
+    }
   }
 }
