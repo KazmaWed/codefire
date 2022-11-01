@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/dungeon_03.dart';
+import 'package:codefire/maps/dungeon_03/dungeon_03.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +23,8 @@ class _Dungeon03ScreenState extends State<Dungeon03Screen> {
     String defaultCode = widget.initialCode ??
         '''
 for (let idx = 1; idx <= 2; idx++) {
-  if(idx == 1) {
-    moveLeft(10);
-  }
-  moveUp(3);
+  moveLeft(10);
+  moveUp(6);
   moveRight(6);
 }''';
 

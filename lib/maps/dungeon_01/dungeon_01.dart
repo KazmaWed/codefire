@@ -1,8 +1,8 @@
 import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/decorations/button_blue.dart';
-import 'package:codefire/decorations/button_red.dart';
-import 'package:codefire/maps/dungeon_02_screen.dart';
-import 'package:codefire/maps/dungeon_03_controller.dart';
+import 'package:codefire/maps/dungeon_01/dungeon_01_controller.dart';
+// import 'package:codefire/maps/dungeon_02_screen.dart';
+import 'package:codefire/maps/dungeon_03/dungeon_03_screen.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
@@ -12,41 +12,36 @@ import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 
-class Dungeon03 extends StatefulWidget {
-  const Dungeon03({Key? key, required this.focus}) : super(key: key);
+class Dungeon01 extends StatefulWidget {
+  const Dungeon01({Key? key, required this.focus}) : super(key: key);
   final FocusNode focus;
-
   @override
-  State<Dungeon03> createState() => _Dungeon03State();
+  State<Dungeon01> createState() => _Dungeon01State();
 }
 
-class _Dungeon03State extends State<Dungeon03> {
-  static const jsonFilePath = 'tiled/dungeon_03.json';
-  static final playerPosition = Vector2(13, 8.5);
-  static final roboPosition = Vector2(11, 9);
+class _Dungeon01State extends State<Dungeon01> {
   static const tileSize = 48.0; // タイルのサイズ定義
 
   final player = PlayerBandit(
-    playerPosition * tileSize,
+    Vector2(tileSize * 9, tileSize * 7),
     spriteSheet: PlayerBanditSprite.sheet,
     initDirection: Direction.up,
     tileSize: tileSize,
   );
 
   final robo = NpcRoboDino(
-    roboPosition * tileSize,
+    Vector2(tileSize * 6, tileSize * 9),
     spriteSheet: NpcRoboDinoSprite.sheet,
     tileSize: tileSize,
   );
 
   late final ArchGateDecoration archGate;
 
-  late Dungeon03Controller controller;
+  late Dungeon01Controller controller;
 
   @override
   Widget build(BuildContext context) {
     final Set<int> allButtons = {};
-    final Set<ButtonBlueDecoration> allButtonDecorations = {};
     final cameraTarget = CameraTarget(
       player: player,
       components: [robo],
@@ -65,7 +60,7 @@ class _Dungeon03State extends State<Dungeon03> {
       },
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
-        jsonFilePath,
+        'tiled/dungeon_01.json',
         forceTileSize: Vector2(tileSize, tileSize),
         objectsBuilder: {
           'archGate': (properties) {
@@ -77,7 +72,7 @@ class _Dungeon03State extends State<Dungeon03> {
           },
           'buttonBlue': (properties) {
             allButtons.add(properties.id!);
-            final newButton = ButtonBlueDecoration(
+            return ButtonBlueDecoration(
               initPosition: properties.position,
               tileSize: tileSize,
               id: properties.id!,
@@ -87,24 +82,11 @@ class _Dungeon03State extends State<Dungeon03> {
                 if (controller.allActivated()) archGate.openGate();
               },
             );
-            allButtonDecorations.add(newButton);
-            return newButton;
-          },
-          'buttonRed': (properties) {
-            return ButtonRedDecoration(
-              initPosition: properties.position,
-              tileSize: tileSize,
-              id: properties.id!,
-              player: player,
-              callback: () {
-                controller.deactivateAll();
-              },
-            );
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
                 size: properties.size,
-                nextMap: const Dungeon02Screen(),
+                nextMap: const Dungeon03Screen(),
               ),
         },
       ),
@@ -113,10 +95,7 @@ class _Dungeon03State extends State<Dungeon03> {
       onReady: (bonfireGame) async {
         await bonfireGame.add(robo);
         await bonfireGame.add(cameraTarget);
-        controller = Dungeon03Controller(
-          allButtons: allButtons,
-          allButtonDecorations: allButtonDecorations,
-        );
+        controller = Dungeon01Controller(allButtons: allButtons);
       },
       // カメラ設定
       cameraConfig: CameraConfig(
@@ -128,6 +107,18 @@ class _Dungeon03State extends State<Dungeon03> {
       ),
       // 入力インターフェースの設定
       joystick: Joystick(
+        // // 画面上のジョイスティック追加
+        // directional: JoystickDirectional(
+        //   color: Colors.white,
+        // ),
+        // actions: [
+        //   // 画面上のアクションボタン追加
+        //   JoystickAction(
+        //     color: Colors.white,
+        //     actionId: 1,
+        //     margin: const EdgeInsets.all(65),
+        //   ),
+        // ],
         // キーボード用入力の設定
         keyboardConfig: KeyboardConfig(
           keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // キーボードの矢印とWASDを有効化

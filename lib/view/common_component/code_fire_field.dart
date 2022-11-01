@@ -36,7 +36,7 @@ class _CodeFireFieldState extends State<CodeFireField> {
       textStyle: codeStyle,
       focusNode: _focus,
     );
-    final shortCutTextStyle = codeStyle;
+    final shortCutTextStyle = codeStyle.copyWith(fontWeight: FontWeight.bold);
 
     return Padding(
       padding: const EdgeInsets.all(8),

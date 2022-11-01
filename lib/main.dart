@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/dungeon_01_screen.dart';
+import 'package:codefire/maps/dungeon_01/dungeon_01_screen.dart';
 // import 'package:codefire/maps/dungeon_02_screen.dart';
 // import 'package:codefire/maps/dungeon_03_screen.dart';
 import 'package:codefire/player/player_bandit_sprite.dart';

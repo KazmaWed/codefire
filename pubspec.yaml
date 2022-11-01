@@ -36,3 +36,12 @@ flutter:
     - family: NotoSansMono
       fonts:
         - asset: assets/fonts/NotoSansMono-Regular.ttf
+        - asset: assets/fonts/NotoSansMono-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/NotoSansMono-Light.ttf
+          weight: 400
+    - family: CourierPrime
+      fonts:
+        - asset: assets/fonts/CourierPrime-Regular.ttf
+        - asset: assets/fonts/CourierPrime-Bold.ttf
+          weight: 600
