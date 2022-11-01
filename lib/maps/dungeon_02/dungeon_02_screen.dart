@@ -41,7 +41,7 @@ for (let idx = 0; idx < 2; idx++) {
       body: Row(
         children: [
           Expanded(
-            flex: 3,
+            flex: 1,
             child: CodeFireField(
               controller: controller,
               parentWidget: widget,
@@ -53,7 +53,7 @@ for (let idx = 0; idx < 2; idx++) {
             ),
           ),
           const VerticalDivider(width: 0),
-          Expanded(flex: 5, child: Dungeon02(focus: focus)),
+          Expanded(flex: 2, child: Dungeon02(focus: focus)),
         ],
       ),
     );

@@ -53,7 +53,7 @@ class _Dungeon01State extends State<Dungeon01> {
 
     // 画面
     return BonfireWidget(
-      showCollisionArea: true,
+      // showCollisionArea: true,
       // クリックで移動
       onTapDown: ((game, screenPosition, worldPosition) {
         widget.focus.requestFocus();
