@@ -2,6 +2,8 @@ import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/maps/dungeon_02/dungeon_02_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
+import 'package:codefire/npc/necromancer.dart';
+import 'package:codefire/npc/necromancer_sprite.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
@@ -19,6 +21,8 @@ class Dungeon02 extends StatefulWidget {
 
 class _Dungeon02State extends State<Dungeon02> {
   static const tileSize = 48.0; // タイルのサイズ定義
+
+  late NpcNecromancer necromancer;
 
   final player = PlayerBandit(
     Vector2(tileSize * 10, tileSize * 12),
@@ -61,6 +65,15 @@ class _Dungeon02State extends State<Dungeon02> {
         'tiled/dungeon_02.json',
         forceTileSize: Vector2(tileSize, tileSize),
         objectsBuilder: {
+          'necromancer': (properties) {
+            necromancer = NpcNecromancer(
+              properties.position,
+              spriteSheet: NpcNecromancerSprite.sheet,
+              tileSize: tileSize,
+              cameraCenterComponent: cameraTarget,
+            );
+            return necromancer;
+          },
           'archGate': (properties) {
             archGate = ArchGateDecoration(
               tileSize: tileSize,

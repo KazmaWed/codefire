@@ -4,6 +4,8 @@ import 'package:codefire/maps/dungeon_01/dungeon_01_controller.dart';
 // import 'package:codefire/maps/dungeon_02_screen.dart';
 import 'package:codefire/maps/dungeon_03/dungeon_03_screen.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
+import 'package:codefire/npc/necromancer.dart';
+import 'package:codefire/npc/necromancer_sprite.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
@@ -21,6 +23,8 @@ class Dungeon01 extends StatefulWidget {
 
 class _Dungeon01State extends State<Dungeon01> {
   static const tileSize = 48.0; // タイルのサイズ定義
+
+  late NpcNecromancer necromancer;
 
   final player = PlayerBandit(
     Vector2(tileSize * 9, tileSize * 7),
@@ -49,7 +53,7 @@ class _Dungeon01State extends State<Dungeon01> {
 
     // 画面
     return BonfireWidget(
-      // showCollisionArea: true,
+      showCollisionArea: true,
       // クリックで移動
       onTapDown: ((game, screenPosition, worldPosition) {
         widget.focus.requestFocus();
@@ -63,6 +67,15 @@ class _Dungeon01State extends State<Dungeon01> {
         'tiled/dungeon_01.json',
         forceTileSize: Vector2(tileSize, tileSize),
         objectsBuilder: {
+          'necromancer': (properties) {
+            necromancer = NpcNecromancer(
+              properties.position,
+              spriteSheet: NpcNecromancerSprite.sheet,
+              tileSize: tileSize,
+              cameraCenterComponent: cameraTarget,
+            );
+            return necromancer;
+          },
           'archGate': (properties) {
             archGate = ArchGateDecoration(
               tileSize: tileSize,
@@ -81,7 +94,7 @@ class _Dungeon01State extends State<Dungeon01> {
                 controller.activate(properties.id!);
                 if (controller.allActivated()) archGate.openGate();
               },
-            )..changePriorityWithoutResorting(-19);
+            );
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
@@ -93,9 +106,10 @@ class _Dungeon01State extends State<Dungeon01> {
       // プレイヤーキャラクター
       player: player,
       onReady: (bonfireGame) async {
-        await bonfireGame.add(robo..changePriorityWithoutResorting(10));
-        await bonfireGame.add(cameraTarget);
         controller = Dungeon01Controller(allButtons: allButtons);
+        await bonfireGame.add(robo);
+        await bonfireGame.add(cameraTarget);
+        bonfireGame.addJoystickObserver(necromancer);
       },
       // カメラ設定
       cameraConfig: CameraConfig(
@@ -129,7 +143,7 @@ class _Dungeon01State extends State<Dungeon01> {
       progress: Container(
         width: double.maxFinite,
         height: double.maxFinite,
-        color: Colors.black,
+        color: Colors.transparent,
       ),
       focusNode: widget.focus,
     );

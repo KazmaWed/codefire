@@ -2,6 +2,8 @@ import 'package:bonfire/bonfire.dart';
 import 'package:codefire/maps/dungeon_03/dungeon_03.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
+import 'package:codefire/view/common_component/code_fire_scaffold.dart';
+import 'package:codefire/view/main_screen/main_screen_component.dart';
 import 'package:flutter/material.dart';
 import 'package:code_text_field/code_text_field.dart';
 // ignore: depend_on_referenced_packages
@@ -33,8 +35,8 @@ for (let idx = 1; idx <= 2; idx++) {
       patternMap: CodeFireField.patternMap,
     );
     final focus = FocusNode();
-    return Scaffold(
-      backgroundColor: Colors.white,
+    return CodefireScaffold(
+      floatingActinButton: const GoBackFloatingButton(),
       body: Row(
         children: [
           Expanded(

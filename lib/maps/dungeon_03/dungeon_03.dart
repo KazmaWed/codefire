@@ -4,6 +4,8 @@ import 'package:codefire/decorations/button_red.dart';
 import 'package:codefire/maps/dungeon_02/dungeon_02_screen.dart';
 import 'package:codefire/maps/dungeon_03/dungeon_03_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
+import 'package:codefire/npc/necromancer.dart';
+import 'package:codefire/npc/necromancer_sprite.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
@@ -25,6 +27,8 @@ class _Dungeon03State extends State<Dungeon03> {
   static final playerPosition = Vector2(13, 8.5);
   static final roboPosition = Vector2(11, 9);
   static const tileSize = 48.0; // タイルのサイズ定義
+
+  late NpcNecromancer necromancer;
 
   final player = PlayerBandit(
     playerPosition * tileSize,
@@ -68,6 +72,15 @@ class _Dungeon03State extends State<Dungeon03> {
         jsonFilePath,
         forceTileSize: Vector2(tileSize, tileSize),
         objectsBuilder: {
+          'necromancer': (properties) {
+            necromancer = NpcNecromancer(
+              properties.position,
+              spriteSheet: NpcNecromancerSprite.sheet,
+              tileSize: tileSize,
+              cameraCenterComponent: cameraTarget,
+            );
+            return necromancer;
+          },
           'archGate': (properties) {
             archGate = ArchGateDecoration(
               tileSize: tileSize,

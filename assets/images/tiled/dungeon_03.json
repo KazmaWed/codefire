@@ -163,6 +163,17 @@
                  "width":48,
                  "x":224,
                  "y":64
+                }, 
+                {
+                 "class":"",
+                 "height":16,
+                 "id":10,
+                 "name":"necromancer",
+                 "rotation":0,
+                 "visible":true,
+                 "width":16,
+                 "x":272,
+                 "y":112
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -171,7 +182,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":10,
+ "nextobjectid":11,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

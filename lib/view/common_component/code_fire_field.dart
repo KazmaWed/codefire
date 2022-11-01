@@ -48,149 +48,157 @@ class _CodeFireFieldState extends State<CodeFireField> {
     );
     final shortCutTextStyle = codeStyle.copyWith(fontWeight: FontWeight.bold);
 
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Row(children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: InkWell(
-                  child:
-                      const SizedBox(height: 36, width: 64, child: Icon(Icons.arrow_back_rounded)),
-                  onTap: () {
-                    widget.controller.insertStr('moveLeft(1);');
-                    codeField.focusNode!.requestFocus();
-                  }),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: InkWell(
-                  child: const SizedBox(
-                      height: 36, width: 64, child: Icon(Icons.arrow_upward_rounded)),
-                  onTap: () {
-                    widget.controller.insertStr('moveUp(1);');
-                    codeField.focusNode!.requestFocus();
-                  }),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: InkWell(
-                  child: const SizedBox(
-                      height: 36, width: 64, child: Icon(Icons.arrow_downward_rounded)),
-                  onTap: () {
-                    widget.controller.insertStr('moveDown(1);');
-                    codeField.focusNode!.requestFocus();
-                  }),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: InkWell(
-                  child: const SizedBox(
-                      height: 36, width: 64, child: Icon(Icons.arrow_forward_rounded)),
-                  onTap: () {
-                    widget.controller.insertStr('moveRight(1);');
-                    codeField.focusNode!.requestFocus();
-                  }),
-            ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: InkWell(
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 36,
-                    width: 64,
-                    child: Text('FOR', style: shortCutTextStyle),
-                  ),
-                  onTap: () {
-                    widget.controller.insertStr('for (let idx = 1; idx <= 2; idx++) {};');
-                    codeField.focusNode!.requestFocus();
-                  }),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: InkWell(
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 36,
-                    width: 64,
-                    child: Text('IF', style: shortCutTextStyle),
-                  ),
-                  onTap: () {
-                    widget.controller.insertStr('if (1 == 1) {};');
-                    codeField.focusNode!.requestFocus();
-                  }),
-            ),
-          ]),
-          const Divider(),
-          Expanded(child: codeField),
-          const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Row(children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: InkWell(
-                    child: const SizedBox(height: 36, width: 64, child: Icon(Icons.replay_rounded)),
+                    child: const SizedBox(
+                        height: 36, width: 64, child: Icon(Icons.arrow_back_rounded)),
                     onTap: () {
-                      final controller = BonfireInjector().get<NpcRoboDinoController>();
-                      controller.initialize();
-                      context.goTo(widget.parentWidget);
+                      widget.controller.insertStr('moveLeft(1);');
+                      codeField.focusNode!.requestFocus();
                     }),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: InkWell(
-                  child:
-                      const SizedBox(height: 36, width: 64, child: Icon(Icons.play_arrow_rounded)),
-                  onTapUp: (details) => widget.gameScreenFocus.requestFocus(),
-                  onTap: () async {
-                    widget.gameScreenFocus.requestFocus();
-                    String code = widget.controller.text;
-                    final List<Map<String, dynamic>> playerCommandMap = code.toPlayerCommandMap();
-                    try {
-                      _focus.unfocus();
-                      _commandList = playerCommandMap;
-                      setState(() {
-                        _commandListInStr = playerCommandMap.toString();
-                      });
-                    } catch (error) {
-                      _commandList = [];
-                      setState(() {
-                        _commandListInStr = error.toString();
-                      });
-                    }
-                    widget.callback(_commandList);
-                  },
-                ),
+                    child: const SizedBox(
+                        height: 36, width: 64, child: Icon(Icons.arrow_upward_rounded)),
+                    onTap: () {
+                      widget.controller.insertStr('moveUp(1);');
+                      codeField.focusNode!.requestFocus();
+                    }),
               ),
-            ],
-          ),
-          const Divider(),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SelectableText(
-                          _commandListInStr,
-                          style: consoleStyle,
-                          minLines: 5,
-                          textAlign: TextAlign.start,
-                        ),
-                      ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: InkWell(
+                    child: const SizedBox(
+                        height: 36, width: 64, child: Icon(Icons.arrow_downward_rounded)),
+                    onTap: () {
+                      widget.controller.insertStr('moveDown(1);');
+                      codeField.focusNode!.requestFocus();
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: InkWell(
+                    child: const SizedBox(
+                        height: 36, width: 64, child: Icon(Icons.arrow_forward_rounded)),
+                    onTap: () {
+                      widget.controller.insertStr('moveRight(1);');
+                      codeField.focusNode!.requestFocus();
+                    }),
+              ),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: InkWell(
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 36,
+                      width: 64,
+                      child: Text('FOR', style: shortCutTextStyle),
                     ),
+                    onTap: () {
+                      widget.controller.insertStr('for (let idx = 1; idx <= 2; idx++) {};');
+                      codeField.focusNode!.requestFocus();
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: InkWell(
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 36,
+                      width: 64,
+                      child: Text('IF', style: shortCutTextStyle),
+                    ),
+                    onTap: () {
+                      widget.controller.insertStr('if (1 == 1) {};');
+                      codeField.focusNode!.requestFocus();
+                    }),
+              ),
+            ]),
+            const Divider(),
+            Expanded(child: codeField),
+            const Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: InkWell(
+                      child:
+                          const SizedBox(height: 36, width: 64, child: Icon(Icons.replay_rounded)),
+                      onTap: () {
+                        final controller = BonfireInjector().get<NpcRoboDinoController>();
+                        controller.initialize();
+                        context.goTo(widget.parentWidget);
+                      }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: InkWell(
+                    child: const SizedBox(
+                        height: 36, width: 64, child: Icon(Icons.play_arrow_rounded)),
+                    onTapUp: (details) => widget.gameScreenFocus.requestFocus(),
+                    onTap: () async {
+                      widget.gameScreenFocus.requestFocus();
+                      String code = widget.controller.text;
+                      final List<Map<String, dynamic>> playerCommandMap = code.toPlayerCommandMap();
+                      try {
+                        _focus.unfocus();
+                        _commandList = playerCommandMap;
+                        setState(() {
+                          _commandListInStr = playerCommandMap.toString();
+                        });
+                      } catch (error) {
+                        _commandList = [];
+                        setState(() {
+                          _commandListInStr = error.toString();
+                        });
+                      }
+                      widget.callback(_commandList);
+                    },
                   ),
                 ),
-              ]),
-        ],
+              ],
+            ),
+            const Divider(),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SelectableText(
+                            _commandListInStr,
+                            style: consoleStyle,
+                            minLines: 5,
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ]),
+          ],
+        ),
       ),
     );
   }

@@ -1,11 +1,10 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/dungeon_01/dungeon_01_screen.dart';
-// import 'package:codefire/maps/dungeon_02_screen.dart';
-// import 'package:codefire/maps/dungeon_03_screen.dart';
+import 'package:codefire/npc/necromancer_sprite.dart';
 import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:codefire/player/player_bandit_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
+import 'package:codefire/view/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:codefire/maps/dungeon_01_screen.dart';
 
@@ -14,9 +13,9 @@ void main() async {
 
   await PlayerBanditSprite.load();
   await NpcRoboDinoSprite.load();
+  await NpcNecromancerSprite.load();
 
   BonfireInjector().put((i) => NpcRoboDinoController());
-  // BonfireInjector().putFactory((i) => NpcRoboDinoController());
   BonfireInjector().put((i) => PlayerBanditController());
 
   runApp(const MyApp());
@@ -32,9 +31,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'NotoSansMono',
-        primarySwatch: Colors.blue,
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
       ),
-      home: const Dungeon01Screen(),
+      home: const CodefireMainScreen(),
     );
   }
 }
