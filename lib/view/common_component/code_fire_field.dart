@@ -3,6 +3,7 @@ import 'package:code_text_field/code_text_field.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/utilities/extentions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_highlight/themes/tomorrow.dart';
 
 class CodeFireField extends StatefulWidget {
   const CodeFireField({
@@ -16,6 +17,15 @@ class CodeFireField extends StatefulWidget {
   final CodeController controller;
   final ValueChanged<List<Map<String, dynamic>>> callback;
   final FocusNode gameScreenFocus;
+
+  static const codeTheme = tomorrowTheme;
+  static const colorThemeName = 'title';
+  static final patternMap = {
+    'moveUp': TextStyle(color: codeTheme[colorThemeName]?.color),
+    'moveDown': TextStyle(color: codeTheme[colorThemeName]?.color),
+    'moveLeft': TextStyle(color: codeTheme[colorThemeName]?.color),
+    'moveRight': TextStyle(color: codeTheme[colorThemeName]?.color),
+  };
 
   @override
   State<CodeFireField> createState() => _CodeFireFieldState();
@@ -48,28 +58,40 @@ class _CodeFireFieldState extends State<CodeFireField> {
               child: InkWell(
                   child:
                       const SizedBox(height: 36, width: 64, child: Icon(Icons.arrow_back_rounded)),
-                  onTap: () {}),
+                  onTap: () {
+                    widget.controller.insertStr('moveLeft(1);');
+                    codeField.focusNode!.requestFocus();
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: InkWell(
                   child: const SizedBox(
                       height: 36, width: 64, child: Icon(Icons.arrow_upward_rounded)),
-                  onTap: () {}),
+                  onTap: () {
+                    widget.controller.insertStr('moveUp(1);');
+                    codeField.focusNode!.requestFocus();
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: InkWell(
                   child: const SizedBox(
                       height: 36, width: 64, child: Icon(Icons.arrow_downward_rounded)),
-                  onTap: () {}),
+                  onTap: () {
+                    widget.controller.insertStr('moveDown(1);');
+                    codeField.focusNode!.requestFocus();
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: InkWell(
                   child: const SizedBox(
                       height: 36, width: 64, child: Icon(Icons.arrow_forward_rounded)),
-                  onTap: () {}),
+                  onTap: () {
+                    widget.controller.insertStr('moveRight(1);');
+                    codeField.focusNode!.requestFocus();
+                  }),
             ),
             const Spacer(),
             Padding(
@@ -81,7 +103,10 @@ class _CodeFireFieldState extends State<CodeFireField> {
                     width: 64,
                     child: Text('FOR', style: shortCutTextStyle),
                   ),
-                  onTap: () {}),
+                  onTap: () {
+                    widget.controller.insertStr('for (let idx = 1; idx <= 2; idx++) {};');
+                    codeField.focusNode!.requestFocus();
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -92,7 +117,10 @@ class _CodeFireFieldState extends State<CodeFireField> {
                     width: 64,
                     child: Text('IF', style: shortCutTextStyle),
                   ),
-                  onTap: () {}),
+                  onTap: () {
+                    widget.controller.insertStr('if (1 == 1) {};');
+                    codeField.focusNode!.requestFocus();
+                  }),
             ),
           ]),
           const Divider(),

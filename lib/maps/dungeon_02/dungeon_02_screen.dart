@@ -4,8 +4,6 @@ import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:flutter/material.dart';
 import 'package:code_text_field/code_text_field.dart';
-import 'package:flutter_highlight/themes/arduino-light.dart';
-// import 'package:flutter_highlight/themes/atom-one-light.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
@@ -29,20 +27,11 @@ for (let idx = 0; idx < 2; idx++) {
   moveDown(7)
 }''';
 
-    // const codeTheme = atomOneLightTheme;
-    // const colorThemeName = 'name';
-    const codeTheme = arduinoLightTheme;
-    const colorThemeName = 'code';
-    final codeController = CodeController(
+    final controller = CodeController(
       text: defaultCode,
       language: javascript,
-      theme: codeTheme,
-      patternMap: {
-        'moveUp': TextStyle(color: codeTheme[colorThemeName]?.color),
-        'moveDown': TextStyle(color: codeTheme[colorThemeName]?.color),
-        'moveLeft': TextStyle(color: codeTheme[colorThemeName]?.color),
-        'moveRight': TextStyle(color: codeTheme[colorThemeName]?.color),
-      },
+      theme: CodeFireField.codeTheme,
+      patternMap: CodeFireField.patternMap,
     );
     final focus = FocusNode();
     return Scaffold(
@@ -52,7 +41,7 @@ for (let idx = 0; idx < 2; idx++) {
           Expanded(
             flex: 1,
             child: CodeFireField(
-              controller: codeController,
+              controller: controller,
               parentWidget: widget,
               gameScreenFocus: focus,
               callback: (result) {
