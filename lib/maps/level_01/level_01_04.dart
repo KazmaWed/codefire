@@ -1,22 +1,22 @@
 import 'package:codefire/decorations/button_blue.dart';
-import 'package:codefire/maps/level_01/level_01_03_controller.dart';
+import 'package:codefire/maps/level_01/level_01_04_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 
-class Level0103 extends StatefulWidget {
-  const Level0103({Key? key, required this.focus}) : super(key: key);
+class Level0104 extends StatefulWidget {
+  const Level0104({Key? key, required this.focus}) : super(key: key);
   final FocusNode focus;
   @override
-  State<Level0103> createState() => _Level0103State();
+  State<Level0104> createState() => _Level0104State();
 }
 
-class _Level0103State extends State<Level0103> {
+class _Level0104State extends State<Level0104> {
   @override
   Widget build(BuildContext context) {
-    final controller = Level0103Controller();
+    final controller = Level0104Controller();
     controller.cameraTarget = CameraTarget(
       player: controller.player,
       components: [controller.robo],
@@ -37,14 +37,14 @@ class _Level0103State extends State<Level0103> {
       map: WorldMapByTiled(
         controller.jsonPath,
         forceTileSize: Vector2(
-          Level0103Controller.tileSize,
-          Level0103Controller.tileSize,
+          Level0104Controller.tileSize,
+          Level0104Controller.tileSize,
         ),
         objectsBuilder: {
           'necromancer': (properties) {
             controller.necromancer = NpcNecromancer(
               properties.position,
-              tileSize: Level0103Controller.tileSize,
+              tileSize: Level0104Controller.tileSize,
               cameraCenterComponent: controller.cameraTarget,
               hintTextList: controller.hintTextList,
             );
@@ -52,7 +52,7 @@ class _Level0103State extends State<Level0103> {
           },
           'archGate': (properties) {
             controller.archGate = ArchGateDecoration(
-              tileSize: Level0103Controller.tileSize,
+              tileSize: Level0104Controller.tileSize,
               initialPosition: properties.position,
             );
             return controller.archGate;
@@ -61,7 +61,7 @@ class _Level0103State extends State<Level0103> {
             controller.allButtons.add(properties.id!);
             return ButtonBlueDecoration(
               initPosition: properties.position,
-              tileSize: Level0103Controller.tileSize,
+              tileSize: Level0104Controller.tileSize,
               id: properties.id!,
               player: controller.player,
               callback: () {

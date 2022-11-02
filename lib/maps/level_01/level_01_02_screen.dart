@@ -23,7 +23,7 @@ class _Level0102ScreenState extends State<Level0102Screen> {
   Widget build(BuildContext context) {
     String defaultCode = widget.initialCode ?? Level0102Controller.initialCode;
 
-    final controller = CodeController(
+    final codeController = CodeController(
       text: defaultCode,
       language: javascript,
       theme: CodeFireField.codeTheme,
@@ -37,7 +37,7 @@ class _Level0102ScreenState extends State<Level0102Screen> {
           Expanded(
             flex: 1,
             child: CodeFireField(
-              controller: controller,
+              controller: codeController,
               parentWidget: widget,
               gameScreenFocus: focus,
               callback: (result) {

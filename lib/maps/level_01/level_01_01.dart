@@ -1,11 +1,8 @@
 import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/maps/level_01/level_01_01_controller.dart';
-// import 'package:codefire/maps/dungeon_02_screen.dart';
-// import 'package:codefire/maps/dungeon_03/dungeon_03_screen.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 

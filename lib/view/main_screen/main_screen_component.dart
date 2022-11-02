@@ -22,6 +22,7 @@ class CordfireLevelCard extends StatelessWidget {
         Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white);
     final TextStyle descriptionStyle =
         Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white);
+
     return Card(
       clipBehavior: Clip.antiAlias,
       color: Colors.white12,
