@@ -1,13 +1,6 @@
-import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/maps/dungeon_02/dungeon_02_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
-import 'package:codefire/npc/necromancer.dart';
-import 'package:codefire/npc/necromancer_sprite.dart';
-import 'package:codefire/npc/npc_robo_dino.dart';
-import 'package:codefire/npc/npc_robo_dino_sprite.dart';
-import 'package:codefire/player/player_bandit.dart';
-import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';

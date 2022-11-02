@@ -17,7 +17,6 @@ class Dungeon02Controller {
   final Set<int> allButtons = {};
 
   static const tileSize = 48.0; // タイルのサイズ定義
-  static get _tileSize => tileSize;
 
   late NpcNecromancer necromancer;
 
