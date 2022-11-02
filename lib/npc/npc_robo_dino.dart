@@ -1,11 +1,11 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
+import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 
 class NpcRoboDino extends SimpleNpc
     with ObjectCollision, UseStateController<NpcRoboDinoController> {
   NpcRoboDino(
     Vector2 initialPosition, {
-    required this.spriteSheet,
     Direction initDirection = Direction.left,
     required this.tileSize,
   }) : super(
@@ -34,7 +34,7 @@ class NpcRoboDino extends SimpleNpc
     );
   }
 
-  final SpriteSheet spriteSheet;
+  static final SpriteSheet spriteSheet = NpcRoboDinoSprite.sheet;
   final double tileSize;
 
   static const spriteShift = 14.0;

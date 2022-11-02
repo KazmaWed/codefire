@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/maps/dungeon_01/dungeon_01_controller.dart';
 import 'package:codefire/player/player_bandit_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,6 @@ class PlayerBandit extends SimplePlayer
   PlayerBandit(
     position, {
     required this.tileSize,
-    required this.spriteSheet,
     Direction initDirection = Direction.up,
   }) : super(
           animation: SimpleDirectionAnimation(
@@ -37,7 +37,7 @@ class PlayerBandit extends SimplePlayer
       barriersCalculatedColor: Colors.transparent,
     );
   }
-  final SpriteSheet spriteSheet;
+  static final SpriteSheet spriteSheet = PlayerBanditSprite.sheet;
   final double tileSize;
 
   static final imageShift = Vector2(0, -12);

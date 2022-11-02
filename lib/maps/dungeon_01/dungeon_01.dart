@@ -1,16 +1,10 @@
-import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/maps/dungeon_01/dungeon_01_controller.dart';
 // import 'package:codefire/maps/dungeon_02_screen.dart';
 import 'package:codefire/maps/dungeon_03/dungeon_03_screen.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
-import 'package:codefire/npc/necromancer.dart';
-import 'package:codefire/npc/necromancer_sprite.dart';
-import 'package:codefire/npc/npc_robo_dino.dart';
-import 'package:codefire/npc/npc_robo_dino_sprite.dart';
-import 'package:codefire/player/player_bandit.dart';
-import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
+import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 
@@ -22,33 +16,12 @@ class Dungeon01 extends StatefulWidget {
 }
 
 class _Dungeon01State extends State<Dungeon01> {
-  static const tileSize = 48.0; // タイルのサイズ定義
-
-  late NpcNecromancer necromancer;
-
-  final player = PlayerBandit(
-    Vector2(tileSize * 9, tileSize * 7),
-    spriteSheet: PlayerBanditSprite.sheet,
-    initDirection: Direction.up,
-    tileSize: tileSize,
-  );
-
-  final robo = NpcRoboDino(
-    Vector2(tileSize * 6, tileSize * 9),
-    spriteSheet: NpcRoboDinoSprite.sheet,
-    tileSize: tileSize,
-  );
-
-  late final ArchGateDecoration archGate;
-
-  late Dungeon01Controller controller;
-
   @override
   Widget build(BuildContext context) {
-    final Set<int> allButtons = {};
-    final cameraTarget = CameraTarget(
-      player: player,
-      components: [robo],
+    final controller = Dungeon01Controller();
+    controller.cameraTarget = CameraTarget(
+      player: controller.player,
+      components: [controller.robo],
     );
 
     // 画面
@@ -65,34 +38,36 @@ class _Dungeon01State extends State<Dungeon01> {
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
         'tiled/dungeon_01.json',
-        forceTileSize: Vector2(tileSize, tileSize),
+        forceTileSize: Vector2(
+          Dungeon01Controller.tileSize,
+          Dungeon01Controller.tileSize,
+        ),
         objectsBuilder: {
           'necromancer': (properties) {
-            necromancer = NpcNecromancer(
+            controller.necromancer = NpcNecromancer(
               properties.position,
-              spriteSheet: NpcNecromancerSprite.sheet,
-              tileSize: tileSize,
-              cameraCenterComponent: cameraTarget,
+              tileSize: Dungeon01Controller.tileSize,
+              cameraCenterComponent: controller.cameraTarget,
             );
-            return necromancer;
+            return controller.necromancer;
           },
           'archGate': (properties) {
-            archGate = ArchGateDecoration(
-              tileSize: tileSize,
+            controller.archGate = ArchGateDecoration(
+              tileSize: Dungeon01Controller.tileSize,
               initialPosition: properties.position,
             );
-            return archGate;
+            return controller.archGate;
           },
           'buttonBlue': (properties) {
-            allButtons.add(properties.id!);
+            controller.allButtons.add(properties.id!);
             return ButtonBlueDecoration(
               initPosition: properties.position,
-              tileSize: tileSize,
+              tileSize: Dungeon01Controller.tileSize,
               id: properties.id!,
-              player: player,
+              player: controller.player,
               callback: () {
                 controller.activate(properties.id!);
-                if (controller.allActivated()) archGate.openGate();
+                if (controller.allActivated()) controller.archGate.openGate();
               },
             );
           },
@@ -104,47 +79,24 @@ class _Dungeon01State extends State<Dungeon01> {
         },
       ),
       // プレイヤーキャラクター
-      player: player,
+      player: controller.player,
       onReady: (bonfireGame) async {
-        controller = Dungeon01Controller(allButtons: allButtons);
-        await bonfireGame.add(robo);
-        await bonfireGame.add(cameraTarget);
-        bonfireGame.addJoystickObserver(necromancer);
+        await bonfireGame.add(controller.robo);
+        await bonfireGame.add(controller.cameraTarget);
+        bonfireGame.addJoystickObserver(controller.necromancer);
       },
       // カメラ設定
       cameraConfig: CameraConfig(
         // moveOnlyMapArea: true,
         sizeMovementWindow: Vector2.zero(),
-        target: cameraTarget,
+        target: controller.cameraTarget,
         smoothCameraEnabled: true,
         smoothCameraSpeed: 10,
       ),
       // 入力インターフェースの設定
-      joystick: Joystick(
-        // // 画面上のジョイスティック追加
-        // directional: JoystickDirectional(
-        //   color: Colors.white,
-        // ),
-        // actions: [
-        //   // 画面上のアクションボタン追加
-        //   JoystickAction(
-        //     color: Colors.white,
-        //     actionId: 1,
-        //     margin: const EdgeInsets.all(65),
-        //   ),
-        // ],
-        // キーボード用入力の設定
-        keyboardConfig: KeyboardConfig(
-          keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // キーボードの矢印とWASDを有効化
-          // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
-        ),
-      ),
+      joystick: codefireJoystick,
       // ロード中の画面の設定
-      progress: Container(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        color: Colors.transparent,
-      ),
+      progress: codefireProgress,
       focusNode: widget.focus,
     );
   }

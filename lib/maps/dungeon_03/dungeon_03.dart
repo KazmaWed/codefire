@@ -32,14 +32,12 @@ class _Dungeon03State extends State<Dungeon03> {
 
   final player = PlayerBandit(
     playerPosition * tileSize,
-    spriteSheet: PlayerBanditSprite.sheet,
     initDirection: Direction.up,
     tileSize: tileSize,
   );
 
   final robo = NpcRoboDino(
     roboPosition * tileSize,
-    spriteSheet: NpcRoboDinoSprite.sheet,
     tileSize: tileSize,
   );
 
@@ -75,7 +73,6 @@ class _Dungeon03State extends State<Dungeon03> {
           'necromancer': (properties) {
             necromancer = NpcNecromancer(
               properties.position,
-              spriteSheet: NpcNecromancerSprite.sheet,
               tileSize: tileSize,
               cameraCenterComponent: cameraTarget,
             );

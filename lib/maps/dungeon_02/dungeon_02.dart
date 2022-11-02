@@ -8,6 +8,7 @@ import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
 import 'package:codefire/player/player_bandit_sprite.dart';
+import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 
@@ -20,33 +21,14 @@ class Dungeon02 extends StatefulWidget {
 }
 
 class _Dungeon02State extends State<Dungeon02> {
-  static const tileSize = 48.0; // タイルのサイズ定義
-
-  late NpcNecromancer necromancer;
-
-  final player = PlayerBandit(
-    Vector2(tileSize * 10, tileSize * 12),
-    spriteSheet: PlayerBanditSprite.sheet,
-    initDirection: Direction.up,
-    tileSize: tileSize,
-  );
-
-  final robo = NpcRoboDino(
-    Vector2(tileSize * 8, tileSize * 12),
-    spriteSheet: NpcRoboDinoSprite.sheet,
-    tileSize: tileSize,
-  );
-
-  late final ArchGateDecoration archGate;
-
-  late Dungeon02Controller controller;
+  final controller = Dungeon02Controller();
 
   @override
   Widget build(BuildContext context) {
     final Set<int> allButtons = {};
     final cameraTarget = CameraTarget(
-      player: player,
-      components: [robo],
+      player: controller.player,
+      components: [controller.robo],
     );
 
     // 画面
@@ -63,45 +45,43 @@ class _Dungeon02State extends State<Dungeon02> {
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
         'tiled/dungeon_02.json',
-        forceTileSize: Vector2(tileSize, tileSize),
+        forceTileSize: Vector2(Dungeon02Controller.tileSize, Dungeon02Controller.tileSize),
         objectsBuilder: {
           'necromancer': (properties) {
-            necromancer = NpcNecromancer(
+            controller.necromancer = NpcNecromancer(
               properties.position,
-              spriteSheet: NpcNecromancerSprite.sheet,
-              tileSize: tileSize,
+              tileSize: Dungeon02Controller.tileSize,
               cameraCenterComponent: cameraTarget,
             );
-            return necromancer;
+            return controller.necromancer;
           },
           'archGate': (properties) {
-            archGate = ArchGateDecoration(
-              tileSize: tileSize,
+            controller.archGate = ArchGateDecoration(
+              tileSize: Dungeon02Controller.tileSize,
               initialPosition: properties.position,
             );
-            return archGate;
+            return controller.archGate;
           },
           'buttonBlue': (properties) {
             allButtons.add(properties.id!);
             return ButtonBlueDecoration(
               initPosition: properties.position,
-              tileSize: tileSize,
+              tileSize: Dungeon02Controller.tileSize,
               id: properties.id!,
-              player: player,
+              player: controller.player,
               callback: () {
                 controller.activate(properties.id!);
-                if (controller.allActivated()) archGate.openGate();
+                if (controller.allActivated()) controller.archGate.openGate();
               },
             );
           },
         },
       ),
       // プレイヤーキャラクター
-      player: player,
+      player: controller.player,
       onReady: (bonfireGame) async {
-        await bonfireGame.add(robo);
+        await bonfireGame.add(controller.robo);
         await bonfireGame.add(cameraTarget);
-        controller = Dungeon02Controller(allButtons: allButtons);
       },
       // カメラ設定
       cameraConfig: CameraConfig(
@@ -112,31 +92,9 @@ class _Dungeon02State extends State<Dungeon02> {
         smoothCameraSpeed: 10,
       ),
       // 入力インターフェースの設定
-      joystick: Joystick(
-        // // 画面上のジョイスティック追加
-        // directional: JoystickDirectional(
-        //   color: Colors.white,
-        // ),
-        // actions: [
-        //   // 画面上のアクションボタン追加
-        //   JoystickAction(
-        //     color: Colors.white,
-        //     actionId: 1,
-        //     margin: const EdgeInsets.all(65),
-        //   ),
-        // ],
-        // キーボード用入力の設定
-        keyboardConfig: KeyboardConfig(
-          keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // キーボードの矢印とWASDを有効化
-          // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
-        ),
-      ),
+      joystick: codefireJoystick,
       // ロード中の画面の設定
-      progress: Container(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        color: Colors.black,
-      ),
+      progress: codefireProgress,
       focusNode: widget.focus,
     );
   }

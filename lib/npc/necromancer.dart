@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/npc/necromancer_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/services.dart';
 class NpcNecromancer extends SimpleNpc with ObjectCollision, JoystickListener {
   NpcNecromancer(
     Vector2 initialPosition, {
-    required this.spriteSheet,
     required this.tileSize,
     required this.cameraCenterComponent,
     Direction initDirection = Direction.right,
@@ -36,7 +36,7 @@ class NpcNecromancer extends SimpleNpc with ObjectCollision, JoystickListener {
     );
   }
 
-  final SpriteSheet spriteSheet;
+  static final SpriteSheet spriteSheet = NpcNecromancerSprite.sheet;
   final double tileSize;
   final GameComponent cameraCenterComponent;
 
