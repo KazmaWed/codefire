@@ -97,6 +97,9 @@ class _Level0103State extends State<Level0103> {
       // ロード中の画面の設定
       progress: CodefireGameComponents.codefireProgress,
       focusNode: widget.focus,
+      onDispose: () {
+        controller.player.controller.stopMoving();
+      },
     );
   }
 }

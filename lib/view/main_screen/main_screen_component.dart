@@ -8,13 +8,13 @@ class CordfireLevelCard extends StatelessWidget {
     required this.context,
     required this.name,
     required this.description,
-    required this.map,
+    required this.maps,
   });
 
   final BuildContext context;
   final String name;
   final String description;
-  final Widget map;
+  final List<Widget> maps;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +26,50 @@ class CordfireLevelCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       color: Colors.white12,
+      child: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Row(children: [
+              Text(name, style: titleStyle),
+              const Spacer(),
+              Text(description, style: descriptionStyle),
+            ]),
+            const SizedBox(height: 12),
+            // Row(
+            //   mainAxisSize: MainAxisSize.max,
+            //   children: [
+            Wrap(
+              runAlignment: WrapAlignment.start,
+              spacing: 12,
+              runSpacing: 8,
+              children: [
+                for (var index = 0; index < maps.length; index++) levelButton(maps[index], index),
+              ],
+            ),
+            //   ],
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget levelButton(Widget map, int index) {
+    final TextStyle style = Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white);
+    final levelText = 'ステージ ${index + 1}';
+
+    return Container(
+      clipBehavior: Clip.hardEdge,
+      decoration: const BoxDecoration(
+        color: Colors.white12,
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
       child: InkWell(
         child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(children: [
-            Text(name, style: titleStyle),
-            const SizedBox(height: 8),
-            Text(
-              description,
-              style: descriptionStyle,
-            )
-          ]),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+          child: Text(levelText, style: style),
         ),
         onTap: () {
           context.goTo(map);

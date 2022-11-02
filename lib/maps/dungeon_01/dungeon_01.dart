@@ -70,7 +70,7 @@ class _Dungeon01State extends State<Dungeon01> {
                 controller.activate(properties.id!);
                 if (controller.allActivated()) controller.archGate.openGate();
               },
-            );
+            )..priority = -1;
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,

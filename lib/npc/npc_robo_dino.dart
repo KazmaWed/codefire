@@ -2,7 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
 
-class NpcRoboDino extends SimpleNpc
+class NpcRoboDino extends SimplePlayer
     with ObjectCollision, UseStateController<NpcRoboDinoController> {
   NpcRoboDino(
     Vector2 initialPosition, {
@@ -32,6 +32,7 @@ class NpcRoboDino extends SimpleNpc
         ],
       ),
     );
+    priority = 1;
   }
 
   static final SpriteSheet spriteSheet = NpcRoboDinoSprite.sheet;
@@ -46,14 +47,26 @@ class NpcRoboDino extends SimpleNpc
   }
 
   @override
-  int get priority => LayerPriority.getComponentPriority(1);
-
-  @override
   bool onCollision(GameComponent component, bool active) {
-    controller.moving = null;
+    controller.command = null;
     // controller.nextPosition = null;
     controller.haveMoved = 0;
 
     return true;
+  }
+
+  @override
+  void die() {
+    super.die();
+    gameRef.add(
+      AnimatedObjectOnce(
+        animation: spriteSheet
+            .createAnimation(row: 10, stepTime: 0.3, from: 4, to: 8, loop: false)
+            .asFuture(),
+        position: position,
+        size: size,
+      ),
+    );
+    removeFromParent();
   }
 }

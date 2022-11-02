@@ -18,7 +18,7 @@ class _CodefireMainScreenState extends State<CodefireMainScreen> {
     return CodefireScaffold(
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 420),
+          constraints: const BoxConstraints(maxWidth: 540),
           child: ListView.builder(
             shrinkWrap: true,
             padding: const EdgeInsets.all(12),
@@ -29,7 +29,7 @@ class _CodefireMainScreenState extends State<CodefireMainScreen> {
                 context: context,
                 name: levelInfo['name'],
                 description: levelInfo['description'],
-                map: levelInfo['map'],
+                maps: levelInfo['maps'],
               );
             }),
           ),

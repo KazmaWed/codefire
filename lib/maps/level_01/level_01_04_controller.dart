@@ -14,7 +14,7 @@ export 'package:codefire/npc/npc_robo_dino_sprite.dart';
 export 'package:codefire/player/player_bandit_sprite.dart';
 
 class Level0104Controller {
-  static const initialCode = '''moveUp(4);\n''';
+  static const initialCode = '';
   final jsonPath = 'tiled/level_01_04.json';
   final hintTextList = [
     '私はネクロマンサー、話す時も振り返らない',

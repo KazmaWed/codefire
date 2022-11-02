@@ -4,27 +4,27 @@ import 'package:codefire/npc/npc_robo_dino.dart';
 class NpcRoboDinoController extends StateController<NpcRoboDino> {
   List<Map<String, dynamic>> commandList = [];
   Vector2? startPosition;
-  Map<String, dynamic>? moving;
+  Map<String, dynamic>? command;
   double haveMoved = 0;
   Vector2? _nextPosition;
 
   Vector2 getNextPosition() {
     final now = component!.position;
     late Vector2 dif;
-    if (moving!['direction'] == 'up') {
-      dif = Vector2(0, -component!.tileSize * moving!['count']);
-    } else if (moving!['direction'] == 'down') {
-      dif = Vector2(0, component!.tileSize * moving!['count']);
-    } else if (moving!['direction'] == 'left') {
-      dif = Vector2(-component!.tileSize * moving!['count'], 0);
+    if (command!['direction'] == 'up') {
+      dif = Vector2(0, -component!.tileSize * command!['count']);
+    } else if (command!['direction'] == 'down') {
+      dif = Vector2(0, component!.tileSize * command!['count']);
+    } else if (command!['direction'] == 'left') {
+      dif = Vector2(-component!.tileSize * command!['count'], 0);
     } else {
-      dif = Vector2(component!.tileSize * moving!['count'], 0);
+      dif = Vector2(component!.tileSize * command!['count'], 0);
     }
     return now + dif;
   }
 
   void commandInput(List<Map<String, dynamic>> input) {
-    if (moving == null && commandList.isEmpty) {
+    if (command == null && commandList.isEmpty) {
       commandList = input;
     }
   }
@@ -32,34 +32,40 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
   void initialize() {
     commandList = [];
     startPosition = null;
-    moving = null;
+    command = null;
     haveMoved = 0;
     _nextPosition = null;
   }
 
   @override
   void update(double dt, NpcRoboDino component) {
-    // 次のコマンドがなければ終了
-    if (moving == null) {
+    // if (component.isDead) {
+    //   return;
+    // }
+
+    // コマンド待機中
+    if (command == null) {
       component.idle();
     }
 
-    if (commandList.isNotEmpty && moving == null) {
-      startPosition = component.position.xy;
-      moving = commandList.first;
-      _nextPosition = getNextPosition();
-      commandList.removeAt(0);
-      haveMoved = 0;
+    // 次のコマンド受付
+    if (commandList.isNotEmpty && command == null) {
+      startPosition = component.position.xy; // スタート位置
+      _nextPosition = getNextPosition(); // 次の移動先
+      command = commandList.first; // コマンド
+      commandList.removeAt(0); // コマンドリスト
+      haveMoved = 0; // 移動距離初期化
     }
 
-    if (moving != null) {
-      if (moving!['direction'] == 'up') {
+    // コマンド実行中
+    if (command != null) {
+      if (command!['direction'] == 'up') {
         component.moveUp(component.speed);
         haveMoved = (component.position.y - startPosition!.y).abs();
-      } else if (moving!['direction'] == 'down') {
+      } else if (command!['direction'] == 'down') {
         component.moveDown(component.speed);
         haveMoved = (component.position.y - startPosition!.y).abs();
-      } else if (moving!['direction'] == 'left') {
+      } else if (command!['direction'] == 'left') {
         component.moveLeft(component.speed);
         haveMoved = (component.position.x - startPosition!.x).abs();
       } else {
@@ -69,10 +75,14 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
     }
 
     // 移動距離を満たしたらコマンド終了
-    if (moving != null && component.tileSize * moving!['count'] <= haveMoved) {
+    if (component.tileSize * command!['count'] <= haveMoved) {
       component.position = _nextPosition!;
-      moving = null;
+      _nextPosition = null;
+      command = null;
       haveMoved = 0;
+      // if (commandList.isEmpty) {
+      //   component.die();
+      // }
     }
   }
 }

@@ -3,6 +3,7 @@ import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/npc/necromancer.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/player/player_bandit.dart';
+import 'package:flutter/services.dart';
 export 'package:codefire/player/player_bandit.dart';
 export 'package:codefire/decorations/arch_gate.dart';
 export 'package:codefire/npc/necromancer.dart';
@@ -36,7 +37,7 @@ class Dungeon02Controller {
     // キーボード用入力の設定
     keyboardConfig: KeyboardConfig(
       keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // キーボードの矢印とWASDを有効化
-      // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
+      acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
     ),
   );
 
