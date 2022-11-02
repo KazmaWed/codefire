@@ -11,22 +11,24 @@ export 'package:codefire/npc/npc_robo_dino.dart';
 export 'package:codefire/npc/npc_robo_dino_sprite.dart';
 export 'package:codefire/player/player_bandit_sprite.dart';
 
-class Dungeon01Controller {
-  Dungeon01Controller();
+class Level0103Controller {
+  Level0103Controller();
 
   final Set<int> _activatedButtons = {};
   final Set<int> allButtons = {};
 
+  final jsonPath = 'tiled/level_01_03.json';
   final hintTextList = [
-    '私はネクロマンサー、この世界のルールを知っている者',
+    '私はネクロマンサー、この世界のルールを知っている',
     'さて、画面左側に白い枠が見えるだろう、あれだ「コードフィールド」だ',
-    'コードフィールドの左下に再生ボタンが見えるはずだ、まずはそれを押してみなさい',
+    'コードフィールドの右下に再生ボタンが見えるはずだ、まずはそれを押してみなさい',
     '扉が開かれるはずだ',
     'うまく行かないときはリセットボタンを押してみなさい、再生ボタンのちょうど左側にある',
   ];
 
   static const tileSize = 48.0;
-  static final playerPosition = Vector2(9, 7);
+  static final playerPosition = Vector2(7, 9);
+  static final roboDinoPosition = Vector2(4, 6);
 
   late final CameraTarget cameraTarget;
   late final ArchGateDecoration archGate;
@@ -38,7 +40,7 @@ class Dungeon01Controller {
     tileSize: tileSize,
   );
   final robo = NpcRoboDino(
-    Vector2(tileSize * 6, tileSize * 9),
+    roboDinoPosition * tileSize,
     tileSize: tileSize,
   );
 

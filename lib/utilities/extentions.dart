@@ -100,9 +100,10 @@ function moveRight(d = 1) {
     count: d
   };
   playerCommandOutput.push(newCommand);
-}
+}\n
 ''';
     const footer = '''
+\n
 const json = {data: playerCommandOutput};
 JSON.stringify(playerCommandOutput)
 ''';

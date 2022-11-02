@@ -26,6 +26,7 @@ class _CodefireMainScreenState extends State<CodefireMainScreen> {
             itemBuilder: ((context, index) {
               final levelInfo = controller.levels[index];
               return CordfireLevelCard(
+                context: context,
                 name: levelInfo['name'],
                 description: levelInfo['description'],
                 map: levelInfo['map'],

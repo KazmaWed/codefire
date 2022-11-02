@@ -1,24 +1,25 @@
 import 'package:codefire/decorations/button_blue.dart';
-import 'package:codefire/maps/dungeon_01/dungeon_01_controller.dart';
+import 'package:codefire/maps/level_01/level_01_02_controller.dart';
 // import 'package:codefire/maps/dungeon_02_screen.dart';
-import 'package:codefire/maps/dungeon_03/dungeon_03_screen.dart';
+// import 'package:codefire/maps/dungeon_03/dungeon_03_screen.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
+import 'package:codefire/view/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 
-class Dungeon01 extends StatefulWidget {
-  const Dungeon01({Key? key, required this.focus}) : super(key: key);
+class Level0102 extends StatefulWidget {
+  const Level0102({Key? key, required this.focus}) : super(key: key);
   final FocusNode focus;
   @override
-  State<Dungeon01> createState() => _Dungeon01State();
+  State<Level0102> createState() => _Level0102State();
 }
 
-class _Dungeon01State extends State<Dungeon01> {
+class _Level0102State extends State<Level0102> {
   @override
   Widget build(BuildContext context) {
-    final controller = Dungeon01Controller();
+    final controller = Level0102Controller();
     controller.cameraTarget = CameraTarget(
       player: controller.player,
       components: [controller.robo],
@@ -37,16 +38,16 @@ class _Dungeon01State extends State<Dungeon01> {
       },
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
-        'tiled/dungeon_01.json',
+        controller.jsonPath,
         forceTileSize: Vector2(
-          Dungeon01Controller.tileSize,
-          Dungeon01Controller.tileSize,
+          Level0102Controller.tileSize,
+          Level0102Controller.tileSize,
         ),
         objectsBuilder: {
           'necromancer': (properties) {
             controller.necromancer = NpcNecromancer(
               properties.position,
-              tileSize: Dungeon01Controller.tileSize,
+              tileSize: Level0102Controller.tileSize,
               cameraCenterComponent: controller.cameraTarget,
               hintTextList: controller.hintTextList,
             );
@@ -54,7 +55,7 @@ class _Dungeon01State extends State<Dungeon01> {
           },
           'archGate': (properties) {
             controller.archGate = ArchGateDecoration(
-              tileSize: Dungeon01Controller.tileSize,
+              tileSize: Level0102Controller.tileSize,
               initialPosition: properties.position,
             );
             return controller.archGate;
@@ -63,7 +64,7 @@ class _Dungeon01State extends State<Dungeon01> {
             controller.allButtons.add(properties.id!);
             return ButtonBlueDecoration(
               initPosition: properties.position,
-              tileSize: Dungeon01Controller.tileSize,
+              tileSize: Level0102Controller.tileSize,
               id: properties.id!,
               player: controller.player,
               callback: () {
@@ -75,7 +76,7 @@ class _Dungeon01State extends State<Dungeon01> {
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
                 size: properties.size,
-                nextMap: const Dungeon03Screen(),
+                nextMap: const CodefireMainScreen(),
               ),
         },
       ),

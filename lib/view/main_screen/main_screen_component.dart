@@ -5,19 +5,23 @@ import 'package:flutter/material.dart';
 class CordfireLevelCard extends StatelessWidget {
   const CordfireLevelCard({
     super.key,
+    required this.context,
     required this.name,
     required this.description,
     required this.map,
   });
 
+  final BuildContext context;
   final String name;
   final String description;
   final Widget map;
 
-  final TextStyle style = const TextStyle(color: Colors.white);
-
   @override
   Widget build(BuildContext context) {
+    final TextStyle titleStyle =
+        Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white);
+    final TextStyle descriptionStyle =
+        Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white);
     return SizedBox(
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -25,7 +29,13 @@ class CordfireLevelCard extends StatelessWidget {
         child: InkWell(
           child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Text(name, style: style),
+            child: Column(children: [
+              Text(name, style: titleStyle),
+              Text(
+                description,
+                style: descriptionStyle,
+              )
+            ]),
           ),
           onTap: () {
             context.goTo(map);

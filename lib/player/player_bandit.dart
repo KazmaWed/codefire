@@ -18,7 +18,7 @@ class PlayerBandit extends SimplePlayer
             runRight: spriteSheet.createAnimation(row: 3, stepTime: 0.1, from: 0, to: 4).asFuture(),
           ),
           size: Vector2.all(tileSize * 2),
-          position: position + imageShift,
+          position: position - Vector2.all(tileSize / 2) + imageShift,
           initDirection: initDirection,
           speed: tileSize * 4,
         ) {

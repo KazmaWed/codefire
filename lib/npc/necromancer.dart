@@ -10,6 +10,7 @@ class NpcNecromancer extends SimpleNpc with ObjectCollision, JoystickListener {
     required this.tileSize,
     required this.cameraCenterComponent,
     Direction initDirection = Direction.right,
+    this.hintTextList,
   }) : super(
           animation: SimpleDirectionAnimation(
             idleLeft: spriteSheet.createAnimation(row: 0, stepTime: 0.3, from: 4, to: 8).asFuture(),
@@ -39,6 +40,7 @@ class NpcNecromancer extends SimpleNpc with ObjectCollision, JoystickListener {
   static final SpriteSheet spriteSheet = NpcNecromancerSprite.sheet;
   final double tileSize;
   final GameComponent cameraCenterComponent;
+  final List<String>? hintTextList;
 
   static const spriteShift = 14.0;
 
@@ -49,28 +51,26 @@ class NpcNecromancer extends SimpleNpc with ObjectCollision, JoystickListener {
   }
 
   void _showTalk() {
-    gameRef.player!.idle();
-    (gameRef.player! as PlayerBandit).controller.stopMoving();
-    TalkDialog.show(
-      gameRef.map.gameRef.context,
-      [
-        Say(
-          text: [const TextSpan(text: '私はネクロマンサー')],
-        ),
-        Say(
-          text: [const TextSpan(text: 'ヒントを出す予定だ')],
-        ),
-      ],
-      logicalKeyboardKeysToNext: [
-        LogicalKeyboardKey.space,
-      ],
-      style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white),
-      padding:
-          EdgeInsets.only(left: MediaQuery.of(context).size.width / 3) + const EdgeInsets.all(32),
-      onFinish: () {
-        gameRef.camera.moveToTargetAnimated(cameraCenterComponent);
-      },
-    );
+    if (hintTextList != null) {
+      gameRef.player!.idle();
+      (gameRef.player! as PlayerBandit).controller.stopMoving();
+      TalkDialog.show(
+        gameRef.map.gameRef.context,
+        // [
+        hintTextList!.map((element) {
+          return Say(text: [TextSpan(text: element)]);
+        }).toList(),
+        logicalKeyboardKeysToNext: [
+          LogicalKeyboardKey.space,
+        ],
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white),
+        padding:
+            EdgeInsets.only(left: MediaQuery.of(context).size.width / 3) + const EdgeInsets.all(32),
+        onFinish: () {
+          gameRef.camera.moveToTargetAnimated(cameraCenterComponent);
+        },
+      );
+    }
   }
 
   // final radiusVision = 1.5;
