@@ -18,7 +18,8 @@ class Dungeon02Controller {
 
   static const tileSize = 48.0; // タイルのサイズ定義
 
-  late NpcNecromancer necromancer;
+  late final NpcNecromancer necromancer;
+  late final ArchGateDecoration archGate;
 
   final player = PlayerBandit(
     Vector2(tileSize * 10, tileSize * 12),
@@ -31,7 +32,13 @@ class Dungeon02Controller {
     tileSize: tileSize,
   );
 
-  late final ArchGateDecoration archGate;
+  final joystick = Joystick(
+    // キーボード用入力の設定
+    keyboardConfig: KeyboardConfig(
+      keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // キーボードの矢印とWASDを有効化
+      // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
+    ),
+  );
 
   bool allActivated() {
     return _activatedButtons.containsAll(allButtons);

@@ -94,9 +94,9 @@ class _Dungeon01State extends State<Dungeon01> {
         smoothCameraSpeed: 10,
       ),
       // 入力インターフェースの設定
-      joystick: codefireJoystick,
+      joystick: controller.joystick,
       // ロード中の画面の設定
-      progress: codefireProgress,
+      progress: CodefireGameComponents.codefireProgress,
       focusNode: widget.focus,
     );
   }

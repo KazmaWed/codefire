@@ -17,22 +17,30 @@ class Dungeon01Controller {
   final Set<int> _activatedButtons = {};
   final Set<int> allButtons = {};
 
-  static const tileSize = 48.0; // タイルのサイズ定義
+  static const tileSize = 48.0;
+  static final playerPosition = Vector2(9, 7);
 
-  late NpcNecromancer necromancer;
+  late final CameraTarget cameraTarget;
+  late final ArchGateDecoration archGate;
+  late final NpcNecromancer necromancer;
+
   final PlayerBandit player = PlayerBandit(
-    Vector2(tileSize * 9, tileSize * 7),
+    playerPosition * tileSize,
     initDirection: Direction.up,
     tileSize: tileSize,
   );
-  late CameraTarget cameraTarget;
-
   final robo = NpcRoboDino(
     Vector2(tileSize * 6, tileSize * 9),
     tileSize: tileSize,
   );
 
-  late final ArchGateDecoration archGate;
+  final joystick = Joystick(
+    // キーボード用入力の設定
+    keyboardConfig: KeyboardConfig(
+      keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // キーボードの矢印とWASDを有効化
+      // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
+    ),
+  );
 
   bool allActivated() {
     return _activatedButtons.containsAll(allButtons);
