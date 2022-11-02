@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/maps/level_01/level_01_03.dart';
+import 'package:codefire/maps/level_01/level_01_03_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:codefire/view/common_component/code_fire_scaffold.dart';
@@ -20,7 +21,7 @@ class Level0103Screen extends StatefulWidget {
 class _Level0103ScreenState extends State<Level0103Screen> {
   @override
   Widget build(BuildContext context) {
-    String defaultCode = widget.initialCode ?? '''moveLeft(2)''';
+    String defaultCode = widget.initialCode ?? Level0103Controller.initialCode;
 
     final controller = CodeController(
       text: defaultCode,

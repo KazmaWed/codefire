@@ -1,9 +1,11 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/decorations/arch_gate.dart';
+import 'package:codefire/maps/level_01/level_01_03_screen.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/npc/necromancer.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/player/player_bandit.dart';
+import 'package:flutter/material.dart';
 export 'package:codefire/player/player_bandit.dart';
 export 'package:codefire/decorations/arch_gate.dart';
 export 'package:codefire/npc/necromancer.dart';
@@ -12,23 +14,20 @@ export 'package:codefire/npc/npc_robo_dino_sprite.dart';
 export 'package:codefire/player/player_bandit_sprite.dart';
 
 class Level0103Controller {
-  Level0103Controller();
-
-  final Set<int> _activatedButtons = {};
-  final Set<int> allButtons = {};
-
+  static const initialCode = '''moveUp(4);\n''';
   final jsonPath = 'tiled/level_01_03.json';
   final hintTextList = [
     '私はネクロマンサー、この世界のルールを知っている',
-    'さて、画面左側に白い枠が見えるだろう、あれだ「コードフィールド」だ',
-    'コードフィールドの右下に再生ボタンが見えるはずだ、まずはそれを押してみなさい',
-    '扉が開かれるはずだ',
-    'うまく行かないときはリセットボタンを押してみなさい、再生ボタンのちょうど左側にある',
+    'さて、今回も再生ボタンを押すだけでは扉は開かない\n「moveUp(4);」だけではスイッチにたどり着けないからな',
+    '「moveUp(4);」に次の行を追加してから「moveLeft(2);」を入力してみるといい\n入力が面倒臭い場合は、コードフィールド上の「←」ボタンを押してみるといいだろう',
+    'ふむ、だいぶ分かってきたぞ、という顔をしているな…',
   ];
+
+  final Widget nextMap = const Level0103Screen();
 
   static const tileSize = 48.0;
   static final playerPosition = Vector2(7, 9);
-  static final roboDinoPosition = Vector2(4, 6);
+  static final roboDinoPosition = Vector2(4, 8);
 
   late final CameraTarget cameraTarget;
   late final ArchGateDecoration archGate;
@@ -51,6 +50,9 @@ class Level0103Controller {
       // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
     ),
   );
+
+  final Set<int> _activatedButtons = {};
+  final Set<int> allButtons = {};
 
   bool allActivated() {
     return _activatedButtons.containsAll(allButtons);

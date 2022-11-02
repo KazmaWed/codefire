@@ -19,28 +19,27 @@ class CordfireLevelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle titleStyle =
-        Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white);
+        Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white);
     final TextStyle descriptionStyle =
-        Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white);
-    return SizedBox(
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        color: Colors.white12,
-        child: InkWell(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(children: [
-              Text(name, style: titleStyle),
-              Text(
-                description,
-                style: descriptionStyle,
-              )
-            ]),
-          ),
-          onTap: () {
-            context.goTo(map);
-          },
+        Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white);
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      color: Colors.white12,
+      child: InkWell(
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(children: [
+            Text(name, style: titleStyle),
+            const SizedBox(height: 8),
+            Text(
+              description,
+              style: descriptionStyle,
+            )
+          ]),
         ),
+        onTap: () {
+          context.goTo(map);
+        },
       ),
     );
   }

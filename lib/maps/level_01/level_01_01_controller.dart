@@ -1,9 +1,11 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/decorations/arch_gate.dart';
+import 'package:codefire/maps/level_01/level_01_02_screen.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/npc/necromancer.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/player/player_bandit.dart';
+import 'package:flutter/material.dart';
 export 'package:codefire/player/player_bandit.dart';
 export 'package:codefire/decorations/arch_gate.dart';
 export 'package:codefire/npc/necromancer.dart';
@@ -12,12 +14,7 @@ export 'package:codefire/npc/npc_robo_dino_sprite.dart';
 export 'package:codefire/player/player_bandit_sprite.dart';
 
 class Level0101Controller {
-  Level0101Controller();
-
-  final Set<int> _activatedButtons = {};
-  final Set<int> allButtons = {};
-
-  static const initialCode = '''moveLeft(2)''';
+  static const initialCode = '''moveLeft(2);\n''';
   final jsonPath = 'tiled/level_01_01.json';
   final hintTextList = [
     '私はネクロマンサー、この世界のルールを知っている',
@@ -26,6 +23,8 @@ class Level0101Controller {
     '扉が開かれるはずだ',
     'うまく行かないときはリセットボタンを押してみなさい、再生ボタンのちょうど左側にある',
   ];
+
+  final Widget nextMap = const Level0102Screen();
 
   static const tileSize = 48.0;
   static final playerPosition = Vector2(7, 9);
@@ -52,6 +51,9 @@ class Level0101Controller {
       // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
     ),
   );
+
+  final Set<int> _activatedButtons = {};
+  final Set<int> allButtons = {};
 
   bool allActivated() {
     return _activatedButtons.containsAll(allButtons);

@@ -76,7 +76,7 @@ class _Level0103State extends State<Level0103> {
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
                 size: properties.size,
-                nextMap: const CodefireMainScreen(),
+                nextMap: controller.nextMap,
               ),
         },
       ),
