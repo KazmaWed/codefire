@@ -14,17 +14,25 @@ class Level0101 extends StatefulWidget {
 }
 
 class _Level0101State extends State<Level0101> {
+  final controller = Level0101Controller();
   @override
   Widget build(BuildContext context) {
-    final controller = Level0101Controller();
     controller.cameraTarget = CameraTarget(
       player: controller.player,
       components: [controller.robo],
     );
 
+    void onBlueButton(int id) {
+      controller.activate(id);
+      if (controller.allActivated()) {
+        controller.robo.controller.succeed();
+        controller.archGate.openGate();
+      }
+    }
+
     // 画面
     return BonfireWidget(
-      // showCollisionArea: true,
+      showCollisionArea: controller.showCollisionArea,
       // クリックで移動
       onTapDown: ((game, screenPosition, worldPosition) {
         widget.focus.requestFocus();
@@ -64,24 +72,23 @@ class _Level0101State extends State<Level0101> {
               tileSize: Level0101Controller.tileSize,
               id: properties.id!,
               player: controller.player,
-              callback: () {
-                controller.activate(properties.id!);
-                if (controller.allActivated()) controller.archGate.openGate();
-              },
+              callback: () => onBlueButton(properties.id!),
             );
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
                 size: properties.size,
-                // nextMap: const CodefireMainScreen(),
                 nextMap: controller.nextMap,
               ),
+          'robo': ((properties) {
+            return controller.robo;
+          }),
         },
       ),
       // プレイヤーキャラクター
       player: controller.player,
       onReady: (bonfireGame) async {
-        await bonfireGame.add(controller.robo);
+        // await bonfireGame.add(controller.robo);
         await bonfireGame.add(controller.cameraTarget);
         bonfireGame.addJoystickObserver(controller.necromancer);
       },

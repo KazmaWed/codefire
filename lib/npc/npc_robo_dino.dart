@@ -32,12 +32,11 @@ class NpcRoboDino extends SimplePlayer
         ],
       ),
     );
-    priority = 1;
+    // aboveComponents = true;
   }
 
   static final SpriteSheet spriteSheet = NpcRoboDinoSprite.sheet;
   final double tileSize;
-
   static const spriteShift = 14.0;
 
   @override
@@ -48,25 +47,25 @@ class NpcRoboDino extends SimplePlayer
 
   @override
   bool onCollision(GameComponent component, bool active) {
-    controller.command = null;
-    // controller.nextPosition = null;
-    controller.haveMoved = 0;
-
+    controller.endCommand(onCollide: true);
     return true;
   }
 
   @override
   void die() {
+    final dieAnimation = lastDirection == Direction.right
+        ? spriteSheet.createAnimation(row: 10, stepTime: 0.2, from: 0, to: 4, loop: false)
+        : spriteSheet.createAnimation(row: 10, stepTime: 0.2, from: 4, to: 8, loop: false);
+
     super.die();
+    removeFromParent();
     gameRef.add(
-      AnimatedObjectOnce(
-        animation: spriteSheet
-            .createAnimation(row: 10, stepTime: 0.3, from: 4, to: 8, loop: false)
-            .asFuture(),
+      GameDecorationWithCollision.withAnimation(
+        animation: dieAnimation.asFuture(),
         position: position,
         size: size,
+        collisions: [CollisionArea.rectangle(size: Vector2.zero())],
       ),
     );
-    removeFromParent();
   }
 }

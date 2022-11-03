@@ -3,10 +3,11 @@ import 'package:codefire/npc/npc_robo_dino.dart';
 
 class NpcRoboDinoController extends StateController<NpcRoboDino> {
   List<Map<String, dynamic>> commandList = [];
-  Vector2? startPosition;
   Map<String, dynamic>? command;
   double haveMoved = 0;
+  Vector2? startPosition;
   Vector2? _nextPosition;
+  bool succeeded = false;
 
   Vector2 getNextPosition() {
     final now = component!.position;
@@ -37,52 +38,66 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
     _nextPosition = null;
   }
 
+  void nextCommand() {
+    startPosition = component!.position.xy; // スタート位置
+    command = commandList.first; // コマンド
+    commandList.removeAt(0); // コマンドリスト
+    haveMoved = 0; // 移動距離初期化
+    _nextPosition = getNextPosition(); // 次の移動先
+  }
+
+  void excecuteCommand() {
+    if (command!['direction'] == 'up') {
+      component!.moveUp(component!.speed);
+      haveMoved = (component!.position.y - startPosition!.y).abs();
+    } else if (command!['direction'] == 'down') {
+      component!.moveDown(component!.speed);
+      haveMoved = (component!.position.y - startPosition!.y).abs();
+    } else if (command!['direction'] == 'left') {
+      component!.moveLeft(component!.speed);
+      haveMoved = (component!.position.x - startPosition!.x).abs();
+    } else {
+      component!.moveRight(component!.speed);
+      haveMoved = (component!.position.x - startPosition!.x).abs();
+    }
+  }
+
+  void endCommand({bool onCollide = false}) {
+    if (!onCollide) {
+      component!.position = _nextPosition!;
+    }
+    command = null;
+    haveMoved = 0;
+    if (commandList.isEmpty && !succeeded) {
+      component!.die();
+    }
+  }
+
+  void succeed() {
+    succeeded = true;
+  }
+
   @override
   void update(double dt, NpcRoboDino component) {
-    // if (component.isDead) {
-    //   return;
-    // }
-
+    // ガード
+    if (component.isDead) {
+      return;
+    }
     // コマンド待機中
     if (command == null) {
       component.idle();
     }
-
     // 次のコマンド受付
     if (commandList.isNotEmpty && command == null) {
-      startPosition = component.position.xy; // スタート位置
-      _nextPosition = getNextPosition(); // 次の移動先
-      command = commandList.first; // コマンド
-      commandList.removeAt(0); // コマンドリスト
-      haveMoved = 0; // 移動距離初期化
+      nextCommand();
     }
-
     // コマンド実行中
     if (command != null) {
-      if (command!['direction'] == 'up') {
-        component.moveUp(component.speed);
-        haveMoved = (component.position.y - startPosition!.y).abs();
-      } else if (command!['direction'] == 'down') {
-        component.moveDown(component.speed);
-        haveMoved = (component.position.y - startPosition!.y).abs();
-      } else if (command!['direction'] == 'left') {
-        component.moveLeft(component.speed);
-        haveMoved = (component.position.x - startPosition!.x).abs();
-      } else {
-        component.moveRight(component.speed);
-        haveMoved = (component.position.x - startPosition!.x).abs();
-      }
+      excecuteCommand();
     }
-
     // 移動距離を満たしたらコマンド終了
-    if (component.tileSize * command!['count'] <= haveMoved) {
-      component.position = _nextPosition!;
-      _nextPosition = null;
-      command = null;
-      haveMoved = 0;
-      // if (commandList.isEmpty) {
-      //   component.die();
-      // }
+    if (command != null && component.tileSize * command!['count'] <= haveMoved) {
+      endCommand();
     }
   }
 }

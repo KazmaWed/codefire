@@ -11,16 +11,15 @@ class ButtonBlueDecoration extends GameDecoration with Sensor {
     required this.callback,
   }) : super.withSprite(
           sprite: Sprite.load(imagePathOff),
-          position: initPosition,
-          size: Vector2(tileSize, tileSize),
+          position: initPosition + positionShift,
+          size: imageSize * tileSize / 16,
         ) {
     setupSensorArea(areaSensor: [
       CollisionArea.rectangle(
-        size: Vector2(tileSize, tileSize) * 1 / 3,
-        align: Vector2(tileSize, tileSize) * 1 / 3,
+        size: Vector2.all(tileSize) * 1 / 3,
+        align: Vector2.all(tileSize) * 1 / 3 - positionShift,
       ),
     ]);
-    priority = 0;
   }
 
   final Vector2 initPosition;
@@ -30,6 +29,8 @@ class ButtonBlueDecoration extends GameDecoration with Sensor {
   final Function callback;
   bool activated = false;
 
+  static final imageSize = Vector2(8, 10);
+  static final positionShift = (Vector2.all(16) - Vector2(8, 12)) * 3 / 2;
   static const imagePathOff = 'decorations/button_blue_off.png';
   static const imagePathOn = 'decorations/button_blue_on.png';
 

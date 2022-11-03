@@ -26,6 +26,7 @@ class Dungeon01Controller {
   ];
 
   static const tileSize = 48.0;
+  // static final playerPosition = Vector2(9, 7);
   static final playerPosition = Vector2(9, 7);
 
   late final CameraTarget cameraTarget;

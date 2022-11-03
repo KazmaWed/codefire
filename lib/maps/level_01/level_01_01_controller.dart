@@ -14,6 +14,7 @@ export 'package:codefire/npc/npc_robo_dino_sprite.dart';
 export 'package:codefire/player/player_bandit_sprite.dart';
 
 class Level0101Controller {
+  final showCollisionArea = false;
   static const initialCode = '''moveLeft(2);\n''';
   final jsonPath = 'tiled/level_01_01.json';
   final hintTextList = [
@@ -27,7 +28,7 @@ class Level0101Controller {
   final Widget nextMap = const Level0102Screen();
 
   static const tileSize = 48.0;
-  static final playerPosition = Vector2(7, 9);
+  static final playerPosition = Vector2(4, 9);
   static final roboDinoPosition = Vector2(4, 6);
 
   late final CameraTarget cameraTarget;

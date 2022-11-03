@@ -14,17 +14,25 @@ class Level0103 extends StatefulWidget {
 }
 
 class _Level0103State extends State<Level0103> {
+  final controller = Level0103Controller();
   @override
   Widget build(BuildContext context) {
-    final controller = Level0103Controller();
     controller.cameraTarget = CameraTarget(
       player: controller.player,
       components: [controller.robo],
     );
 
+    void onBlueButton(int id) {
+      controller.activate(id);
+      if (controller.allActivated()) {
+        controller.robo.controller.succeed();
+        controller.archGate.openGate();
+      }
+    }
+
     // 画面
     return BonfireWidget(
-      // showCollisionArea: true,
+      showCollisionArea: controller.showCollisionArea,
       // クリックで移動
       onTapDown: ((game, screenPosition, worldPosition) {
         widget.focus.requestFocus();
@@ -64,10 +72,7 @@ class _Level0103State extends State<Level0103> {
               tileSize: Level0103Controller.tileSize,
               id: properties.id!,
               player: controller.player,
-              callback: () {
-                controller.activate(properties.id!);
-                if (controller.allActivated()) controller.archGate.openGate();
-              },
+              callback: () => onBlueButton(properties.id!),
             );
           },
           'exitSensor': (properties) => ExitMapSensor(

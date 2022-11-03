@@ -90,17 +90,6 @@
                 {
                  "class":"",
                  "height":16,
-                 "id":2,
-                 "name":"",
-                 "rotation":0,
-                 "visible":true,
-                 "width":16,
-                 "x":112,
-                 "y":144
-                }, 
-                {
-                 "class":"",
-                 "height":16,
                  "id":3,
                  "name":"necromancer",
                  "rotation":0,
@@ -118,7 +107,7 @@
                  "visible":true,
                  "width":16,
                  "x":32,
-                 "y":62.8945559775728
+                 "y":64
                 }, 
                 {
                  "class":"",

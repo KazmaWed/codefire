@@ -10,31 +10,31 @@
  "tileheight":16,
  "tiles":[
         {
-         "class":"dynamicAbove",
+         "class":"above",
          "id":15
         }, 
         {
-         "class":"dynamicAbove",
+         "class":"above",
          "id":16
         }, 
         {
-         "class":"dynamicAbove",
+         "class":"above",
          "id":17
         }, 
         {
-         "class":"dynamicAbove",
+         "class":"above",
          "id":18
         }, 
         {
-         "class":"dynamicAbove",
+         "class":"above",
          "id":19
         }, 
         {
-         "class":"dynamicAbove",
+         "class":"above",
          "id":20
         }, 
         {
-         "class":"dynamicAbove",
+         "class":"above",
          "id":21
         }, 
         {
@@ -314,7 +314,7 @@
             }
         }, 
         {
-         "class":"dynamicAbove",
+         "class":"above",
          "id":58
         }, 
         {
@@ -374,7 +374,6 @@
          "objectgroup":
             {
              "draworder":"index",
-             "id":2,
              "name":"",
              "objects":[
                     {

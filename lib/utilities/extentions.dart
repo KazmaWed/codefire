@@ -66,6 +66,23 @@ extension StringExtention on String {
     return jsResult;
   }
 
+  Map<String, int> commantCount() {
+    final moveUp = RegExp(r'moveUp\([0-9]*\)').allMatches(this).length;
+    final moveDown = RegExp(r'moveLeft\([0-9]*\)').allMatches(this).length;
+    final moveLeft = RegExp(r'moveLeft\([0-9]*\)').allMatches(this).length;
+    final moveRight = RegExp(r'moveRight\([0-9]*\)').allMatches(this).length;
+    final forUsage = RegExp(r'for\(.+;.+;.+\)').allMatches(this).length;
+    final ifUsage = RegExp(r'if\(\)').allMatches(this).length;
+    return {
+      'moveUp': moveUp,
+      'moveDown': moveDown,
+      'moveLeft': moveLeft,
+      'moveRight': moveRight,
+      'for': forUsage,
+      'if': ifUsage,
+    };
+  }
+
   String toPlayerCommandStr() {
     const header = '''
 var playerCommandOutput = [];

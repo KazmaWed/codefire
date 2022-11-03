@@ -8,7 +8,7 @@ class ArchGateDecoration extends GameDecoration with ObjectCollision {
   }) : super.withSprite(
           sprite: Sprite.load(imagePathClose),
           position: initialPosition,
-          size: Vector2(tileSize * 3, tileSize * 3),
+          size: Vector2.all(tileSize) * 3,
         ) {
     setupCollision(
       CollisionConfig(collisions: [
@@ -32,12 +32,12 @@ class ArchGateDecoration extends GameDecoration with ObjectCollision {
     setupCollision(
       CollisionConfig(collisions: [
         CollisionArea.rectangle(
-          size: Vector2(tileSize * 1, tileSize * 1),
+          size: Vector2.all(tileSize),
           align: Vector2(0, tileSize * 2),
         ),
         CollisionArea.rectangle(
-          size: Vector2(tileSize * 1, tileSize * 1),
-          align: Vector2(tileSize * 2, tileSize * 2),
+          size: Vector2.all(tileSize),
+          align: Vector2.all(tileSize) * 2,
         ),
       ]),
     );

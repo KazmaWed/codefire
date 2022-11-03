@@ -14,6 +14,7 @@ export 'package:codefire/npc/npc_robo_dino_sprite.dart';
 export 'package:codefire/player/player_bandit_sprite.dart';
 
 class Level0103Controller {
+  final showCollisionArea = false;
   static const initialCode = '''moveUp(4);\n''';
   final jsonPath = 'tiled/level_01_03.json';
   final hintTextList = [
