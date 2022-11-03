@@ -19,9 +19,9 @@ class CordfireLevelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle titleStyle =
-        Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white);
+        Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.yellowAccent);
     final TextStyle descriptionStyle =
-        Theme.of(context).textTheme.labelMedium!.copyWith(color: Colors.white);
+        Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white);
 
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -61,19 +61,28 @@ class CordfireLevelCard extends StatelessWidget {
 
     const borderRadius = BorderRadius.all(Radius.circular(12));
 
+    Widget starIndicator(int star) {
+      final TextStyle starStyle =
+          Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.yellowAccent);
+      return Text(
+        '★' * star + '・' * (3 - star),
+        style: starStyle,
+      );
+    }
+
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white12,
+        color: Colors.white24,
         borderRadius: borderRadius,
       ),
       child: InkWell(
         borderRadius: borderRadius,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
           child: Column(children: [
             Text(levelText, style: style),
-            const SizedBox(height: 4),
-            Text(mapStar.toString(), style: style),
+            // const SizedBox(height: 4),
+            starIndicator(mapStar),
           ]),
         ),
         onTap: () {

@@ -14,8 +14,8 @@ final mainScreenControllerProvider = StateProvider<MainScreenController>((ref) {
 class MainScreenController {
   List<Map<String, dynamic>> levels = [
     {
-      'name': 'LEVEL 1',
-      'description': 'CODEFIREの遊び方を覚える',
+      'name': 'レベル１',
+      'description': 'CODEFIREの遊び方を覚えよう',
       'maps': [
         {'map': const Level0101Screen(), 'star': 0},
         {'map': const Level0102Screen(), 'star': 0},
@@ -24,21 +24,21 @@ class MainScreenController {
       ]
     },
     {
-      'name': 'TEST LEVEL 1',
+      'name': 'レベル２',
       'description': 'Description.',
       'maps': [
         {'map': const Dungeon01Screen(), 'star': 0}
       ],
     },
     {
-      'name': 'TEST LEVEL 2',
+      'name': 'レベル３',
       'description': 'Description.',
       'maps': [
         {'map': const Dungeon02Screen(), 'star': 0}
       ],
     },
     {
-      'name': 'TEST LEVEL 3',
+      'name': 'レベル４',
       'description': 'Description.',
       'maps': [
         {'map': const Dungeon03Screen(), 'star': 0}

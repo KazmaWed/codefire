@@ -59,9 +59,9 @@ class _Level0103ScreenState extends State<Level0103Screen> {
         void onClear() {
           final mainScreenController = ref.watch(mainScreenControllerProvider);
           final result = levelController.culcScore(codeController.text);
-          print(result);
-          mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];
-          ref.read(mainScreenControllerProvider.state).state = mainScreenController;
+          if (mainScreenController.levels[levelId]['maps'][stageId]['star'] < result['star']) {
+            mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];
+          }
         }
 
         return CodefireScaffold(
