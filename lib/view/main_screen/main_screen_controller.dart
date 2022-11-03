@@ -5,6 +5,11 @@ import 'package:codefire/maps/level_01/level_01_01_screen.dart';
 import 'package:codefire/maps/level_01/level_01_02_screen.dart';
 import 'package:codefire/maps/level_01/level_01_03_screen.dart';
 import 'package:codefire/maps/level_01/level_01_04_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final mainScreenControllerProvider = StateProvider<MainScreenController>((ref) {
+  return MainScreenController();
+});
 
 class MainScreenController {
   List<Map<String, dynamic>> levels = [

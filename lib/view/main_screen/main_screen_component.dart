@@ -42,8 +42,7 @@ class CordfireLevelCard extends StatelessWidget {
               spacing: 12,
               runSpacing: 8,
               children: [
-                for (var index = 0; index < maps.length; index++)
-                  levelButton(maps[index]['map']!, index),
+                for (var index = 0; index < maps.length; index++) levelButton(maps[index], index),
               ],
             ),
             //   ],
@@ -54,23 +53,31 @@ class CordfireLevelCard extends StatelessWidget {
     );
   }
 
-  Widget levelButton(Widget map, int index) {
+  Widget levelButton(Map<String, dynamic> map, int index) {
     final TextStyle style = Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white);
     final levelText = 'ステージ ${index + 1}';
+    final Widget mapWidget = map['map'];
+    final int mapStar = map['star'];
+
+    const borderRadius = BorderRadius.all(Radius.circular(12));
 
     return Container(
-      clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
         color: Colors.white12,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: borderRadius,
       ),
       child: InkWell(
+        borderRadius: borderRadius,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-          child: Text(levelText, style: style),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          child: Column(children: [
+            Text(levelText, style: style),
+            const SizedBox(height: 4),
+            Text(mapStar.toString(), style: style),
+          ]),
         ),
         onTap: () {
-          context.goTo(map);
+          context.goTo(mapWidget);
         },
       ),
     );

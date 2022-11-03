@@ -91,6 +91,10 @@ class LevelController {
         .toList()
         .reduce((value, element) => value + element);
 
+    final star = (totalStep <= minimumStep ? 1 : 0) +
+        (commandUsed <= minimumCommand ? 1 : 0) +
+        (sameCommandUsage == 0 ? 1 : 0);
+
     final score = {
       'totalStep': totalStep,
       'commandUsed': commandUsed,
@@ -104,6 +108,7 @@ class LevelController {
     };
 
     return {
+      'star': star,
       'score': score,
       'message': message,
     };
