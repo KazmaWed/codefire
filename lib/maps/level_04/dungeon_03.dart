@@ -2,7 +2,7 @@ import 'package:codefire/decorations/arch_gate.dart';
 import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/decorations/button_red.dart';
 import 'package:codefire/maps/dungeon_02/dungeon_02_screen.dart';
-import 'package:codefire/maps/dungeon_03/dungeon_03_controller.dart';
+import 'package:codefire/maps/level_04/dungeon_03_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/npc/necromancer.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';

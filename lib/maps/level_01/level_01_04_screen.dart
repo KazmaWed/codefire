@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/level_01/level_01_04.dart';
+import 'package:codefire/maps/level_04/level_04_01.dart';
 import 'package:codefire/maps/level_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
@@ -25,13 +25,9 @@ class _Level0104ScreenState extends State<Level0104Screen> {
   final levelController = LevelController(
     initialCode: '',
     mapJsonPath: 'tiled/level_01_04.json',
-    hintTextList: [
-      '私はネクロマンサー、話す時も振り返らない',
-      'コマンドフィールドを見てみろ、まだ何も書かれていない\n再生ボタンを押しても何も動かないだろう',
-      '自分でコマンドを入力して、ディノロボットをスイッチまで導くのだ！',
-    ],
-    playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(2, 8),
+    hintTextList: [],
+    playerPosition: Vector2(13, 9),
+    roboDinoPosition: Vector2(11, 9),
     minimumStep: 8,
     minimumCommand: 3,
     nextMap: const CodefireMainScreen(),
@@ -80,7 +76,7 @@ class _Level0104ScreenState extends State<Level0104Screen> {
             const VerticalDivider(width: 0),
             Expanded(
               flex: 2,
-              child: Level0104(
+              child: Level0401(
                 focus: focus,
                 levelController: levelController,
                 onClear: () {
