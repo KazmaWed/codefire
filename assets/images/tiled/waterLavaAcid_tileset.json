@@ -1,15 +1,122 @@
 {
-    "columns": 19,
-    "image": "..\/maps\/waterLavaAcid_.png",
-    "imageheight": 336,
-    "imagewidth": 304,
-    "margin": 0,
-    "name": "waterLavaAcid_tileset",
-    "spacing": 0,
-    "tilecount": 399,
-    "tiledversion": "1.9.2",
-    "tileheight": 16,
-    "tilewidth": 16,
-    "type": "tileset",
-    "version": "1.9"
+       "columns": 19,
+       "image": "..\/maps\/waterLavaAcid.png",
+       "imageheight": 336,
+       "imagewidth": 304,
+       "margin": 0,
+       "name": "waterLavaAcid_tileset",
+       "spacing": 0,
+       "tilecount": 399,
+       "tiledversion": "1.9.2",
+       "tileheight": 16,
+       "tiles": [
+              {
+                     "animation": [
+                            {
+                                   "duration": 300,
+                                   "tileid": 29
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 124
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 219
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 314
+                            }
+                     ],
+                     "id": 29
+              },
+              {
+                     "animation": [
+                            {
+                                   "duration": 300,
+                                   "tileid": 67
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 162
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 257
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 352
+                            }
+                     ],
+                     "id": 67
+              },
+              {
+                     "animation": [
+                            {
+                                   "duration": 300,
+                                   "tileid": 68
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 163
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 258
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 353
+                            }
+                     ],
+                     "id": 68
+              },
+              {
+                     "animation": [
+                            {
+                                   "duration": 300,
+                                   "tileid": 86
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 181
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 276
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 371
+                            }
+                     ],
+                     "id": 86
+              },
+              {
+                     "animation": [
+                            {
+                                   "duration": 300,
+                                   "tileid": 87
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 182
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 277
+                            },
+                            {
+                                   "duration": 300,
+                                   "tileid": 372
+                            }
+                     ],
+                     "id": 87
+              }
+       ],
+       "tilewidth": 16,
+       "type": "tileset",
+       "version": "1.9"
 }
