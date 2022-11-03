@@ -10,7 +10,7 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
   int _totalStep = 0;
   bool succeeded = false;
 
-  int get totalStep => _totalStep + (_totalStep / component!.tileSize).ceil();
+  int get totalStep => _totalStep + (haveMoved / component!.tileSize).ceil();
 
   Vector2 getNextPosition() {
     final now = component!.position;
@@ -35,10 +35,12 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
 
   void initialize() {
     commandList = [];
-    startPosition = null;
     command = null;
-    haveMoved = 0;
+    startPosition = null;
     _nextPosition = null;
+    haveMoved = 0;
+    _totalStep = 0;
+    succeeded = false;
   }
 
   void nextCommand() {

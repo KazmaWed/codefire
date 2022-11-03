@@ -11,9 +11,12 @@ class Level0103 extends StatefulWidget {
     Key? key,
     required this.focus,
     required this.levelController,
+    required this.onClear,
   }) : super(key: key);
   final FocusNode focus;
   final LevelController levelController;
+
+  final Function onClear;
   @override
   State<Level0103> createState() => _Level0103State();
 }
@@ -31,6 +34,7 @@ class _Level0103State extends State<Level0103> {
       if (widget.levelController.allActivated()) {
         widget.levelController.clearLevel();
         widget.levelController.archGate.openGate();
+        widget.onClear();
       }
     }
 

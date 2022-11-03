@@ -20,17 +20,19 @@ class LevelController {
     required this.playerPosition,
     required this.roboDinoPosition,
     required this.nextMap,
+    required this.minimumStep,
+    required this.minimumCommand,
     this.showCollisionArea = false,
   });
   final String initialCode;
   final String mapJsonPath;
   final List<String> hintTextList;
-
-  final Widget nextMap;
-
   final bool showCollisionArea;
   final Vector2 playerPosition;
   final Vector2 roboDinoPosition;
+  final Widget nextMap;
+  final int minimumStep;
+  final int minimumCommand;
 
   double get tileSize => 48.0;
 
@@ -72,42 +74,49 @@ class LevelController {
     _activatedButtons.add(buttonId);
   }
 
-  void clearLevel() {
+  clearLevel() {
     robo.controller.succeed();
-
-    int totalStep = robo.controller.totalStep;
-    print(totalStep);
   }
 
-  void culcScore(String code) {
-    const minimumStep = 6;
-    const minimumCommand = 2;
-
+  Map<String, dynamic> culcScore(String code) {
     int totalStep = robo.controller.totalStep;
-    final int commandUsed = _commandCountMap(code).length;
+    final int commandUsed = _commandCountMap(code)
+        .entries
+        .map((entry) => entry.value == 0 ? 0 : 1)
+        .toList()
+        .reduce((value, element) => value + element);
     final int sameCommandUsage = _commandCountMap(code)
         .entries
-        .map((entry) => entry.value - 1)
+        .map((entry) => entry.value == 0 ? 0 : entry.value - 1)
         .toList()
         .reduce((value, element) => value + element);
 
-    final Map<String, Map<String, dynamic>> result = {
-      'ステップ': {'value': 'totalStep マス', 'star': totalStep <= minimumStep},
-      '使ったコマンド': {'value': '$commandUsed 種類', 'star': commandUsed <= minimumCommand},
-      '同じコマンド': {'value': '$commandUsed 回', 'star': sameCommandUsage == 0},
+    final score = {
+      'totalStep': totalStep,
+      'commandUsed': commandUsed,
+      'sameCommandUsage': sameCommandUsage,
     };
 
-    print(result);
+    final Map<String, Map<String, dynamic>> message = {
+      'ステップ': {'value': '$totalStep マス', 'star': totalStep <= minimumStep},
+      '使ったコマンド': {'value': '$commandUsed 種類', 'star': commandUsed <= minimumCommand},
+      '同じコマンド': {'value': '$sameCommandUsage 回', 'star': sameCommandUsage == 0},
+    };
+
+    return {
+      'score': score,
+      'message': message,
+    };
   }
 
   Map<String, int> _commandCountMap(String code) {
     final moveUp = RegExp(r'moveUp\([0-9]*\)').allMatches(code).length;
-    final moveDown = RegExp(r'moveLeft\([0-9]*\)').allMatches(code).length;
+    final moveDown = RegExp(r'moveDown\([0-9]*\)').allMatches(code).length;
     final moveLeft = RegExp(r'moveLeft\([0-9]*\)').allMatches(code).length;
     final moveRight = RegExp(r'moveRight\([0-9]*\)').allMatches(code).length;
     final forUsage = RegExp(r'for\(.+;.+;.+\)').allMatches(code).length;
     final ifUsage = RegExp(r'if\(\)').allMatches(code).length;
-    return {
+    final output = {
       'moveUp': moveUp,
       'moveDown': moveDown,
       'moveLeft': moveLeft,
@@ -115,5 +124,6 @@ class LevelController {
       'for': forUsage,
       'if': ifUsage,
     };
+    return output;
   }
 }

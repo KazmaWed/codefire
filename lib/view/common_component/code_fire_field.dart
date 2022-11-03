@@ -15,8 +15,8 @@ class CodeFireField extends StatefulWidget {
   });
   final Widget parentWidget;
   final CodeController controller;
-  final ValueChanged<List<Map<String, dynamic>>> onPlay;
   final FocusNode gameScreenFocus;
+  final ValueChanged<List<Map<String, dynamic>>> onPlay;
 
   static const codeTheme = tomorrowTheme;
   static const colorThemeName = 'title';

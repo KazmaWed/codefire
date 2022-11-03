@@ -32,10 +32,10 @@ class _Level0103ScreenState extends State<Level0103Screen> {
     ],
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(4, 8),
+    minimumStep: 6,
+    minimumCommand: 2,
     nextMap: const Level0104Screen(),
   );
-
-  final focus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +49,7 @@ class _Level0103ScreenState extends State<Level0103Screen> {
       patternMap: CodeFireField.patternMap,
     );
 
+    final focus = FocusNode();
     return CodefireScaffold(
       floatingActinButton: const GoBackFloatingButton(),
       body: Row(
@@ -67,11 +68,13 @@ class _Level0103ScreenState extends State<Level0103Screen> {
           ),
           const VerticalDivider(width: 0),
           Expanded(
-              flex: 2,
-              child: Level0103(
-                focus: focus,
-                levelController: levelController,
-              )),
+            flex: 2,
+            child: Level0103(
+              focus: focus,
+              levelController: levelController,
+              onClear: () => levelController.culcScore(codeController.text),
+            ),
+          ),
         ],
       ),
     );

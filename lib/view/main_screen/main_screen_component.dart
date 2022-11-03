@@ -14,7 +14,7 @@ class CordfireLevelCard extends StatelessWidget {
   final BuildContext context;
   final String name;
   final String description;
-  final List<Widget> maps;
+  final List<Map<String, dynamic>> maps;
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +37,13 @@ class CordfireLevelCard extends StatelessWidget {
               Text(description, style: descriptionStyle),
             ]),
             const SizedBox(height: 12),
-            // Row(
-            //   mainAxisSize: MainAxisSize.max,
-            //   children: [
             Wrap(
               runAlignment: WrapAlignment.start,
               spacing: 12,
               runSpacing: 8,
               children: [
-                for (var index = 0; index < maps.length; index++) levelButton(maps[index], index),
+                for (var index = 0; index < maps.length; index++)
+                  levelButton(maps[index]['map']!, index),
               ],
             ),
             //   ],

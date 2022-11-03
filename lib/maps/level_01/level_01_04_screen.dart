@@ -30,8 +30,11 @@ class _Level0104ScreenState extends State<Level0104Screen> {
     ],
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(2, 8),
+    minimumStep: 8,
+    minimumCommand: 3,
     nextMap: const CodefireMainScreen(),
   );
+
   @override
   Widget build(BuildContext context) {
     levelController.init();
@@ -66,6 +69,7 @@ class _Level0104ScreenState extends State<Level0104Screen> {
               child: Level0104(
                 focus: focus,
                 levelController: levelController,
+                onClear: () => levelController.culcScore(codeController.text),
               )),
         ],
       ),

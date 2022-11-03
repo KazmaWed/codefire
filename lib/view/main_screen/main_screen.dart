@@ -24,7 +24,7 @@ class _CodefireMainScreenState extends State<CodefireMainScreen> {
             padding: const EdgeInsets.all(12),
             itemCount: controller.levels.length,
             itemBuilder: ((context, index) {
-              final levelInfo = controller.levels[index];
+              final Map<String, dynamic> levelInfo = controller.levels[index];
               return CordfireLevelCard(
                 context: context,
                 name: levelInfo['name'],
