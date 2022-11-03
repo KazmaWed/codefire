@@ -21,6 +21,7 @@ class Level0102Screen extends StatefulWidget {
 class _Level0102ScreenState extends State<Level0102Screen> {
   @override
   Widget build(BuildContext context) {
+    final levelController = Level0102Controller();
     String defaultCode = widget.initialCode ?? Level0102Controller.initialCode;
 
     final codeController = CodeController(
@@ -40,14 +41,19 @@ class _Level0102ScreenState extends State<Level0102Screen> {
               controller: codeController,
               parentWidget: widget,
               gameScreenFocus: focus,
-              callback: (result) {
+              onPlay: (commandList) {
                 final controller = BonfireInjector().get<NpcRoboDinoController>();
-                controller.commandInput(result);
+                controller.commandInput(commandList);
               },
             ),
           ),
           const VerticalDivider(width: 0),
-          Expanded(flex: 2, child: Level0102(focus: focus)),
+          Expanded(
+              flex: 2,
+              child: Level0102(
+                focus: focus,
+                levelController: levelController,
+              )),
         ],
       ),
     );

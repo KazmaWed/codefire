@@ -28,7 +28,7 @@ class Level0101Controller {
   final Widget nextMap = const Level0102Screen();
 
   static const tileSize = 48.0;
-  static final playerPosition = Vector2(4, 9);
+  static final playerPosition = Vector2(7, 9);
   static final roboDinoPosition = Vector2(4, 6);
 
   late final CameraTarget cameraTarget;
@@ -43,14 +43,6 @@ class Level0101Controller {
   final robo = NpcRoboDino(
     roboDinoPosition * tileSize,
     tileSize: tileSize,
-  );
-
-  final joystick = Joystick(
-    // キーボード用入力の設定
-    keyboardConfig: KeyboardConfig(
-      keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows, // キーボードの矢印とWASDを有効化
-      // acceptedKeys: [LogicalKeyboardKey.space], // キーボードのスペースバーを有効化
-    ),
   );
 
   final Set<int> _activatedButtons = {};

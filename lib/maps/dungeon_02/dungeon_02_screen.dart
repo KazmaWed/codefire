@@ -46,9 +46,9 @@ for (let idx = 0; idx < 2; idx++) {
               controller: controller,
               parentWidget: widget,
               gameScreenFocus: focus,
-              callback: (result) {
+              onPlay: (commandList) {
                 final controller = BonfireInjector().get<NpcRoboDinoController>();
-                controller.commandInput(result);
+                controller.commandInput(commandList);
               },
             ),
           ),

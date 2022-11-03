@@ -10,12 +10,12 @@ class CodeFireField extends StatefulWidget {
     super.key,
     required this.parentWidget,
     required this.controller,
-    required this.callback,
+    required this.onPlay,
     required this.gameScreenFocus,
   });
   final Widget parentWidget;
   final CodeController controller;
-  final ValueChanged<List<Map<String, dynamic>>> callback;
+  final ValueChanged<List<Map<String, dynamic>>> onPlay;
   final FocusNode gameScreenFocus;
 
   static const codeTheme = tomorrowTheme;
@@ -168,7 +168,7 @@ class _CodeFireFieldState extends State<CodeFireField> {
                           _commandListInStr = error.toString();
                         });
                       }
-                      widget.callback(_commandList);
+                      widget.onPlay(_commandList);
                     },
                   ),
                 ),

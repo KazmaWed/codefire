@@ -4,10 +4,13 @@ import 'package:codefire/npc/npc_robo_dino.dart';
 class NpcRoboDinoController extends StateController<NpcRoboDino> {
   List<Map<String, dynamic>> commandList = [];
   Map<String, dynamic>? command;
-  double haveMoved = 0;
   Vector2? startPosition;
   Vector2? _nextPosition;
+  double haveMoved = 0;
+  int _totalStep = 0;
   bool succeeded = false;
+
+  int get totalStep => _totalStep + (_totalStep / component!.tileSize).ceil();
 
   Vector2 getNextPosition() {
     final now = component!.position;
@@ -63,14 +66,11 @@ class NpcRoboDinoController extends StateController<NpcRoboDino> {
   }
 
   void endCommand({bool onCollide = false}) {
-    if (!onCollide) {
-      component!.position = _nextPosition!;
-    }
+    if (!onCollide) component!.position = _nextPosition!;
+    _totalStep += (haveMoved / component!.tileSize).round();
     command = null;
     haveMoved = 0;
-    if (commandList.isEmpty && !succeeded) {
-      component!.die();
-    }
+    if (commandList.isEmpty && !succeeded) component!.die();
   }
 
   void succeed() {

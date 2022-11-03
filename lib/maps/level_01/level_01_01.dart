@@ -7,32 +7,36 @@ import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 
 class Level0101 extends StatefulWidget {
-  const Level0101({Key? key, required this.focus}) : super(key: key);
+  const Level0101({
+    Key? key,
+    required this.focus,
+    required this.levelController,
+  }) : super(key: key);
   final FocusNode focus;
+  final Level0101Controller levelController;
   @override
   State<Level0101> createState() => _Level0101State();
 }
 
 class _Level0101State extends State<Level0101> {
-  final controller = Level0101Controller();
   @override
   Widget build(BuildContext context) {
-    controller.cameraTarget = CameraTarget(
-      player: controller.player,
-      components: [controller.robo],
+    widget.levelController.cameraTarget = CameraTarget(
+      player: widget.levelController.player,
+      components: [widget.levelController.robo],
     );
 
     void onBlueButton(int id) {
-      controller.activate(id);
-      if (controller.allActivated()) {
-        controller.robo.controller.succeed();
-        controller.archGate.openGate();
+      widget.levelController.activate(id);
+      if (widget.levelController.allActivated()) {
+        widget.levelController.robo.controller.succeed();
+        widget.levelController.archGate.openGate();
       }
     }
 
     // 画面
     return BonfireWidget(
-      showCollisionArea: controller.showCollisionArea,
+      showCollisionArea: widget.levelController.showCollisionArea,
       // クリックで移動
       onTapDown: ((game, screenPosition, worldPosition) {
         widget.focus.requestFocus();
@@ -43,70 +47,74 @@ class _Level0101State extends State<Level0101> {
       },
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
-        controller.jsonPath,
+        widget.levelController.jsonPath,
         forceTileSize: Vector2(
           Level0101Controller.tileSize,
           Level0101Controller.tileSize,
         ),
         objectsBuilder: {
           'necromancer': (properties) {
-            controller.necromancer = NpcNecromancer(
+            widget.levelController.necromancer = NpcNecromancer(
               properties.position,
               tileSize: Level0101Controller.tileSize,
-              cameraCenterComponent: controller.cameraTarget,
-              hintTextList: controller.hintTextList,
+              cameraCenterComponent: widget.levelController.cameraTarget,
+              hintTextList: widget.levelController.hintTextList,
             );
-            return controller.necromancer;
+            return widget.levelController.necromancer;
           },
           'archGate': (properties) {
-            controller.archGate = ArchGateDecoration(
+            widget.levelController.archGate = ArchGateDecoration(
               tileSize: Level0101Controller.tileSize,
               initialPosition: properties.position,
             );
-            return controller.archGate;
+            return widget.levelController.archGate;
           },
           'buttonBlue': (properties) {
-            controller.allButtons.add(properties.id!);
+            widget.levelController.allButtons.add(properties.id!);
             return ButtonBlueDecoration(
               initPosition: properties.position,
               tileSize: Level0101Controller.tileSize,
               id: properties.id!,
-              player: controller.player,
+              player: widget.levelController.player,
               callback: () => onBlueButton(properties.id!),
             );
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
                 size: properties.size,
-                nextMap: controller.nextMap,
+                nextMap: widget.levelController.nextMap,
               ),
           'robo': ((properties) {
-            return controller.robo;
+            return widget.levelController.robo;
           }),
         },
       ),
       // プレイヤーキャラクター
-      player: controller.player,
+      player: widget.levelController.player,
       onReady: (bonfireGame) async {
-        // await bonfireGame.add(controller.robo);
-        await bonfireGame.add(controller.cameraTarget);
-        bonfireGame.addJoystickObserver(controller.necromancer);
+        // await bonfireGame.add(widget.levelController.robo);
+        await bonfireGame.add(widget.levelController.cameraTarget);
+        bonfireGame.addJoystickObserver(widget.levelController.necromancer);
       },
       // カメラ設定
       cameraConfig: CameraConfig(
         // moveOnlyMapArea: true,
         sizeMovementWindow: Vector2.zero(),
-        target: controller.cameraTarget,
+        target: widget.levelController.cameraTarget,
         smoothCameraEnabled: true,
         smoothCameraSpeed: 10,
       ),
       // 入力インターフェースの設定
-      joystick: controller.joystick,
+      joystick: Joystick(
+        keyboardConfig: KeyboardConfig(
+          keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows,
+        ),
+      ),
       // ロード中の画面の設定
       progress: CodefireGameComponents.codefireProgress,
       focusNode: widget.focus,
       onDispose: () {
-        controller.player.controller.stopMoving();
+        widget.levelController.player.controller.stopMoving();
       },
     );
   }
