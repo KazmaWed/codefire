@@ -23,7 +23,7 @@ class Level0401Screen extends StatefulWidget {
 class _Level0401ScreenState extends State<Level0401Screen> {
   final levelController = LevelController(
     showCollisionArea: false,
-    initialCode: '''moveUp(4);\n''',
+    initialCode: '''moveLeft(10);\n''',
     mapJsonPath: 'tiled/level_04_01.json',
     hintTextList: [
       '私はネクロマンサー、自己紹介が好き',
@@ -31,8 +31,8 @@ class _Level0401ScreenState extends State<Level0401Screen> {
       '「moveUp(4);」の次の行に「moveLeft(2);」と入力してみるといい\n入力が面倒臭い場合は、コードフィールド上の「←」ボタンを押してみるといいだろう',
       'ふむ、だいぶ分かってきたぞ、という顔をしているな…\nさあ、その手で試してみるんだ',
     ],
-    playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(4, 8),
+    playerPosition: Vector2(13, 9),
+    roboDinoPosition: Vector2(11, 9),
     minimumStep: 6,
     minimumCommand: 2,
     nextMap: const Level0401Screen(),

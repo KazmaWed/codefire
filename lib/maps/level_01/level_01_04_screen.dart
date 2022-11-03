@@ -25,9 +25,9 @@ class _Level0104ScreenState extends State<Level0104Screen> {
   final levelController = LevelController(
     initialCode: '',
     mapJsonPath: 'tiled/level_01_04.json',
-    hintTextList: [],
-    playerPosition: Vector2(13, 9),
-    roboDinoPosition: Vector2(11, 9),
+    // hintTextList: [],
+    playerPosition: Vector2(7, 9),
+    roboDinoPosition: Vector2(2, 9),
     minimumStep: 8,
     minimumCommand: 3,
     nextMap: const CodefireMainScreen(),

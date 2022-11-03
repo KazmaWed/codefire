@@ -1,4 +1,5 @@
 import 'package:codefire/decorations/button_blue.dart';
+import 'package:codefire/decorations/button_red.dart';
 import 'package:codefire/maps/level_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
@@ -71,13 +72,25 @@ class _Level0401State extends State<Level0401> {
             return widget.levelController.archGate;
           },
           'buttonBlue': (properties) {
-            widget.levelController.allButtons.add(properties.id!);
-            return ButtonBlueDecoration(
+            final newButton = ButtonBlueDecoration(
               initPosition: properties.position,
               tileSize: widget.levelController.tileSize,
               id: properties.id!,
               player: widget.levelController.player,
               callback: () => onBlueButton(properties.id!),
+            );
+            widget.levelController.addButton(newButton);
+            return newButton;
+          },
+          'buttonRed': (properties) {
+            return ButtonRedDecoration(
+              initPosition: properties.position,
+              tileSize: widget.levelController.tileSize,
+              id: properties.id!,
+              player: widget.levelController.player,
+              callback: () {
+                widget.levelController.deactivateAll();
+              },
             );
           },
           'exitSensor': (properties) => ExitMapSensor(

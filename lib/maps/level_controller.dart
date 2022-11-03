@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/decorations/arch_gate.dart';
+import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/npc/necromancer.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
@@ -16,17 +17,17 @@ class LevelController {
   LevelController({
     required this.initialCode,
     required this.mapJsonPath,
-    required this.hintTextList,
     required this.playerPosition,
     required this.roboDinoPosition,
     required this.nextMap,
     required this.minimumStep,
     required this.minimumCommand,
+    this.hintTextList,
     this.showCollisionArea = false,
   });
   final String initialCode;
   final String mapJsonPath;
-  final List<String> hintTextList;
+  final List<String>? hintTextList;
   final bool showCollisionArea;
   final Vector2 playerPosition;
   final Vector2 roboDinoPosition;
@@ -53,7 +54,6 @@ class LevelController {
   }
 
   late final PlayerBandit player;
-
   late final NpcRoboDino robo;
 
   final joystick = Joystick(
@@ -63,8 +63,14 @@ class LevelController {
     ),
   );
 
+  final Set<ButtonBlueDecoration> allButtonDecorations = {};
   final Set<int> _activatedButtons = {};
   final Set<int> allButtons = {};
+
+  void addButton(ButtonBlueDecoration button) {
+    allButtons.add(button.id);
+    allButtonDecorations.add(button);
+  }
 
   bool allActivated() {
     return _activatedButtons.containsAll(allButtons);
@@ -76,6 +82,13 @@ class LevelController {
 
   clearLevel() {
     robo.controller.succeed();
+  }
+
+  void deactivateAll() {
+    for (var element in allButtonDecorations) {
+      element.deactivate();
+    }
+    _activatedButtons.clear();
   }
 
   Map<String, dynamic> culcScore(String code) {

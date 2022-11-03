@@ -20,7 +20,6 @@ class ButtonGreenDecoration extends GameDecoration with Sensor {
         align: Vector2(tileSize, tileSize) * 1 / 3,
       ),
     ]);
-    priority = 0;
   }
 
   final Vector2 initPosition;
@@ -50,4 +49,7 @@ class ButtonGreenDecoration extends GameDecoration with Sensor {
       activated = false;
     }
   }
+
+  @override
+  int get priority => LayerPriority.MAP + 1;
 }

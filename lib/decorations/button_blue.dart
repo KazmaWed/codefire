@@ -47,4 +47,7 @@ class ButtonBlueDecoration extends GameDecoration with Sensor {
     sprite = await Sprite.load(imagePathOff);
     activated = false;
   }
+
+  @override
+  int get priority => LayerPriority.MAP + 1;
 }

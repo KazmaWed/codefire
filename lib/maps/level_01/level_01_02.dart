@@ -1,5 +1,5 @@
 import 'package:codefire/decorations/button_blue.dart';
-import 'package:codefire/maps/level_01/level_01_02_controller.dart';
+import 'package:codefire/maps/level_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
@@ -11,26 +11,30 @@ class Level0102 extends StatefulWidget {
     Key? key,
     required this.focus,
     required this.levelController,
+    required this.onClear,
   }) : super(key: key);
   final FocusNode focus;
-  final Level0102Controller levelController;
+  final LevelController levelController;
+
+  final Function onClear;
   @override
   State<Level0102> createState() => _Level0102State();
 }
 
 class _Level0102State extends State<Level0102> {
-  final controller = Level0102Controller();
   @override
   Widget build(BuildContext context) {
     widget.levelController.cameraTarget = CameraTarget(
       player: widget.levelController.player,
       components: [widget.levelController.robo],
     );
+
     void onBlueButton(int id) {
       widget.levelController.activate(id);
       if (widget.levelController.allActivated()) {
-        widget.levelController.robo.controller.succeed();
+        widget.levelController.clearLevel();
         widget.levelController.archGate.openGate();
+        widget.onClear();
       }
     }
 
@@ -47,16 +51,13 @@ class _Level0102State extends State<Level0102> {
       },
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
-        widget.levelController.jsonPath,
-        forceTileSize: Vector2(
-          Level0102Controller.tileSize,
-          Level0102Controller.tileSize,
-        ),
+        widget.levelController.mapJsonPath,
+        forceTileSize: Vector2.all(widget.levelController.tileSize),
         objectsBuilder: {
           'necromancer': (properties) {
             widget.levelController.necromancer = NpcNecromancer(
               properties.position,
-              tileSize: Level0102Controller.tileSize,
+              tileSize: widget.levelController.tileSize,
               cameraCenterComponent: widget.levelController.cameraTarget,
               hintTextList: widget.levelController.hintTextList,
             );
@@ -64,20 +65,21 @@ class _Level0102State extends State<Level0102> {
           },
           'archGate': (properties) {
             widget.levelController.archGate = ArchGateDecoration(
-              tileSize: Level0102Controller.tileSize,
+              tileSize: widget.levelController.tileSize,
               initialPosition: properties.position,
             );
             return widget.levelController.archGate;
           },
           'buttonBlue': (properties) {
-            widget.levelController.allButtons.add(properties.id!);
-            return ButtonBlueDecoration(
+            final newButton = ButtonBlueDecoration(
               initPosition: properties.position,
-              tileSize: Level0102Controller.tileSize,
+              tileSize: widget.levelController.tileSize,
               id: properties.id!,
               player: widget.levelController.player,
               callback: () => onBlueButton(properties.id!),
             );
+            widget.levelController.addButton(newButton);
+            return newButton;
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,

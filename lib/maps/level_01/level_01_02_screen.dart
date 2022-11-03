@@ -1,12 +1,15 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/maps/level_01/level_01_02.dart';
-import 'package:codefire/maps/level_01/level_01_02_controller.dart';
+import 'package:codefire/maps/level_01/level_01_03_screen.dart';
+import 'package:codefire/maps/level_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:codefire/view/common_component/code_fire_scaffold.dart';
 import 'package:codefire/view/main_screen/main_screen_component.dart';
+import 'package:codefire/view/main_screen/main_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:code_text_field/code_text_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
@@ -19,10 +22,30 @@ class Level0102Screen extends StatefulWidget {
 }
 
 class _Level0102ScreenState extends State<Level0102Screen> {
+  final levelController = LevelController(
+    showCollisionArea: false,
+    initialCode: '''moveUp(2);\n''',
+    mapJsonPath: 'tiled/level_01_02.json',
+    hintTextList: [
+      '私はネクロマンサー、どこにでも現れる',
+      'さて、今回は再生ボタンを押すだけでは扉は開かないぞ\nディノロボットがボタンまで辿り着かないからな',
+      'コードフィールドに書かれた「moveUp(2);」の文字は、「コマンド」というんだ\nコマンドは、ディノロボットを動かすための呪文のようなものだ',
+      'あれを「moveUp(4);」に書き換えてから再生ボタンを押してみなさい',
+      'それでうまくいくはずだ\nもし失敗したら、いつでもリセットボタンを押すんだぞ',
+    ],
+    playerPosition: Vector2(7, 9),
+    roboDinoPosition: Vector2(3, 8),
+    minimumStep: 4,
+    minimumCommand: 1,
+    nextMap: const Level0103Screen(),
+  );
+  final levelId = 0;
+  final stageId = 0;
+
   @override
   Widget build(BuildContext context) {
-    final levelController = Level0102Controller();
-    String defaultCode = widget.initialCode ?? Level0102Controller.initialCode;
+    levelController.init();
+    String defaultCode = widget.initialCode ?? levelController.initialCode;
 
     final codeController = CodeController(
       text: defaultCode,
@@ -30,32 +53,47 @@ class _Level0102ScreenState extends State<Level0102Screen> {
       theme: CodeFireField.codeTheme,
       patternMap: CodeFireField.patternMap,
     );
+
     final focus = FocusNode();
-    return CodefireScaffold(
-      floatingActinButton: const GoBackFloatingButton(),
-      body: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: CodeFireField(
-              controller: codeController,
-              parentWidget: widget,
-              gameScreenFocus: focus,
-              onPlay: (commandList) {
-                final controller = BonfireInjector().get<NpcRoboDinoController>();
-                controller.commandInput(commandList);
-              },
-            ),
+    return Consumer(
+      builder: ((context, ref, child) {
+        void onClear() {
+          final mainScreenController = ref.watch(mainScreenControllerProvider);
+          final result = levelController.culcScore(codeController.text);
+          if (mainScreenController.levels[levelId]['maps'][stageId]['star'] < result['star']) {
+            mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];
+          }
+        }
+
+        return CodefireScaffold(
+          floatingActinButton: const GoBackFloatingButton(),
+          body: Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: CodeFireField(
+                  controller: codeController,
+                  parentWidget: widget,
+                  gameScreenFocus: focus,
+                  onPlay: (commandList) {
+                    final controller = BonfireInjector().get<NpcRoboDinoController>();
+                    controller.commandInput(commandList);
+                  },
+                ),
+              ),
+              const VerticalDivider(width: 0),
+              Expanded(
+                flex: 2,
+                child: Level0102(
+                  focus: focus,
+                  levelController: levelController,
+                  onClear: () => onClear(),
+                ),
+              ),
+            ],
           ),
-          const VerticalDivider(width: 0),
-          Expanded(
-              flex: 2,
-              child: Level0102(
-                focus: focus,
-                levelController: levelController,
-              )),
-        ],
-      ),
+        );
+      }),
     );
   }
 }

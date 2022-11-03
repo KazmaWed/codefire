@@ -16,11 +16,10 @@ class ButtonRedDecoration extends GameDecoration with Sensor {
         ) {
     setupSensorArea(areaSensor: [
       CollisionArea.rectangle(
-        size: Vector2(tileSize, tileSize) * 1 / 3,
-        align: Vector2(tileSize, tileSize) * 1 / 3,
+        size: Vector2.all(tileSize) * 1 / 3,
+        align: Vector2.all(tileSize) * 1 / 3 - positionShift,
       ),
     ]);
-    priority = 0;
   }
 
   final Vector2 initPosition;
@@ -52,4 +51,7 @@ class ButtonRedDecoration extends GameDecoration with Sensor {
       activated = false;
     }
   }
+
+  @override
+  int get priority => LayerPriority.MAP + 1;
 }

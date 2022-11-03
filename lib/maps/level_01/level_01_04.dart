@@ -70,14 +70,15 @@ class _Level0104State extends State<Level0104> {
             return widget.levelController.archGate;
           },
           'buttonBlue': (properties) {
-            widget.levelController.allButtons.add(properties.id!);
-            return ButtonBlueDecoration(
+            final newButton = ButtonBlueDecoration(
               initPosition: properties.position,
               tileSize: widget.levelController.tileSize,
               id: properties.id!,
               player: widget.levelController.player,
               callback: () => onBlueButton(properties.id!),
-            )..priority;
+            );
+            widget.levelController.addButton(newButton);
+            return newButton;
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,

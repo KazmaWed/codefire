@@ -1,5 +1,5 @@
 import 'package:codefire/decorations/button_blue.dart';
-import 'package:codefire/maps/level_01/level_01_01_controller.dart';
+import 'package:codefire/maps/level_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
@@ -11,9 +11,12 @@ class Level0101 extends StatefulWidget {
     Key? key,
     required this.focus,
     required this.levelController,
+    required this.onClear,
   }) : super(key: key);
   final FocusNode focus;
-  final Level0101Controller levelController;
+  final LevelController levelController;
+
+  final Function onClear;
   @override
   State<Level0101> createState() => _Level0101State();
 }
@@ -29,8 +32,9 @@ class _Level0101State extends State<Level0101> {
     void onBlueButton(int id) {
       widget.levelController.activate(id);
       if (widget.levelController.allActivated()) {
-        widget.levelController.robo.controller.succeed();
+        widget.levelController.clearLevel();
         widget.levelController.archGate.openGate();
+        widget.onClear();
       }
     }
 
@@ -47,16 +51,13 @@ class _Level0101State extends State<Level0101> {
       },
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
-        widget.levelController.jsonPath,
-        forceTileSize: Vector2(
-          Level0101Controller.tileSize,
-          Level0101Controller.tileSize,
-        ),
+        widget.levelController.mapJsonPath,
+        forceTileSize: Vector2.all(widget.levelController.tileSize),
         objectsBuilder: {
           'necromancer': (properties) {
             widget.levelController.necromancer = NpcNecromancer(
               properties.position,
-              tileSize: Level0101Controller.tileSize,
+              tileSize: widget.levelController.tileSize,
               cameraCenterComponent: widget.levelController.cameraTarget,
               hintTextList: widget.levelController.hintTextList,
             );
@@ -64,35 +65,33 @@ class _Level0101State extends State<Level0101> {
           },
           'archGate': (properties) {
             widget.levelController.archGate = ArchGateDecoration(
-              tileSize: Level0101Controller.tileSize,
+              tileSize: widget.levelController.tileSize,
               initialPosition: properties.position,
             );
             return widget.levelController.archGate;
           },
           'buttonBlue': (properties) {
-            widget.levelController.allButtons.add(properties.id!);
-            return ButtonBlueDecoration(
+            final newButton = ButtonBlueDecoration(
               initPosition: properties.position,
-              tileSize: Level0101Controller.tileSize,
+              tileSize: widget.levelController.tileSize,
               id: properties.id!,
               player: widget.levelController.player,
               callback: () => onBlueButton(properties.id!),
             );
+            widget.levelController.addButton(newButton);
+            return newButton;
           },
           'exitSensor': (properties) => ExitMapSensor(
                 position: properties.position,
                 size: properties.size,
                 nextMap: widget.levelController.nextMap,
               ),
-          'robo': ((properties) {
-            return widget.levelController.robo;
-          }),
         },
       ),
       // プレイヤーキャラクター
       player: widget.levelController.player,
       onReady: (bonfireGame) async {
-        // await bonfireGame.add(widget.levelController.robo);
+        await bonfireGame.add(widget.levelController.robo);
         await bonfireGame.add(widget.levelController.cameraTarget);
         bonfireGame.addJoystickObserver(widget.levelController.necromancer);
       },
@@ -105,11 +104,7 @@ class _Level0101State extends State<Level0101> {
         smoothCameraSpeed: 10,
       ),
       // 入力インターフェースの設定
-      joystick: Joystick(
-        keyboardConfig: KeyboardConfig(
-          keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows,
-        ),
-      ),
+      joystick: widget.levelController.joystick,
       // ロード中の画面の設定
       progress: CodefireGameComponents.codefireProgress,
       focusNode: widget.focus,

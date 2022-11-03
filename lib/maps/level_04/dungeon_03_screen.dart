@@ -1,5 +1,5 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/level_04/dungeon_03.dart';
+import 'package:codefire/maps/level_04/level_04_01.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:codefire/view/common_component/code_fire_scaffold.dart';
@@ -52,7 +52,7 @@ for (let idx = 1; idx <= 2; idx++) {
             ),
           ),
           const VerticalDivider(width: 0),
-          Expanded(flex: 2, child: Dungeon03(focus: focus)),
+          Expanded(flex: 2, child: Level0401(focus: focus)),
         ],
       ),
     );
