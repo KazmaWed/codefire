@@ -1,5 +1,3 @@
-import 'package:codefire/maps/dungeon_01/dungeon_01_screen.dart';
-import 'package:codefire/maps/dungeon_02/dungeon_02_screen.dart';
 import 'package:codefire/maps/level_01/level_01_01_screen.dart';
 import 'package:codefire/maps/level_01/level_01_02_screen.dart';
 import 'package:codefire/maps/level_01/level_01_03_screen.dart';
@@ -22,20 +20,6 @@ class MainScreenController {
         {'map': const Level0103Screen(), 'star': 0},
         {'map': const Level0104Screen(), 'star': 0},
       ]
-    },
-    {
-      'name': 'レベル２',
-      'description': 'Description.',
-      'maps': [
-        {'map': const Dungeon01Screen(), 'star': 0}
-      ],
-    },
-    {
-      'name': 'レベル３',
-      'description': 'Description.',
-      'maps': [
-        {'map': const Dungeon02Screen(), 'star': 0}
-      ],
     },
     {
       'name': 'レベル４',

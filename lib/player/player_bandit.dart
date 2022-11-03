@@ -1,6 +1,6 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/dungeon_01/dungeon_01_controller.dart';
 import 'package:codefire/player/player_bandit_controller.dart';
+import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:flutter/material.dart';
 
 class PlayerBandit extends SimplePlayer
