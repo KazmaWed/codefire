@@ -91,7 +91,7 @@ class LevelController {
     _activatedButtons.clear();
   }
 
-  Map<String, dynamic> culcScore(String code) {
+  Map<String, dynamic> culcScore(BuildContext context, String code) {
     int totalStep = robo.controller.totalStep;
     final int commandUsed = _commandCountMap(code)
         .entries
@@ -119,6 +119,22 @@ class LevelController {
       '使ったコマンド': {'value': '$commandUsed 種類', 'star': commandUsed <= minimumCommand},
       '同じコマンド': {'value': '$sameCommandUsage 回', 'star': sameCommandUsage == 0},
     };
+
+    showDialog(
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: const Text("スコア"),
+          content: Text(message.toString()),
+          actions: [
+            TextButton(
+              child: const Text("閉じる"),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      }),
+    );
 
     return {
       'star': star,

@@ -2,6 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:codefire/maps/level_01/level_01_03.dart';
 import 'package:codefire/maps/level_01/level_01_04_screen.dart';
 import 'package:codefire/maps/level_controller.dart';
+import 'package:codefire/maps/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:codefire/view/common_component/code_fire_scaffold.dart';
@@ -54,45 +55,43 @@ class _Level0103ScreenState extends State<Level0103Screen> {
     );
 
     final focus = FocusNode();
-    return Consumer(
-      builder: ((context, ref, child) {
-        void onClear() {
-          final mainScreenController = ref.watch(mainScreenControllerProvider);
-          final result = levelController.culcScore(codeController.text);
-          if (mainScreenController.levels[levelId]['maps'][stageId]['star'] < result['star']) {
-            mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];
-          }
+    return Consumer(builder: (context, ref, child) {
+      void onClear() {
+        final mainScreenController = ref.watch(mainScreenControllerProvider);
+        final result = levelController.culcScore(context, codeController.text);
+        if (mainScreenController.levels[levelId]['maps'][stageId]['star'] < result['star']) {
+          mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];
         }
+      }
 
-        return CodefireScaffold(
-          floatingActinButton: const GoBackFloatingButton(),
-          body: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: CodeFireField(
-                  controller: codeController,
-                  parentWidget: widget,
-                  gameScreenFocus: focus,
-                  onPlay: (commandList) {
-                    final controller = BonfireInjector().get<NpcRoboDinoController>();
-                    controller.commandInput(commandList);
-                  },
-                ),
+      return CodefireScaffold(
+        floatingActinButton: const GoBackFloatingButton(),
+        body: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: CodeFireField(
+                controller: codeController,
+                parentWidget: widget,
+                gameScreenFocus: focus,
+                onPlay: (commandList) {
+                  final controller = BonfireInjector().get<NpcRoboDinoController>();
+                  controller.commandInput(commandList);
+                },
               ),
-              const VerticalDivider(width: 0),
-              Expanded(
-                flex: 2,
-                child: Level0103(
-                  focus: focus,
-                  levelController: levelController,
-                  onClear: () => onClear(),
-                ),
+            ),
+            const VerticalDivider(width: 0),
+            Expanded(
+              flex: 2,
+              child: LevelWidget(
+                focus: focus,
+                levelController: levelController,
+                onClear: () => onClear(),
               ),
-            ],
-          ),
-        );
-      }),
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

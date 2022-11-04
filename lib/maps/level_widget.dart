@@ -7,8 +7,8 @@ import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
 
-class Level0401 extends StatefulWidget {
-  const Level0401({
+class LevelWidget extends StatefulWidget {
+  const LevelWidget({
     Key? key,
     required this.focus,
     required this.levelController,
@@ -19,10 +19,10 @@ class Level0401 extends StatefulWidget {
 
   final Function onClear;
   @override
-  State<Level0401> createState() => _Level0401State();
+  State<LevelWidget> createState() => _Level0401State();
 }
 
-class _Level0401State extends State<Level0401> {
+class _Level0401State extends State<LevelWidget> {
   @override
   Widget build(BuildContext context) {
     widget.levelController.cameraTarget = CameraTarget(

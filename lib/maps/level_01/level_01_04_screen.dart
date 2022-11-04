@@ -1,6 +1,7 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/level_04/level_04_01.dart';
+import 'package:codefire/maps/level_01/level_01_04.dart';
 import 'package:codefire/maps/level_controller.dart';
+import 'package:codefire/maps/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:codefire/view/common_component/code_fire_scaffold.dart';
@@ -37,21 +38,21 @@ class _Level0104ScreenState extends State<Level0104Screen> {
 
   @override
   Widget build(BuildContext context) {
+    levelController.init();
+    String defaultCode = widget.initialCode ?? levelController.initialCode;
+
+    final codeController = CodeController(
+      text: defaultCode,
+      language: javascript,
+      theme: CodeFireField.codeTheme,
+      patternMap: CodeFireField.patternMap,
+    );
+    final focus = FocusNode();
+
     return Consumer(builder: (context, ref, child) {
-      levelController.init();
-      String defaultCode = widget.initialCode ?? levelController.initialCode;
-
-      final codeController = CodeController(
-        text: defaultCode,
-        language: javascript,
-        theme: CodeFireField.codeTheme,
-        patternMap: CodeFireField.patternMap,
-      );
-      final focus = FocusNode();
-
       void onClear() {
         final mainScreenController = ref.watch(mainScreenControllerProvider);
-        final result = levelController.culcScore(codeController.text);
+        final result = levelController.culcScore(context, codeController.text);
         if (mainScreenController.levels[levelId]['maps'][stageId]['star'] < result['star']) {
           mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];
         }
@@ -76,7 +77,7 @@ class _Level0104ScreenState extends State<Level0104Screen> {
             const VerticalDivider(width: 0),
             Expanded(
               flex: 2,
-              child: Level0401(
+              child: LevelWidget(
                 focus: focus,
                 levelController: levelController,
                 onClear: () {
