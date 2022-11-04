@@ -1,5 +1,5 @@
 import 'package:codefire/decorations/button_blue.dart';
-import 'package:codefire/maps/dungeon_02/dungeon_02_controller.dart';
+import 'package:codefire/levels/dungeon_02/dungeon_02_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:flutter/material.dart';

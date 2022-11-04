@@ -1,6 +1,7 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/level_widget.dart';
-import 'package:codefire/maps/level_controller.dart';
+import 'package:codefire/levels/level_01_04.dart';
+import 'package:codefire/levels/level_controller.dart';
+import 'package:codefire/levels/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:codefire/view/common_component/code_fire_scaffold.dart';
@@ -12,38 +13,38 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
-class Level0401Screen extends StatefulWidget {
-  const Level0401Screen({super.key, this.initialCode});
+class Level0103 extends StatefulWidget {
+  const Level0103({super.key, this.initialCode});
   final String? initialCode;
 
   @override
-  State<Level0401Screen> createState() => _Level0401ScreenState();
+  State<Level0103> createState() => _Level0103State();
 }
 
-class _Level0401ScreenState extends State<Level0401Screen> {
+class _Level0103State extends State<Level0103> {
   final levelController = LevelController(
     showCollisionArea: false,
-    initialCode: '''moveLeft(10);\n''',
-    mapJsonPath: 'tiled/level_04_01.json',
+    initialCode: '''moveUp(4);\n''',
+    mapJsonPath: 'tiled/level_01_03.json',
     hintTextList: [
       '私はネクロマンサー、自己紹介が好き',
       'さて、今回も再生ボタンを押すだけでは扉は開かないぞ\n上に進んでから、そのあと左に進むようにコマンドを送らなければダメだ',
       '「moveUp(4);」の次の行に「moveLeft(2);」と入力してみるといい\n入力が面倒臭い場合は、コードフィールド上の「←」ボタンを押してみるといいだろう',
       'ふむ、だいぶ分かってきたぞ、という顔をしているな…\nさあ、その手で試してみるんだ',
     ],
-    playerPosition: Vector2(13, 9),
-    roboDinoPosition: Vector2(11, 9),
+    playerPosition: Vector2(7, 9),
+    roboDinoPosition: Vector2(4, 8),
     minimumStep: 6,
     minimumCommand: 2,
-    nextMap: const Level0401Screen(),
+    nextMap: const Level0104(),
   );
   final levelId = 0;
   final stageId = 2;
 
   @override
   Widget build(BuildContext context) {
-    levelController.init();
     String defaultCode = widget.initialCode ?? levelController.initialCode;
+    levelController.init();
 
     final codeController = CodeController(
       text: defaultCode,
@@ -53,7 +54,6 @@ class _Level0401ScreenState extends State<Level0401Screen> {
     );
 
     final focus = FocusNode();
-
     return Consumer(builder: (context, ref, child) {
       void onClear() {
         final mainScreenController = ref.watch(mainScreenControllerProvider);

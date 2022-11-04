@@ -1,10 +1,10 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/level_controller.dart';
-import 'package:codefire/maps/level_widget.dart';
+import 'package:codefire/levels/level_01_03.dart';
+import 'package:codefire/levels/level_controller.dart';
+import 'package:codefire/levels/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/code_fire_field.dart';
 import 'package:codefire/view/common_component/code_fire_scaffold.dart';
-import 'package:codefire/view/main_screen/main_screen.dart';
 import 'package:codefire/view/main_screen/main_screen_component.dart';
 import 'package:codefire/view/main_screen/main_screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -13,32 +13,45 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
-class Level0104Screen extends StatefulWidget {
-  const Level0104Screen({super.key, this.initialCode});
+class Level0102 extends StatefulWidget {
+  const Level0102({super.key, this.initialCode});
   final String? initialCode;
 
   @override
-  State<Level0104Screen> createState() => _Level0104ScreenState();
+  State<Level0102> createState() => _Level0102State();
 }
 
-class _Level0104ScreenState extends State<Level0104Screen> {
+class _Level0102State extends State<Level0102> {
   final levelController = LevelController(
-    initialCode: '',
-    mapJsonPath: 'tiled/level_01_04.json',
-    // hintTextList: [],
+    showCollisionArea: false,
+    initialCode: '''moveUp(2);\n''',
+    mapJsonPath: 'tiled/level_01_02.json',
+    hintTextList: [
+      '私はネクロマンサー、どこにでも現れる',
+      'さて、今回は再生ボタンを押すだけでは扉は開かないぞ\nディノロボットがボタンまで辿り着かないからな',
+      'コードフィールドに書かれた「moveUp(2);」の文字は、「コマンド」というんだ\nコマンドは、ディノロボットを動かすための呪文のようなものだ',
+      'あれを「moveUp(4);」に書き換えてから再生ボタンを押してみなさい',
+      'それでうまくいくはずだ\nもし失敗したら、いつでもリセットボタンを押すんだぞ',
+    ],
     playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(2, 8),
-    minimumStep: 8,
-    minimumCommand: 3,
-    nextMap: const CodefireMainScreen(),
+    roboDinoPosition: Vector2(3, 8),
+    minimumStep: 4,
+    minimumCommand: 1,
+    nextMap: const Level0103(),
   );
   final levelId = 0;
-  final stageId = 3;
+  final stageId = 0;
+
+  @override
+  void dispose() {
+    super.dispose();
+    levelController.init();
+  }
 
   @override
   Widget build(BuildContext context) {
-    levelController.init();
     String defaultCode = widget.initialCode ?? levelController.initialCode;
+    levelController.init();
 
     final codeController = CodeController(
       text: defaultCode,
@@ -46,6 +59,7 @@ class _Level0104ScreenState extends State<Level0104Screen> {
       theme: CodeFireField.codeTheme,
       patternMap: CodeFireField.patternMap,
     );
+
     final focus = FocusNode();
 
     return Consumer(builder: (context, ref, child) {
@@ -79,9 +93,7 @@ class _Level0104ScreenState extends State<Level0104Screen> {
               child: LevelWidget(
                 focus: focus,
                 levelController: levelController,
-                onClear: () {
-                  onClear();
-                },
+                onClear: () => onClear(),
               ),
             ),
           ],
