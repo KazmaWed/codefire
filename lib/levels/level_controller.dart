@@ -56,12 +56,7 @@ class LevelController {
   late final PlayerBandit player;
   late final NpcRoboDino robo;
 
-  final joystick = Joystick(
-    // キーボード用入力の設定
-    keyboardConfig: KeyboardConfig(
-      keyboardDirectionalType: KeyboardDirectionalType.wasdAndArrows,
-    ),
-  );
+  // final joystick = CodefireGameComponents.joystick;
 
   final Set<ButtonBlueDecoration> allButtonDecorations = {};
   final Set<int> _activatedButtons = {};

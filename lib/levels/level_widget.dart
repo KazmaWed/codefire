@@ -19,10 +19,10 @@ class LevelWidget extends StatefulWidget {
 
   final Function onClear;
   @override
-  State<LevelWidget> createState() => _Level0401State();
+  State<LevelWidget> createState() => _LevelState();
 }
 
-class _Level0401State extends State<LevelWidget> {
+class _LevelState extends State<LevelWidget> {
   @override
   Widget build(BuildContext context) {
     widget.levelController.cameraTarget = CameraTarget(
@@ -105,7 +105,6 @@ class _Level0401State extends State<LevelWidget> {
       onReady: (bonfireGame) async {
         await bonfireGame.add(widget.levelController.robo);
         await bonfireGame.add(widget.levelController.cameraTarget);
-        bonfireGame.addJoystickObserver(widget.levelController.necromancer);
       },
       // カメラ設定
       cameraConfig: CameraConfig(
@@ -116,7 +115,12 @@ class _Level0401State extends State<LevelWidget> {
         smoothCameraSpeed: 10,
       ),
       // 入力インターフェースの設定
-      joystick: widget.levelController.joystick,
+      joystick: Joystick(
+        // キーボード用入力の設定
+        keyboardConfig: KeyboardConfig(
+          keyboardDirectionalType: KeyboardDirectionalType.arrows,
+        ),
+      ),
       // ロード中の画面の設定
       progress: CodefireGameComponents.codefireProgress,
       focusNode: widget.focus,

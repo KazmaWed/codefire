@@ -4,7 +4,7 @@ import 'package:codefire/player/player_bandit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class NpcNecromancer extends SimpleNpc with ObjectCollision, JoystickListener {
+class NpcNecromancer extends SimpleNpc with ObjectCollision {
   NpcNecromancer(
     Vector2 initialPosition, {
     required this.tileSize,
