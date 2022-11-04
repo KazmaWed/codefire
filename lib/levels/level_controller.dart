@@ -87,6 +87,7 @@ class LevelController {
   }
 
   Map<String, dynamic> culcScore(BuildContext context, String code) {
+    const rowMargin = 4.0;
     int totalStep = robo.controller.totalStep;
     final int commandUsed = _commandCountMap(code)
         .entries
@@ -110,9 +111,13 @@ class LevelController {
     };
 
     final Map<String, Map<String, dynamic>> message = {
-      'ステップ': {'value': '$totalStep マス', 'star': totalStep <= minimumStep},
-      '使ったコマンド': {'value': '$commandUsed 種類', 'star': commandUsed <= minimumCommand},
-      '同じコマンド': {'value': '$sameCommandUsage 回', 'star': sameCommandUsage == 0},
+      'step': {'name': 'ステップ', 'value': '$totalStep マス', 'star': totalStep <= minimumStep},
+      'command': {
+        'name': '使ったコマンド',
+        'value': '$commandUsed 種類',
+        'star': commandUsed <= minimumCommand
+      },
+      'same': {'name': '同じコマンド', 'value': '$sameCommandUsage 回', 'star': sameCommandUsage == 0},
     };
 
     showDialog(
@@ -120,7 +125,45 @@ class LevelController {
       builder: ((context) {
         return AlertDialog(
           title: const Text("スコア"),
-          content: Text(message.toString()),
+          content: Row(
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(message['step']!['name'].toString()),
+                  const SizedBox(height: rowMargin),
+                  Text(message['command']!['name'].toString()),
+                  const SizedBox(height: rowMargin),
+                  Text(message['same']!['name'].toString()),
+                ],
+              ),
+              const SizedBox(width: 24),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(message['step']!['value'].toString()),
+                  const SizedBox(height: rowMargin),
+                  Text(message['command']!['value'].toString()),
+                  const SizedBox(height: rowMargin),
+                  Text(message['same']!['value'].toString()),
+                ],
+              ),
+              const SizedBox(width: 24),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(message['step']!['star'] ? 'Clear!' : ''),
+                  const SizedBox(height: rowMargin),
+                  Text(message['command']!['star'] ? 'Clear!' : ''),
+                  const SizedBox(height: rowMargin),
+                  Text(message['same']!['star'] ? 'Clear!' : ''),
+                ],
+              ),
+            ],
+          ),
           actions: [
             TextButton(
               child: const Text("閉じる"),

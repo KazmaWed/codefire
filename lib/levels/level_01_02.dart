@@ -40,7 +40,7 @@ class _Level0102State extends State<Level0102> {
     nextMap: const Level0103(),
   );
   final levelId = 0;
-  final stageId = 0;
+  final stageId = 1;
 
   @override
   void dispose() {

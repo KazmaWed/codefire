@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:codefire/utilities/extentions.dart';
 import 'package:codefire/view/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +20,16 @@ class CordfireLevelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle titleStyle =
-        Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.yellowAccent);
-    final TextStyle descriptionStyle =
-        Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white);
+    final TextStyle titleStyle = Theme.of(context).textTheme.titleMedium!.copyWith(
+        // color: Colors.white,
+        );
+    final TextStyle descriptionStyle = Theme.of(context).textTheme.titleMedium!.copyWith(
+        // color: Colors.white,
+        );
 
     return Card(
       clipBehavior: Clip.antiAlias,
-      color: Colors.white12,
+      // color: Colors,
       child: Padding(
         padding: const EdgeInsets.all(18),
         child: Column(
@@ -54,36 +58,43 @@ class CordfireLevelCard extends StatelessWidget {
   }
 
   Widget levelButton(Map<String, dynamic> map, int index) {
-    final TextStyle style = Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white);
-    final levelText = 'ステージ ${index + 1}';
+    final TextStyle style = Theme.of(context).textTheme.bodyMedium!.copyWith(
+          color: Colors.black,
+        );
+    final levelText = 'ステージ${index + 1}';
     final Widget mapWidget = map['map'];
     final int mapStar = map['star'];
 
-    const borderRadius = BorderRadius.all(Radius.circular(12));
+    const borderRadius = BorderRadius.all(Radius.circular(4));
 
     Widget starIndicator(int star) {
-      final TextStyle starStyle =
-          Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.yellowAccent);
+      final TextStyle starStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
+            color: Colors.orange,
+            letterSpacing: 2.4,
+          );
       return Text(
-        '★' * star + '・' * (3 - star),
+        '★' * star + '☆' * (3 - star),
         style: starStyle,
       );
     }
 
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white24,
-        borderRadius: borderRadius,
-      ),
+    return Card(
       child: InkWell(
         borderRadius: borderRadius,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-          child: Column(children: [
-            Text(levelText, style: style),
-            // const SizedBox(height: 4),
-            starIndicator(mapStar),
-          ]),
+        child: Container(
+          decoration: BoxDecoration(
+            // color: Colors.white,
+            borderRadius: borderRadius,
+            border: Border.all(color: Colors.black12),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+            child: Column(children: [
+              Text(levelText, style: style),
+              // const SizedBox(height: 4),
+              starIndicator(mapStar),
+            ]),
+          ),
         ),
         onTap: () {
           context.goTo(mapWidget);

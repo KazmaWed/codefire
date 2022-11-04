@@ -12,7 +12,7 @@ final mainScreenControllerProvider = StateProvider<MainScreenController>((ref) {
 class MainScreenController {
   List<Map<String, dynamic>> levels = [
     {
-      'name': 'レベル１',
+      'name': 'レベル1',
       'description': 'CODEFIREの遊び方を覚えよう',
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -22,7 +22,7 @@ class MainScreenController {
       ],
     },
     {
-      'name': 'レベル２',
+      'name': 'レベル2',
       'description': 'コードの書き方を覚えよう',
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -32,7 +32,7 @@ class MainScreenController {
       ],
     },
     {
-      'name': 'レベル３',
+      'name': 'レベル3',
       'description': '最短ルートを見つけよう',
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -42,7 +42,7 @@ class MainScreenController {
       ],
     },
     {
-      'name': 'レベル４',
+      'name': 'レベル4',
       'description': '赤スイッチを避けよう',
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -52,7 +52,7 @@ class MainScreenController {
       ],
     },
     {
-      'name': 'レベル５',
+      'name': 'レベル5',
       'description': 'ループコマンドを使ってみよう その１',
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -62,7 +62,7 @@ class MainScreenController {
       ],
     },
     {
-      'name': 'レベル６',
+      'name': 'レベル6',
       'description': 'ループコマンドを使ってみよう その２',
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -72,7 +72,7 @@ class MainScreenController {
       ],
     },
     {
-      'name': 'レベル７',
+      'name': 'レベル7',
       'description': '分岐コマンドを使ってみよう その１',
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -82,7 +82,7 @@ class MainScreenController {
       ],
     },
     {
-      'name': 'レベル８',
+      'name': 'レベル8',
       'description': '分岐コマンドを使ってみよう その２',
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -92,7 +92,7 @@ class MainScreenController {
       ],
     },
     {
-      'name': 'レベル９',
+      'name': 'レベル9',
       'description': '難しいマップに挑戦しよう',
       'maps': [
         {'map': const Level0401(), 'star': 0}

@@ -18,12 +18,13 @@ class _CodefireMainScreenState extends State<CodefireMainScreen> {
       final controller = ref.watch(mainScreenControllerProvider);
 
       return CodefireScaffold(
+        backgroundColor: Colors.white.withOpacity(0.94),
         body: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 540),
             child: ListView.builder(
               shrinkWrap: true,
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(18),
               itemCount: controller.levels.length,
               itemBuilder: ((context, index) {
                 final Map<String, dynamic> levelInfo = controller.levels[index];

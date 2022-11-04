@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CodefireScaffold extends StatelessWidget {
-  const CodefireScaffold({super.key, this.body, this.floatingActinButton});
+  const CodefireScaffold({super.key, this.body, this.floatingActinButton, this.backgroundColor});
   final Widget? body;
   final Widget? floatingActinButton;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class CodefireScaffold extends StatelessWidget {
             children: [
               Card(
                 elevation: 10,
-                color: Colors.black,
+                color: backgroundColor ?? Colors.black,
                 clipBehavior: Clip.antiAlias,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),

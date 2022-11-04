@@ -47,3 +47,6 @@ flutter:
         - asset: assets/fonts/CourierPrime-Regular.ttf
         - asset: assets/fonts/CourierPrime-Bold.ttf
           weight: 600
+    - family: DotGothic16
+      fonts:
+        - asset: assets/fonts/DotGothic16-Regular.ttf
