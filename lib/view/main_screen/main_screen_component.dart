@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:codefire/utilities/extentions.dart';
 import 'package:codefire/view/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +18,12 @@ class CordfireLevelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle titleStyle = Theme.of(context).textTheme.titleMedium!.copyWith(
-        // color: Colors.white,
+    final TextStyle titleStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontSize: 20,
+          // color: Colors.white,
         );
     final TextStyle descriptionStyle = Theme.of(context).textTheme.titleMedium!.copyWith(
-        // color: Colors.white,
+          color: Colors.white,
         );
 
     return Card(
@@ -38,9 +37,17 @@ class CordfireLevelCard extends StatelessWidget {
             Row(children: [
               Text(name, style: titleStyle),
               const Spacer(),
-              Text(description, style: descriptionStyle),
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                child: Text(description, style: descriptionStyle),
+              ),
             ]),
-            const SizedBox(height: 12),
+            const SizedBox(height: 4),
+            const Divider(height: 24),
             Wrap(
               runAlignment: WrapAlignment.start,
               spacing: 12,
