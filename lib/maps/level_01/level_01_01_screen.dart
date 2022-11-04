@@ -1,5 +1,4 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/maps/level_01/level_01_01.dart';
 import 'package:codefire/maps/level_01/level_01_02_screen.dart';
 import 'package:codefire/maps/level_controller.dart';
 import 'package:codefire/maps/level_widget.dart';
