@@ -1,7 +1,8 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/levels/level_03_02.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
 import 'package:codefire/view/common_component/level_controller.dart';
+import 'package:codefire/view/common_component/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -12,33 +13,30 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
-class Level0401 extends StatefulWidget {
-  const Level0401({super.key, this.initialCode});
+class Level0301 extends StatefulWidget {
+  const Level0301({super.key, this.initialCode});
   final String? initialCode;
 
   @override
-  State<Level0401> createState() => _Level0401State();
+  State<Level0301> createState() => _Level0301State();
 }
 
-class _Level0401State extends State<Level0401> {
+class _Level0301State extends State<Level0301> {
   final levelController = LevelController(
     showCollisionArea: false,
-    initialCode: '''moveLeft(10);\n''',
-    mapJsonPath: 'tiled/level_04_01.json',
+    initialCode: '''moveLeft(3);\n''',
+    mapJsonPath: 'tiled/level_03_01.json',
     hintTextList: [
-      '私はネクロマンサー、自己紹介が好き',
-      'さて、今回も再生ボタンを押すだけでは扉は開かないぞ\n上に進んでから、そのあと左に進むようにコマンドを送らなければダメだ',
-      '「moveUp(4);」の次の行に「moveLeft(2);」と入力してみるといい\n入力が面倒臭い場合は、コードフィールド上の「←」ボタンを押してみるといいだろう',
-      'ふむ、だいぶ分かってきたぞ、という顔をしているな…\nさあ、その手で試してみるんだ',
+      '私はネクロマンサー、コマンドについてとっても詳しい！',
     ],
-    playerPosition: Vector2(13, 9),
-    roboDinoPosition: Vector2(11, 9),
-    minimumStep: 23,
-    minimumCommand: 5,
-    nextMap: const Level0401(),
+    playerPosition: Vector2(8, 9),
+    roboDinoPosition: Vector2(5, 6),
+    minimumStep: 3,
+    minimumCommand: 1,
+    nextMap: const Level0302(),
   );
-  final levelId = 0;
-  final stageId = 2;
+  final levelId = 2;
+  final stageId = 0;
 
   @override
   Widget build(BuildContext context) {

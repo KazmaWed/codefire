@@ -6,7 +6,11 @@ import 'package:codefire/levels/level_02_01.dart';
 import 'package:codefire/levels/level_02_02.dart';
 import 'package:codefire/levels/level_02_03.dart';
 import 'package:codefire/levels/level_02_04.dart';
-import 'package:codefire/levels/level_04_01.dart';
+import 'package:codefire/levels/level_03_01.dart';
+import 'package:codefire/levels/level_03_02.dart';
+import 'package:codefire/levels/level_03_03.dart';
+import 'package:codefire/levels/level_03_04.dart';
+import 'package:codefire/levels/level_09_01.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final mainScreenControllerProvider = StateProvider<MainScreenController>((ref) {
@@ -17,7 +21,7 @@ class MainScreenController {
   List<Map<String, dynamic>> levels = [
     {
       'name': 'レベル1',
-      'description': 'CODEFIREの遊び方を覚えよう',
+      'description': 'CODEFIREの遊び方を知ろう',
       'maps': [
         {'map': const Level0101(), 'star': 0},
         {'map': const Level0102(), 'star': 0},
@@ -27,7 +31,7 @@ class MainScreenController {
     },
     {
       'name': 'レベル2',
-      'description': 'コードの書き方を覚えよう',
+      'description': 'コードの書き方を知ろう',
       'maps': [
         {'map': const Level0201(), 'star': 0},
         {'map': const Level0202(), 'star': 0},
@@ -37,12 +41,12 @@ class MainScreenController {
     },
     {
       'name': 'レベル3',
-      'description': '最短ルートを見つけよう',
+      'description': 'CODEFIREのルールを知ろう',
       'maps': [
-        {'map': const Level0101(), 'star': 0},
-        {'map': const Level0102(), 'star': 0},
-        {'map': const Level0103(), 'star': 0},
-        {'map': const Level0104(), 'star': 0},
+        {'map': const Level0301(), 'star': 0},
+        {'map': const Level0302(), 'star': 0},
+        {'map': const Level0303(), 'star': 0},
+        {'map': const Level0304(), 'star': 0},
       ],
     },
     {
@@ -51,8 +55,6 @@ class MainScreenController {
       'maps': [
         {'map': const Level0101(), 'star': 0},
         {'map': const Level0102(), 'star': 0},
-        {'map': const Level0103(), 'star': 0},
-        {'map': const Level0104(), 'star': 0},
       ],
     },
     {
@@ -99,7 +101,7 @@ class MainScreenController {
       'name': 'レベル9',
       'description': '難しいマップに挑戦しよう',
       'maps': [
-        {'map': const Level0401(), 'star': 0}
+        {'map': const Level0901(), 'star': 0}
       ],
     },
   ];

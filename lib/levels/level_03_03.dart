@@ -1,10 +1,10 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/levels/level_03_04.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/common_component/level_controller.dart';
 import 'package:codefire/view/common_component/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
-import 'package:codefire/view/top_screen/top_screen.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
 import 'package:codefire/view/top_screen/top_screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -13,33 +13,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
-class Level0104 extends StatefulWidget {
-  const Level0104({super.key, this.initialCode});
+class Level0303 extends StatefulWidget {
+  const Level0303({super.key, this.initialCode});
   final String? initialCode;
 
   @override
-  State<Level0104> createState() => _Level0104State();
+  State<Level0303> createState() => _Level0303State();
 }
 
-class _Level0104State extends State<Level0104> {
+class _Level0303State extends State<Level0303> {
   final levelController = LevelController(
-    initialCode: '',
-    mapJsonPath: 'tiled/level_01_04.json',
+    showCollisionArea: false,
+    initialCode: '''move2Up;\n''',
+    mapJsonPath: 'tiled/level_03_03.json',
     hintTextList: [
-      '私はネクロマンサー、この世界のルールを知ってるよ！',
-      'コードフィールドを見てみて、コマンドがなにも書いてないよ！\nこのままだとディノロボくんは一歩も動けないね…',
-      'でも大丈夫！君がコマンドを入力すれば、ディノロボくんはその通りに動いてくれるはずだよ♩\nでも「下に進む」のコマンドは何だったかな…\n',
-      'そうだ！コマンドがわからない時は、コードフィールドの上にある矢印ボタンを押してみて\n自動でコマンド入力されるはずだよ！',
-      'コマンドはパソコンのキーボードを使って入力や編集することもできるから試してみて♩',
+      '私はネクロマンサー、コマンドについてとっても詳しい！',
+      'ねえ、コードフィールドを見てみて！なにかおかしいと思わない？',
+      'コマンドは必ず「moveUp(2)」みたいな形じゃないとダメなんだ\n「Up」は方向を、括弧の中の数字は進むマスの数を表しているよ',
+      'コマンドを正しく直して、ディノロボくんがボタンを押せる様にしてあげられるかな？',
+      'もちろん、コードフィールド上の矢印ボタンを使ってもいいよ♩'
     ],
     playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(3, 5),
-    minimumStep: 8,
-    minimumCommand: 3,
-    nextMap: const TopScreen(),
+    roboDinoPosition: Vector2(3, 7),
+    minimumStep: 2,
+    minimumCommand: 1,
+    nextMap: const Level0304(),
   );
-  final levelId = 0;
-  final stageId = 3;
+  final levelId = 2;
+  final stageId = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,7 @@ class _Level0104State extends State<Level0104> {
       theme: CodefireField.codeTheme,
       patternMap: CodefireField.patternMap,
     );
+
     final focus = FocusNode();
 
     return Consumer(builder: (context, ref, child) {
@@ -85,9 +87,7 @@ class _Level0104State extends State<Level0104> {
               child: LevelWidget(
                 // focus: focus,
                 levelController: levelController,
-                onClear: () {
-                  onClear();
-                },
+                onClear: () => onClear(),
               ),
             ),
           ],

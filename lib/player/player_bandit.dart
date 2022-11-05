@@ -43,5 +43,11 @@ class PlayerBandit extends SimplePlayer
   static final imageShift = Vector2(0, -12);
 
   @override
+  bool onCollision(GameComponent component, bool active) {
+    controller.stopMoving();
+    return true;
+  }
+
+  @override
   Vector2 get center => super.center + Vector2(0, tileSize * 4 / 16);
 }
