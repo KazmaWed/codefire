@@ -1,10 +1,10 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_01_02.dart';
-import 'package:codefire/levels/level_controller.dart';
-import 'package:codefire/levels/level_widget.dart';
+import 'package:codefire/view/common_component/codefire_components.dart';
+import 'package:codefire/view/common_component/level_controller.dart';
+import 'package:codefire/view/common_component/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
-import 'package:codefire/view/common_component/codefire_scaffold.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
 import 'package:codefire/view/top_screen/top_screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +27,11 @@ class _Level0101State extends State<Level0101> {
     initialCode: '''moveLeft(2);\n''',
     mapJsonPath: 'tiled/level_01_01.json',
     hintTextList: [
-      '私はネクロマンサー、この世界のルールを知っている',
-      'さて、画面左側に白い枠が見えるだろう、あれは「コードフィールド」だ',
-      'コードフィールドの右下に「再生ボタン」が見えるだろう\nまずはそれを押してみなさい',
-      '左の部屋のディノロボットがボタンを押して、扉が開かれるはずだ',
-      'うまく行かないときはリセットボタンを押してみなさい\n再生ボタンのちょうど左側にある',
+      '私はネクロマンサー、この世界のルールを知ってるよ！',
+      'ほら、画面左側に白い枠が見えるでしょ、あれは「コードフィールド」',
+      'コードフィールドの右下に「再生ボタン」があるでしょ？\nまずはそれを押してみて',
+      '左の部屋の「ディノロボくん」が青いボタンを押して、扉が開かれるはず♩',
+      'うまく行かないときは「巻き戻しボタン」を押してみて\n再生ボタンのちょうど左側にあるのがそれだよ！'
     ],
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(4, 6),
@@ -78,7 +78,7 @@ class _Level0101State extends State<Level0101> {
             Expanded(
               flex: 1,
               child: CodefireField(
-                controller: codeController,
+                codeController: codeController,
                 parentWidget: widget,
                 gameScreenFocus: focus,
                 onPlay: (commandList) {
@@ -91,7 +91,7 @@ class _Level0101State extends State<Level0101> {
             Expanded(
               flex: 2,
               child: LevelWidget(
-                focus: focus,
+                // focus: focus,
                 levelController: levelController,
                 onClear: () => onClear(),
               ),

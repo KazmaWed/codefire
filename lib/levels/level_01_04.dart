@@ -1,9 +1,9 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/levels/level_controller.dart';
-import 'package:codefire/levels/level_widget.dart';
+import 'package:codefire/view/common_component/codefire_components.dart';
+import 'package:codefire/view/common_component/level_controller.dart';
+import 'package:codefire/view/common_component/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
-import 'package:codefire/view/common_component/codefire_scaffold.dart';
 import 'package:codefire/view/top_screen/top_screen.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
 import 'package:codefire/view/top_screen/top_screen_controller.dart';
@@ -25,12 +25,18 @@ class _Level0104State extends State<Level0104> {
   final levelController = LevelController(
     initialCode: '',
     mapJsonPath: 'tiled/level_01_04.json',
-    // hintTextList: [],
+    hintTextList: [
+      '私はネクロマンサー、この世界のルールを知ってるよ！',
+      'コードフィールドを見てみて、コマンドがなにも書いてないよ！\nこのままだとディノロボくんは一歩も動けないね…',
+      'でも大丈夫！君がコマンドを入力すれば、ディノロボくんはその通りに動いてくれるはずだよ♩\nでも「下に進む」のコマンドは何だったかな…\n',
+      'そうだ！コマンドがわからない時は、コードフィールドの上にある矢印ボタンを押してみて\n自動でコマンド入力されるはずだよ！',
+      'コマンドはパソコンのキーボードを使って入力や編集することもできるから試してみて♩',
+    ],
     playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(2, 8),
+    roboDinoPosition: Vector2(3, 4),
     minimumStep: 8,
     minimumCommand: 3,
-    nextMap: const CodefireMainScreen(),
+    nextMap: const TopScreen(),
   );
   final levelId = 0;
   final stageId = 3;
@@ -64,7 +70,7 @@ class _Level0104State extends State<Level0104> {
             Expanded(
               flex: 1,
               child: CodefireField(
-                controller: codeController,
+                codeController: codeController,
                 parentWidget: widget,
                 gameScreenFocus: focus,
                 onPlay: (commandList) {
@@ -77,7 +83,7 @@ class _Level0104State extends State<Level0104> {
             Expanded(
               flex: 2,
               child: LevelWidget(
-                focus: focus,
+                // focus: focus,
                 levelController: levelController,
                 onClear: () {
                   onClear();

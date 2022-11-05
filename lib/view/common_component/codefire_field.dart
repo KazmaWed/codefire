@@ -9,12 +9,12 @@ class CodefireField extends StatefulWidget {
   const CodefireField({
     super.key,
     required this.parentWidget,
-    required this.controller,
+    required this.codeController,
     required this.onPlay,
     required this.gameScreenFocus,
   });
   final Widget parentWidget;
-  final CodeController controller;
+  final CodeController codeController;
   final FocusNode gameScreenFocus;
   final ValueChanged<List<Map<String, dynamic>>> onPlay;
 
@@ -34,7 +34,6 @@ class CodefireField extends StatefulWidget {
 class _CodefireFieldState extends State<CodefireField> {
   List<Map<String, dynamic>> _commandList = [];
   String _commandListInStr = '';
-  final _focus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +45,21 @@ class _CodefireFieldState extends State<CodefireField> {
           fontFamily: 'NotoSansMono',
         );
     final codeField = CodeField(
-      controller: widget.controller,
+      controller: widget.codeController,
       expands: true,
       textStyle: codeStyle,
-      focusNode: _focus,
+      focusNode: FocusNode(),
     );
     final shortCutTextStyle = codeStyle.copyWith(fontWeight: FontWeight.bold);
+
+    void insertCode(String code) {
+      if (!codeField.focusNode!.hasFocus) {
+        codeField.focusNode!.requestFocus();
+        codeField.controller.selection =
+            TextSelection.collapsed(offset: codeField.controller.text.length);
+      }
+      codeField.controller.insertStr(code);
+    }
 
     return Container(
       clipBehavior: Clip.antiAlias,
@@ -67,71 +75,59 @@ class _CodefireFieldState extends State<CodefireField> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: InkWell(
-                    child: const SizedBox(
-                        height: 36, width: 64, child: Icon(Icons.arrow_back_rounded)),
-                    onTap: () {
-                      widget.controller.insertStr('moveLeft(1);');
-                      codeField.focusNode!.requestFocus();
-                    }),
+                  child:
+                      const SizedBox(height: 36, width: 64, child: Icon(Icons.arrow_back_rounded)),
+                  onTap: () => insertCode('moveLeft(1);\n'),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: InkWell(
-                    child: const SizedBox(
-                        height: 36, width: 64, child: Icon(Icons.arrow_upward_rounded)),
-                    onTap: () {
-                      widget.controller.insertStr('moveUp(1);');
-                      codeField.focusNode!.requestFocus();
-                    }),
+                  child: const SizedBox(
+                      height: 36, width: 64, child: Icon(Icons.arrow_upward_rounded)),
+                  onTap: () => insertCode('moveUp(1);\n'),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: InkWell(
-                    child: const SizedBox(
-                        height: 36, width: 64, child: Icon(Icons.arrow_downward_rounded)),
-                    onTap: () {
-                      widget.controller.insertStr('moveDown(1);');
-                      codeField.focusNode!.requestFocus();
-                    }),
+                  child: const SizedBox(
+                      height: 36, width: 64, child: Icon(Icons.arrow_downward_rounded)),
+                  onTap: () => insertCode('moveDown(1);\n'),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: InkWell(
-                    child: const SizedBox(
-                        height: 36, width: 64, child: Icon(Icons.arrow_forward_rounded)),
-                    onTap: () {
-                      widget.controller.insertStr('moveRight(1);');
-                      codeField.focusNode!.requestFocus();
-                    }),
+                  child: const SizedBox(
+                      height: 36, width: 64, child: Icon(Icons.arrow_forward_rounded)),
+                  onTap: () => insertCode('moveRight(1);\n'),
+                ),
               ),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: InkWell(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 36,
-                      width: 64,
-                      child: Text('FOR', style: shortCutTextStyle),
-                    ),
-                    onTap: () {
-                      widget.controller.insertStr('for (let idx = 1; idx <= 2; idx++) {};');
-                      codeField.focusNode!.requestFocus();
-                    }),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 36,
+                    width: 64,
+                    child: Text('FOR', style: shortCutTextStyle),
+                  ),
+                  onTap: () => insertCode('for (let idx = 1; idx <= 2; idx++) {}'),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: InkWell(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 36,
-                      width: 64,
-                      child: Text('IF', style: shortCutTextStyle),
-                    ),
-                    onTap: () {
-                      widget.controller.insertStr('if (1 == 1) {};');
-                      codeField.focusNode!.requestFocus();
-                    }),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 36,
+                    width: 64,
+                    child: Text('IF', style: shortCutTextStyle),
+                  ),
+                  onTap: () => insertCode('if (1 == 1) {}'),
+                ),
               ),
             ]),
             const Divider(),
@@ -143,8 +139,8 @@ class _CodefireFieldState extends State<CodefireField> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: InkWell(
-                      child:
-                          const SizedBox(height: 36, width: 64, child: Icon(Icons.replay_rounded)),
+                      child: const SizedBox(
+                          height: 36, width: 64, child: Icon(Icons.fast_rewind_rounded)),
                       onTap: () {
                         final controller = BonfireInjector().get<NpcRoboDinoController>();
                         controller.initialize();
@@ -159,10 +155,10 @@ class _CodefireFieldState extends State<CodefireField> {
                     onTapUp: (details) => widget.gameScreenFocus.requestFocus(),
                     onTap: () async {
                       widget.gameScreenFocus.requestFocus();
-                      String code = widget.controller.text;
+                      String code = widget.codeController.text;
                       final List<Map<String, dynamic>> playerCommandMap = code.toPlayerCommandMap();
                       try {
-                        _focus.unfocus();
+                        codeField.focusNode!.unfocus();
                         _commandList = playerCommandMap;
                         setState(() {
                           _commandListInStr = playerCommandMap.toString();

@@ -1,6 +1,6 @@
 import 'package:codefire/decorations/button_blue.dart';
 import 'package:codefire/decorations/button_red.dart';
-import 'package:codefire/levels/level_controller.dart';
+import 'package:codefire/view/common_component/level_controller.dart';
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
@@ -10,11 +10,11 @@ import 'package:bonfire/bonfire.dart';
 class LevelWidget extends StatefulWidget {
   const LevelWidget({
     Key? key,
-    required this.focus,
+    // required this.focus,
     required this.levelController,
     required this.onClear,
   }) : super(key: key);
-  final FocusNode focus;
+  // final FocusNode focus;
   final LevelController levelController;
 
   final Function onClear;
@@ -43,7 +43,7 @@ class _LevelState extends State<LevelWidget> {
     return BonfireWidget(
       showCollisionArea: widget.levelController.showCollisionArea,
       onTapUp: (game, screenPosition, worldPosition) {
-        widget.focus.requestFocus();
+        // widget.focus.requestFocus();
         (game.player! as PlayerBandit).controller.moveToPoint(worldPosition);
       },
       // マップ用jsonファイル読み込み
@@ -111,15 +111,15 @@ class _LevelState extends State<LevelWidget> {
         smoothCameraSpeed: 10,
       ),
       // 入力インターフェースの設定
-      joystick: Joystick(
-        // キーボード用入力の設定
-        keyboardConfig: KeyboardConfig(
-          keyboardDirectionalType: KeyboardDirectionalType.arrows,
-        ),
-      ),
+      // joystick: Joystick(
+      //   // キーボード用入力の設定
+      //   keyboardConfig: KeyboardConfig(
+      //     keyboardDirectionalType: KeyboardDirectionalType.arrows,
+      //   ),
+      // ),
       // ロード中の画面の設定
       progress: CodefireGameComponents.codefireProgress,
-      focusNode: widget.focus,
+      // focusNode: widget.focus,
       onDispose: () {
         widget.levelController.player.controller.stopMoving();
       },

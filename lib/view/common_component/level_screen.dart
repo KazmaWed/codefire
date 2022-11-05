@@ -1,8 +1,7 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/levels/level_01_04.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
 import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/common_component/level_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -13,36 +12,52 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
-class Level0103 extends StatefulWidget {
-  const Level0103({super.key, this.initialCode});
+class LevelScreen extends StatefulWidget {
+  const LevelScreen({
+    super.key,
+    this.initialCode,
+    required this.showCollisionArea,
+    required this.mapJsonPath,
+    required this.levelId,
+    required this.stageId,
+    required this.hintTextList,
+    required this.playerPosition,
+    required this.roboDinoPosition,
+    required this.minimumStep,
+    required this.minimumCommand,
+    required this.nextMap,
+  });
   final String? initialCode;
+  final bool showCollisionArea;
+  final String mapJsonPath;
+  final List<String> hintTextList;
+  final Vector2 playerPosition;
+  final Vector2 roboDinoPosition;
+  final int minimumStep;
+  final int minimumCommand;
+  final Widget nextMap;
+  final int levelId;
+  final int stageId;
 
   @override
-  State<Level0103> createState() => _Level0103State();
+  State<LevelScreen> createState() => _LevelScreenState();
 }
 
-class _Level0103State extends State<Level0103> {
-  final levelController = LevelController(
-    showCollisionArea: false,
-    initialCode: '''moveUp(4);\n''',
-    mapJsonPath: 'tiled/level_01_03.json',
-    hintTextList: [
-      '私はネクロマンサー、この世界のルールを知ってるよ！',
-      '今回のコマンド「moveUp();」は「上に進んで」という指示なんだ\n括弧の中の数字「4」は進むマスの数を表しているよ',
-      '再生ボタンを押せば、ディノロボットが「上に4マス」進んで、スイッチを押してくれるはず♩',
-      'さあ、実際に試してみて！\n巻き戻しボタンは何度でも押せるからね',
-    ],
-    playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(3, 8),
-    minimumStep: 6,
-    minimumCommand: 2,
-    nextMap: const Level0104(),
-  );
-  final levelId = 0;
-  final stageId = 2;
-
+class _LevelScreenState extends State<LevelScreen> {
   @override
   Widget build(BuildContext context) {
+    final levelController = LevelController(
+      showCollisionArea: widget.showCollisionArea,
+      initialCode: widget.initialCode ?? '',
+      mapJsonPath: widget.mapJsonPath,
+      hintTextList: widget.hintTextList,
+      playerPosition: widget.playerPosition,
+      roboDinoPosition: widget.roboDinoPosition,
+      minimumStep: widget.minimumStep,
+      minimumCommand: widget.minimumCommand,
+      nextMap: widget.nextMap,
+    );
+
     String defaultCode = widget.initialCode ?? levelController.initialCode;
     levelController.init();
 
@@ -54,12 +69,15 @@ class _Level0103State extends State<Level0103> {
     );
 
     final focus = FocusNode();
+
     return Consumer(builder: (context, ref, child) {
       void onClear() {
         final mainScreenController = ref.watch(mainScreenControllerProvider);
         final result = levelController.culcScore(context, codeController.text);
-        if (mainScreenController.levels[levelId]['maps'][stageId]['star'] < result['star']) {
-          mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];
+        if (mainScreenController.levels[widget.levelId]['maps'][widget.stageId]['star'] <
+            result['star']) {
+          mainScreenController.levels[widget.levelId]['maps'][widget.stageId]['star'] =
+              result['star'];
         }
       }
 

@@ -118,7 +118,7 @@ class GoBackFloatingButton extends StatelessWidget {
     return FloatingActionButton(
       child: const Icon(Icons.close_rounded),
       onPressed: () {
-        context.goTo(const CodefireMainScreen());
+        context.goTo(const TopScreen());
       },
     );
   }

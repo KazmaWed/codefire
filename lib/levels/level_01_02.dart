@@ -1,10 +1,10 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_01_03.dart';
-import 'package:codefire/levels/level_controller.dart';
-import 'package:codefire/levels/level_widget.dart';
+import 'package:codefire/view/common_component/codefire_components.dart';
+import 'package:codefire/view/common_component/level_controller.dart';
+import 'package:codefire/view/common_component/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
-import 'package:codefire/view/common_component/codefire_scaffold.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
 import 'package:codefire/view/top_screen/top_screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -24,17 +24,17 @@ class Level0102 extends StatefulWidget {
 class _Level0102State extends State<Level0102> {
   final levelController = LevelController(
     showCollisionArea: false,
-    initialCode: '''moveUp(2);\n''',
+    initialCode: '''moveRight(2);\n''',
     mapJsonPath: 'tiled/level_01_02.json',
     hintTextList: [
-      '私はネクロマンサー、どこにでも現れる',
-      'さて、今回は再生ボタンを押すだけでは扉は開かないぞ\nディノロボットがボタンまで辿り着かないからな',
-      'コードフィールドに書かれた「moveUp(2);」の文字は、「コマンド」というんだ\nコマンドは、ディノロボットを動かすための呪文のようなものだ',
-      'あれを「moveUp(4);」に書き換えてから再生ボタンを押してみなさい',
-      'それでうまくいくはずだ\nもし失敗したら、いつでもリセットボタンを押すんだぞ',
+      '私はネクロマンサー、この世界のルールを知ってるよ！',
+      'コードフィールドに書かれた「moveRight();」の文字は「コマンド」というんだ\n左の部屋にいるディノロボくんは、そのコマンド通りに動くよ',
+      '「moveRight();」のコマンドはディノロボくんに「右に動いて」と指示しているんだ',
+      'さて、今回も再生ボタンを押すだけで扉が開くはずだよ♩',
+      'もし失敗したら、いつでも巻き戻しボタンを押すんだよ！',
     ],
     playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(3, 8),
+    roboDinoPosition: Vector2(2, 6),
     minimumStep: 4,
     minimumCommand: 1,
     nextMap: const Level0103(),
@@ -61,7 +61,6 @@ class _Level0102State extends State<Level0102> {
     );
 
     final focus = FocusNode();
-
     return Consumer(builder: (context, ref, child) {
       void onClear() {
         final mainScreenController = ref.watch(mainScreenControllerProvider);
@@ -78,7 +77,7 @@ class _Level0102State extends State<Level0102> {
             Expanded(
               flex: 1,
               child: CodefireField(
-                controller: codeController,
+                codeController: codeController,
                 parentWidget: widget,
                 gameScreenFocus: focus,
                 onPlay: (commandList) {
@@ -91,7 +90,7 @@ class _Level0102State extends State<Level0102> {
             Expanded(
               flex: 2,
               child: LevelWidget(
-                focus: focus,
+                // focus: focus,
                 levelController: levelController,
                 onClear: () => onClear(),
               ),

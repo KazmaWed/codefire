@@ -2,6 +2,10 @@ import 'package:codefire/levels/level_01_01.dart';
 import 'package:codefire/levels/level_01_02.dart';
 import 'package:codefire/levels/level_01_03.dart';
 import 'package:codefire/levels/level_01_04.dart';
+import 'package:codefire/levels/level_02_01.dart';
+import 'package:codefire/levels/level_02_02.dart';
+import 'package:codefire/levels/level_02_03.dart';
+import 'package:codefire/levels/level_02_04.dart';
 import 'package:codefire/levels/level_04_01.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,10 +29,10 @@ class MainScreenController {
       'name': 'レベル2',
       'description': 'コードの書き方を覚えよう',
       'maps': [
-        {'map': const Level0101(), 'star': 0},
-        {'map': const Level0102(), 'star': 0},
-        {'map': const Level0103(), 'star': 0},
-        {'map': const Level0104(), 'star': 0},
+        {'map': const Level0201(), 'star': 0},
+        {'map': const Level0202(), 'star': 0},
+        {'map': const Level0203(), 'star': 0},
+        {'map': const Level0204(), 'star': 0},
       ],
     },
     {

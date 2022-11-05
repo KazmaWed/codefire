@@ -14,6 +14,7 @@ class PlayerBanditController extends StateController<PlayerBandit> {
   @override
   void onReady(PlayerBandit component) {
     super.onReady(component);
+    stopMoving();
     _mapCenter = component.gameRef.map.center;
   }
 

@@ -1,17 +1,17 @@
+import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
 import 'package:codefire/view/top_screen/top_screen_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:codefire/view/common_component/codefire_scaffold.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CodefireMainScreen extends StatefulWidget {
-  const CodefireMainScreen({super.key});
+class TopScreen extends StatefulWidget {
+  const TopScreen({super.key});
 
   @override
-  State<CodefireMainScreen> createState() => _CodefireMainScreenState();
+  State<TopScreen> createState() => _TopScreenState();
 }
 
-class _CodefireMainScreenState extends State<CodefireMainScreen> {
+class _TopScreenState extends State<TopScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: ((context, ref, child) {

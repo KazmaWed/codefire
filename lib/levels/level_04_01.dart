@@ -1,9 +1,9 @@
 import 'package:bonfire/bonfire.dart';
-import 'package:codefire/levels/level_widget.dart';
-import 'package:codefire/levels/level_controller.dart';
+import 'package:codefire/view/common_component/codefire_components.dart';
+import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/common_component/level_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
-import 'package:codefire/view/common_component/codefire_scaffold.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
 import 'package:codefire/view/top_screen/top_screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +70,7 @@ class _Level0401State extends State<Level0401> {
             Expanded(
               flex: 1,
               child: CodefireField(
-                controller: codeController,
+                codeController: codeController,
                 parentWidget: widget,
                 gameScreenFocus: focus,
                 onPlay: (commandList) {
@@ -83,7 +83,7 @@ class _Level0401State extends State<Level0401> {
             Expanded(
               flex: 2,
               child: LevelWidget(
-                focus: focus,
+                // focus: focus,
                 levelController: levelController,
                 onClear: () => onClear(),
               ),

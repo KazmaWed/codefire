@@ -16,8 +16,8 @@ void main() async {
   await NpcRoboDinoSprite.load();
   await NpcNecromancerSprite.load();
 
-  BonfireInjector().putFactory((i) => NpcRoboDinoController());
-  BonfireInjector().putFactory((i) => PlayerBanditController());
+  BonfireInjector().put((i) => NpcRoboDinoController());
+  BonfireInjector().put((i) => PlayerBanditController());
 
   runApp(
     const ProviderScope(child: MyApp()),
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.black,
         ),
       ),
-      home: const CodefireMainScreen(),
+      home: const TopScreen(),
     );
   }
 }
