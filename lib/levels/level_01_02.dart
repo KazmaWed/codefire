@@ -3,10 +3,10 @@ import 'package:codefire/levels/level_01_03.dart';
 import 'package:codefire/levels/level_controller.dart';
 import 'package:codefire/levels/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
-import 'package:codefire/view/common_component/code_fire_field.dart';
-import 'package:codefire/view/common_component/code_fire_scaffold.dart';
-import 'package:codefire/view/main_screen/main_screen_component.dart';
-import 'package:codefire/view/main_screen/main_screen_controller.dart';
+import 'package:codefire/view/common_component/codefire_field.dart';
+import 'package:codefire/view/common_component/codefire_scaffold.dart';
+import 'package:codefire/view/top_screen/top_screen_component.dart';
+import 'package:codefire/view/top_screen/top_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:code_text_field/code_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,8 +56,8 @@ class _Level0102State extends State<Level0102> {
     final codeController = CodeController(
       text: defaultCode,
       language: javascript,
-      theme: CodeFireField.codeTheme,
-      patternMap: CodeFireField.patternMap,
+      theme: CodefireField.codeTheme,
+      patternMap: CodefireField.patternMap,
     );
 
     final focus = FocusNode();
@@ -77,7 +77,7 @@ class _Level0102State extends State<Level0102> {
           children: [
             Expanded(
               flex: 1,
-              child: CodeFireField(
+              child: CodefireField(
                 controller: codeController,
                 parentWidget: widget,
                 gameScreenFocus: focus,
