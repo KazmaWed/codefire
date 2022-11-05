@@ -46,7 +46,7 @@ class CordfireLevelCard extends StatelessWidget {
               ),
             ]),
             const SizedBox(height: 4),
-            const Divider(height: 24),
+            const Divider(height: 24, thickness: 1),
             Wrap(
               runAlignment: WrapAlignment.start,
               spacing: 12,
