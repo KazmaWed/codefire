@@ -29,8 +29,8 @@ class ButtonBlueDecoration extends GameDecoration with Sensor {
   final Function callback;
   bool activated = false;
 
-  static final imageSize = Vector2(8, 10);
-  static final positionShift = (Vector2.all(16) - Vector2(8, 12)) * 3 / 2;
+  static final imageSize = Vector2(8, 12);
+  static final positionShift = (Vector2.all(16) - imageSize) * 3 / 2;
   static const imagePathOff = 'decorations/button_blue_off.png';
   static const imagePathOn = 'decorations/button_blue_on.png';
 

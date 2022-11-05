@@ -41,4 +41,7 @@ class PlayerBandit extends SimplePlayer
   final double tileSize;
 
   static final imageShift = Vector2(0, -12);
+
+  @override
+  Vector2 get center => super.center + Vector2(0, tileSize * 4 / 16);
 }

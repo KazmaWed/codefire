@@ -1,6 +1,5 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/player/player_bandit.dart';
-import 'package:codefire/utilities/extentions.dart';
 
 class PlayerBanditController extends StateController<PlayerBandit> {
   SimpleNpc cameraCenterComponent = SimpleNpc(
@@ -9,7 +8,8 @@ class PlayerBanditController extends StateController<PlayerBandit> {
   );
 
   Vector2 _mapCenter = Vector2.zero();
-  String? _moveTo;
+  Vector2? _moveToPoint;
+  Vector2? _lastPosition;
 
   @override
   void onReady(PlayerBandit component) {
@@ -19,46 +19,57 @@ class PlayerBanditController extends StateController<PlayerBandit> {
 
   @override
   void update(double dt, PlayerBandit component) {
-    if (_moveTo != null) {
-      switch (_moveTo) {
-        case 'up':
-          component.moveUp(component.speed);
-          break;
-        case 'down':
-          component.moveDown(component.speed);
-          break;
-        case 'left':
-          component.moveLeft(component.speed);
-          break;
-        case 'right':
-          component.moveRight(component.speed);
-          break;
-        case 'upRight':
-          component.moveUpRight(component.speed / 1.41, component.speed / 1.41);
-          break;
-        case 'upLeft':
+    if (_moveToPoint != null) {
+      final threxhold = component.tileSize / 30;
+      final toRight = threxhold < (_moveToPoint!.x - component.center.x);
+      final toLeft = threxhold < (component.center.x - _moveToPoint!.x);
+      final toUp = threxhold < (component.center.y - _moveToPoint!.y);
+      final toDown = threxhold < (_moveToPoint!.y - component.center.y);
+
+      if (toUp) {
+        if (toLeft) {
           component.moveUpLeft(component.speed / 1.41, component.speed / 1.41);
-          break;
-        case 'downRight':
-          component.moveDownRight(component.speed / 1.41, component.speed / 1.41);
-          break;
-        case 'downLeft':
+        } else if (toRight) {
+          component.moveUpRight(component.speed / 1.41, component.speed / 1.41);
+        } else {
+          component.moveUp(component.speed);
+        }
+      } else if (toDown) {
+        if (toLeft) {
           component.moveDownLeft(component.speed / 1.41, component.speed / 1.41);
-          break;
-        default:
-          component.idle();
-          break;
+        } else if (toRight) {
+          component.moveDownRight(component.speed / 1.41, component.speed / 1.41);
+        } else {
+          component.moveDown(component.speed);
+        }
+      } else if (toLeft) {
+        component.moveLeft(component.speed);
+      } else if (toRight) {
+        component.moveRight(component.speed);
+      } else {
+        stopMoving();
+      }
+
+      const intervalMilliSec = 100;
+      bool lastPositionInterval =
+          component.checkInterval('lastPositionInterval', intervalMilliSec, dt);
+      if (lastPositionInterval) {
+        if (_lastPosition != null && _lastPosition!.distanceTo(component.position).abs() <= 0) {
+          stopMoving();
+        } else {}
+        _lastPosition = component.position.xy;
       }
     }
-    cameraCenterComponent.position = (_mapCenter * 2 + component.position) / 3;
+    cameraCenterComponent.position = (_mapCenter * 2 + component.center) / 3;
   }
 
   void moveToPoint(Vector2 point) {
-    _moveTo = (point - component!.center).toOctaDirectionStr();
+    _moveToPoint = point;
   }
 
   void stopMoving() {
-    _moveTo = null;
+    _moveToPoint = null;
+    _lastPosition = null;
     component!.idle();
   }
 }

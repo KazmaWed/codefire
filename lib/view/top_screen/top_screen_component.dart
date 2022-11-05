@@ -1,5 +1,5 @@
 import 'package:codefire/utilities/extentions.dart';
-import 'package:codefire/view/main_screen/main_screen.dart';
+import 'package:codefire/view/top_screen/top_screen.dart';
 import 'package:flutter/material.dart';
 
 class CordfireLevelCard extends StatelessWidget {
@@ -20,7 +20,6 @@ class CordfireLevelCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle titleStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
           fontSize: 20,
-          // color: Colors.white,
         );
     final TextStyle descriptionStyle = Theme.of(context).textTheme.titleMedium!.copyWith(
           color: Colors.white,

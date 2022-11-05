@@ -5,8 +5,8 @@ import 'package:codefire/utilities/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/themes/tomorrow.dart';
 
-class CodeFireField extends StatefulWidget {
-  const CodeFireField({
+class CodefireField extends StatefulWidget {
+  const CodefireField({
     super.key,
     required this.parentWidget,
     required this.controller,
@@ -28,18 +28,23 @@ class CodeFireField extends StatefulWidget {
   };
 
   @override
-  State<CodeFireField> createState() => _CodeFireFieldState();
+  State<CodefireField> createState() => _CodefireFieldState();
 }
 
-class _CodeFireFieldState extends State<CodeFireField> {
+class _CodefireFieldState extends State<CodefireField> {
   List<Map<String, dynamic>> _commandList = [];
   String _commandListInStr = '';
   final _focus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    final codeStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 18);
-    final consoleStyle = Theme.of(context).textTheme.bodyMedium!;
+    final codeStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontSize: 18,
+          fontFamily: 'NotoSansMono',
+        );
+    final consoleStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontFamily: 'NotoSansMono',
+        );
     final codeField = CodeField(
       controller: widget.controller,
       expands: true,

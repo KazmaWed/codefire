@@ -6,7 +6,7 @@ import 'package:codefire/player/player_bandit_sprite.dart';
 import 'package:codefire/player/player_bandit_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_sprite.dart';
-import 'package:codefire/view/main_screen/main_screen.dart';
+import 'package:codefire/view/top_screen/top_screen.dart';
 // import 'package:codefire/maps/dungeon_01_screen.dart';
 
 void main() async {
@@ -30,10 +30,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'CODEFIRE',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'NotoSansMono',
+        fontFamily: 'DotGothic16',
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,

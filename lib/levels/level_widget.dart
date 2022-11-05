@@ -42,13 +42,9 @@ class _LevelState extends State<LevelWidget> {
     // 画面
     return BonfireWidget(
       showCollisionArea: widget.levelController.showCollisionArea,
-      // クリックで移動
-      onTapDown: ((game, screenPosition, worldPosition) {
+      onTapUp: (game, screenPosition, worldPosition) {
         widget.focus.requestFocus();
         (game.player! as PlayerBandit).controller.moveToPoint(worldPosition);
-      }),
-      onTapUp: (game, screenPosition, worldPosition) {
-        (game.player! as PlayerBandit).controller.stopMoving();
       },
       // マップ用jsonファイル読み込み
       map: WorldMapByTiled(
