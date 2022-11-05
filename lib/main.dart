@@ -16,8 +16,8 @@ void main() async {
   await NpcRoboDinoSprite.load();
   await NpcNecromancerSprite.load();
 
-  BonfireInjector().put((i) => NpcRoboDinoController());
-  BonfireInjector().put((i) => PlayerBanditController());
+  BonfireInjector().putFactory((i) => NpcRoboDinoController());
+  BonfireInjector().putFactory((i) => PlayerBanditController());
 
   runApp(
     const ProviderScope(child: MyApp()),
