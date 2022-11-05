@@ -117,8 +117,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":32,
-                 "y":96
+                 "x":48,
+                 "y":48
                 }, 
                 {
                  "class":"",
@@ -128,8 +128,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":64,
-                 "y":96
+                 "x":48,
+                 "y":144
                 }, 
                 {
                  "class":"",
@@ -166,6 +166,10 @@
         {
          "firstgid":282,
          "source":"dungeonDecoration_1.json"
+        }, 
+        {
+         "firstgid":730,
+         "source":"waterLavaAcid_tileset.json"
         }],
  "tilewidth":16,
  "type":"map",

@@ -24,29 +24,23 @@ class Level0201 extends StatefulWidget {
 class _Level0201State extends State<Level0201> {
   final levelController = LevelController(
     showCollisionArea: false,
-    initialCode: '''moveLeft(2);\n''',
+    initialCode: '''move2Up;\n''',
     mapJsonPath: 'tiled/level_02_01.json',
     hintTextList: [
-      '私はネクロマンサー、この世界のルールを知ってるよ！',
-      'ほら、画面左側に白い枠が見えるでしょ、あれは「コードフィールド」',
-      'コードフィールドの右下に「再生ボタン」があるでしょ？\nまずはそれを押してみて',
-      '左の部屋の「ディノロボくん」が青いボタンを押して、扉が開かれるはず♩',
-      'うまく行かないときは「巻き戻しボタン」を押してみて\n再生ボタンのちょうど左側にあるのがそれだよ！'
+      '私はネクロマンサー、コマンドについてとっても詳しい！',
+      'ねえ、コードフィールドを見てみて！なにかおかしいと思わない？',
+      'コマンドは必ず「moveUp(2)」みたいな形じゃないとダメなんだ\n「Up」は方向を、括弧の中の数字は進むマスの数を表しているよ',
+      'コマンドを正しく直して、ディノロボくんがボタンを押せる様にしてあげられるかな？',
+      'もちろん、コードフィールド上の矢印ボタンを使ってもいいよ♩'
     ],
     playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(4, 6),
+    roboDinoPosition: Vector2(3, 7),
     minimumStep: 2,
     minimumCommand: 1,
     nextMap: const Level0202(),
   );
   final levelId = 1;
   final stageId = 0;
-
-  @override
-  void dispose() {
-    super.dispose();
-    levelController.init();
-  }
 
   @override
   Widget build(BuildContext context) {

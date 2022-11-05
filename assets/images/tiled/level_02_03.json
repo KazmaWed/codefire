@@ -117,8 +117,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":32,
-                 "y":96
+                 "x":48,
+                 "y":112
                 }, 
                 {
                  "class":"",
@@ -128,8 +128,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":64,
-                 "y":96
+                 "x":48,
+                 "y":80
                 }, 
                 {
                  "class":"",

@@ -43,12 +43,6 @@ class _Level0102State extends State<Level0102> {
   final stageId = 1;
 
   @override
-  void dispose() {
-    super.dispose();
-    levelController.init();
-  }
-
-  @override
   Widget build(BuildContext context) {
     String defaultCode = widget.initialCode ?? levelController.initialCode;
     levelController.init();
