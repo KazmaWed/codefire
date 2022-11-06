@@ -1,6 +1,9 @@
 import 'package:codefire/utilities/extentions.dart';
+import 'package:codefire/utilities/sounds.dart';
 import 'package:codefire/view/top_screen/top_screen.dart';
+import 'package:codefire/view/top_screen/top_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CordfireLevelCard extends StatelessWidget {
   const CordfireLevelCard({
@@ -84,29 +87,37 @@ class CordfireLevelCard extends StatelessWidget {
       );
     }
 
-    return Card(
-      child: InkWell(
-        borderRadius: borderRadius,
-        child: Container(
-          decoration: BoxDecoration(
-            // color: Colors.white,
-            borderRadius: borderRadius,
-            border: Border.all(color: Colors.black12),
+    return Consumer(builder: (context, ref, child) {
+      return Card(
+        child: InkWell(
+          borderRadius: borderRadius,
+          child: Container(
+            decoration: BoxDecoration(
+              // color: Colors.white,
+              borderRadius: borderRadius,
+              border: Border.all(color: Colors.black12),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+              child: Column(children: [
+                Text(levelText, style: style),
+                // const SizedBox(height: 4),
+                starIndicator(mapStar),
+              ]),
+            ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-            child: Column(children: [
-              Text(levelText, style: style),
-              // const SizedBox(height: 4),
-              starIndicator(mapStar),
-            ]),
-          ),
+          onTap: () {
+            final controller = ref.watch(mainScreenControllerProvider);
+            if (controller.playBgm) {
+              Sounds.playBgmDungeon();
+            } else {
+              Sounds.stopBackgroundSound();
+            }
+            context.goTo(mapWidget);
+          },
         ),
-        onTap: () {
-          context.goTo(mapWidget);
-        },
-      ),
-    );
+      );
+    });
   }
 }
 
