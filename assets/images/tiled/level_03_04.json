@@ -107,7 +107,7 @@
                  "visible":true,
                  "width":16,
                  "x":32,
-                 "y":96
+                 "y":48
                 }, 
                 {
                  "class":"",
@@ -117,7 +117,7 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":48,
+                 "x":32,
                  "y":96
                 }, 
                 {
@@ -128,7 +128,7 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":64,
+                 "x":80,
                  "y":96
                 }, 
                 {
@@ -140,7 +140,7 @@
                  "visible":true,
                  "width":16,
                  "x":80,
-                 "y":96
+                 "y":144
                 }, 
                 {
                  "class":"",

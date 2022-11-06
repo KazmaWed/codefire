@@ -20,7 +20,7 @@ class NpcRoboDino extends SimplePlayer
           size: Vector2.all(tileSize * 2),
           position: initialPosition + Vector2(-tileSize / 2, -tileSize / 2 - spriteShift),
           initDirection: initDirection,
-          speed: tileSize * 3,
+          speed: tileSize * 2.8,
         ) {
     setupCollision(
       CollisionConfig(

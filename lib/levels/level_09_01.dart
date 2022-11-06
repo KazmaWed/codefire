@@ -1,7 +1,8 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/levels/level_09_02.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -22,23 +23,19 @@ class Level0901 extends StatefulWidget {
 
 class _Level0901State extends State<Level0901> {
   final levelController = LevelController(
-    showCollisionArea: false,
     initialCode: '''moveLeft(8);\n''',
     mapJsonPath: 'tiled/level_09_01.json',
     hintTextList: [
       '私はネクロマンサー、自己紹介が好き',
-      'さて、今回も再生ボタンを押すだけでは扉は開かないぞ\n上に進んでから、そのあと左に進むようにコマンドを送らなければダメだ',
-      '「moveUp(4);」の次の行に「moveLeft(2);」と入力してみるといい\n入力が面倒臭い場合は、コードフィールド上の「←」ボタンを押してみるといいだろう',
-      'ふむ、だいぶ分かってきたぞ、という顔をしているな…\nさあ、その手で試してみるんだ',
     ],
     playerPosition: Vector2(11, 9),
     roboDinoPosition: Vector2(9, 9),
-    minimumStep: 23,
-    minimumCommand: 5,
-    nextMap: const Level0901(),
+    minimumStep: 20,
+    minimumCommand: 4,
+    nextMap: const Level0902(),
   );
-  final levelId = 0;
-  final stageId = 2;
+  final levelId = 8;
+  final stageId = 0;
 
   @override
   Widget build(BuildContext context) {

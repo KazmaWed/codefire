@@ -1,3 +1,4 @@
+import 'package:codefire/utilities/sounds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:bonfire/bonfire.dart';
@@ -15,6 +16,7 @@ void main() async {
   await PlayerBanditSprite.load();
   await NpcRoboDinoSprite.load();
   await NpcNecromancerSprite.load();
+  await Sounds.initialize();
 
   BonfireInjector().put((i) => NpcRoboDinoController());
   BonfireInjector().put((i) => PlayerBanditController());
@@ -34,6 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'DotGothic16',
+        primarySwatch: Colors.blueGrey,
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,

@@ -33,6 +33,7 @@ flutter:
     - assets/images/maps/
     - assets/images/tiled/
     - assets/audio/bgm/
+    - assets/audio/se/
   fonts:
       
     - family: NotoSansMono

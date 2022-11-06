@@ -50,3 +50,40 @@ class CodefireGameComponents {
     color: Colors.transparent,
   );
 }
+
+class ObjectiveText extends StatelessWidget {
+  const ObjectiveText({
+    super.key,
+    required this.context,
+    required this.step,
+    required this.command,
+  });
+  final BuildContext context;
+  final int step;
+  final int command;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = Theme.of(context).textTheme.titleLarge!.copyWith(
+          color: Colors.white,
+        );
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'スター獲得条件',
+          style: style,
+        ),
+        Text(
+          'ステップ数：$stepマス',
+          style: style,
+        ),
+        Text(
+          '使用コマンド数：$command種類',
+          style: style,
+        ),
+      ],
+    );
+  }
+}

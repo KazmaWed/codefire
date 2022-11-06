@@ -102,12 +102,12 @@
                  "class":"",
                  "height":16,
                  "id":3,
-                 "name":"buttonBlue",
+                 "name":"necromancer",
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":32,
-                 "y":96
+                 "x":191.996707310799,
+                 "y":112
                 }, 
                 {
                  "class":"",
@@ -117,8 +117,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":48,
-                 "y":96
+                 "x":80,
+                 "y":64
                 }, 
                 {
                  "class":"",
@@ -128,8 +128,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":64,
-                 "y":96
+                 "x":32,
+                 "y":64
                 }, 
                 {
                  "class":"",
@@ -139,19 +139,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":16,
-                 "x":80,
-                 "y":96
-                }, 
-                {
-                 "class":"",
-                 "height":16,
-                 "id":7,
-                 "name":"necromancer",
-                 "rotation":0,
-                 "visible":true,
-                 "width":16,
-                 "x":191.996707310799,
-                 "y":112
+                 "x":80.4609764881412,
+                 "y":127.57688943767
                 }],
          "opacity":1,
          "type":"objectgroup",

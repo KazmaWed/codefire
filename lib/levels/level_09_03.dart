@@ -1,7 +1,8 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/levels/level_09_04.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -12,52 +13,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
-class LevelScreen extends StatefulWidget {
-  const LevelScreen({
-    super.key,
-    this.initialCode,
-    required this.showCollisionArea,
-    required this.mapJsonPath,
-    required this.levelId,
-    required this.stageId,
-    required this.hintTextList,
-    required this.playerPosition,
-    required this.roboDinoPosition,
-    required this.minimumStep,
-    required this.minimumCommand,
-    required this.nextMap,
-  });
+class Level0903 extends StatefulWidget {
+  const Level0903({super.key, this.initialCode});
   final String? initialCode;
-  final bool showCollisionArea;
-  final String mapJsonPath;
-  final List<String> hintTextList;
-  final Vector2 playerPosition;
-  final Vector2 roboDinoPosition;
-  final int minimumStep;
-  final int minimumCommand;
-  final Widget nextMap;
-  final int levelId;
-  final int stageId;
 
   @override
-  State<LevelScreen> createState() => _LevelScreenState();
+  State<Level0903> createState() => _Level0903State();
 }
 
-class _LevelScreenState extends State<LevelScreen> {
+class _Level0903State extends State<Level0903> {
+  final levelController = LevelController(
+    initialCode: '''
+moveLeft(8);
+''',
+    mapJsonPath: 'tiled/level_09_03.json',
+    hintTextList: [
+      '私はネクロマンサー、自己紹介が好き',
+    ],
+    playerPosition: Vector2(11, 9),
+    roboDinoPosition: Vector2(9, 9),
+    minimumStep: 22,
+    minimumCommand: 5,
+    nextMap: const Level0904(),
+  );
+  final levelId = 8;
+  final stageId = 2;
+
   @override
   Widget build(BuildContext context) {
-    final levelController = LevelController(
-      showCollisionArea: widget.showCollisionArea,
-      initialCode: widget.initialCode ?? '',
-      mapJsonPath: widget.mapJsonPath,
-      hintTextList: widget.hintTextList,
-      playerPosition: widget.playerPosition,
-      roboDinoPosition: widget.roboDinoPosition,
-      minimumStep: widget.minimumStep,
-      minimumCommand: widget.minimumCommand,
-      nextMap: widget.nextMap,
-    );
-
     String defaultCode = widget.initialCode ?? levelController.initialCode;
     levelController.init();
 
@@ -74,10 +57,8 @@ class _LevelScreenState extends State<LevelScreen> {
       void onClear() {
         final mainScreenController = ref.watch(mainScreenControllerProvider);
         final result = levelController.culcScore(context, codeController.text);
-        if (mainScreenController.levels[widget.levelId]['maps'][widget.stageId]['star'] <
-            result['star']) {
-          mainScreenController.levels[widget.levelId]['maps'][widget.stageId]['star'] =
-              result['star'];
+        if (mainScreenController.levels[levelId]['maps'][stageId]['star'] < result['star']) {
+          mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];
         }
       }
 

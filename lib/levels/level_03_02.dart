@@ -1,8 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_03_03.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -23,20 +23,22 @@ class Level0302 extends StatefulWidget {
 
 class _Level0302State extends State<Level0302> {
   final levelController = LevelController(
-    showCollisionArea: false,
-    initialCode: '''move2Up;\n''',
+    initialCode: '''
+moveUp(4);
+moveLeft(3);
+''',
     mapJsonPath: 'tiled/level_03_02.json',
     hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
-      'ねえ、コードフィールドを見てみて！なにかおかしいと思わない？',
-      'コマンドは必ず「moveUp(2)」みたいな形じゃないとダメなんだ\n「Up」は方向を、括弧の中の数字は進むマスの数を表しているよ',
-      'コマンドを正しく直して、ディノロボくんがボタンを押せる様にしてあげられるかな？',
-      'もちろん、コードフィールド上の矢印ボタンを使ってもいいよ♩'
+      '私はネクロマンサー、人の顔を見るのが苦手だよ！',
+      '左の部屋をみて、今度はボタンが離れたところにあって一度に全てのボタンを押すことはできなさそうだね…',
+      'こんな時は、コマンドをいくつか繋げて見よう！\nディノロボくんは上から順番にコマンドの指示にしたがって動いてくれるよ♩',
+      '今回は上に進んで右のボタンを押してから、次に左に進む、という風にすればうまくいきそうだ！',
+      'コマンドとコマンドの間にセミコロン(;)を打つか、改行を入れること忘れないでね！\nセミコロンや改行を忘れただけで、ディノロボくんがコマンドを理解できなくなることがあるんだ…',
     ],
-    playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(3, 7),
-    minimumStep: 2,
-    minimumCommand: 1,
+    playerPosition: Vector2(8, 9),
+    roboDinoPosition: Vector2(5, 8),
+    minimumStep: 7,
+    minimumCommand: 2,
     nextMap: const Level0303(),
   );
   final levelId = 2;

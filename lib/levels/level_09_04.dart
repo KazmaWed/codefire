@@ -1,10 +1,9 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
-import 'package:codefire/view/top_screen/top_screen.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
 import 'package:codefire/view/top_screen/top_screen_controller.dart';
 import 'package:flutter/material.dart';
@@ -13,31 +12,34 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:highlight/languages/javascript.dart';
 
-class Level0204 extends StatefulWidget {
-  const Level0204({super.key, this.initialCode});
+class Level0904 extends StatefulWidget {
+  const Level0904({super.key, this.initialCode});
   final String? initialCode;
 
   @override
-  State<Level0204> createState() => _Level0204State();
+  State<Level0904> createState() => _Level0904State();
 }
 
-class _Level0204State extends State<Level0204> {
+class _Level0904State extends State<Level0904> {
   final levelController = LevelController(
-    initialCode: '''MoveUp[5;]\n''',
-    mapJsonPath: 'tiled/level_02_04.json',
+    initialCode: '''
+moveLeft(8);
+for (let idx = 1; idx <= 2; idx++) {
+  moveUp(3 * idx - 1);
+  moveRight(5);
+}
+moveDown(1)''',
+    mapJsonPath: 'tiled/level_09_04.json',
     hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
-      '見てよ、コードフィールドにでたらめなコマンドが書いてあるよ！\nひどいね、きっと誰かがいたずらしたんだ…',
-      '括弧の種類が違うだけでも、ディノロボくんはコマンドを理解できなくなっちゃう\n他にもおかしいところはないかな？',
-      '正しいコマンドに書き直して、ディノロボくんをボタンまで動かしてあげて！',
+      '私はネクロマンサー、自己紹介が好き',
     ],
-    playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(3, 9),
-    minimumStep: 6,
-    minimumCommand: 1,
-    nextMap: const TopScreen(),
+    playerPosition: Vector2(11, 9),
+    roboDinoPosition: Vector2(9, 9),
+    minimumStep: 22,
+    minimumCommand: 5,
+    nextMap: const Level0904(),
   );
-  final levelId = 1;
+  final levelId = 8;
   final stageId = 3;
 
   @override

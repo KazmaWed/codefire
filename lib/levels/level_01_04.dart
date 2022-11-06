@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen.dart';

@@ -1,8 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_02_04.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -23,12 +23,11 @@ class Level0203 extends StatefulWidget {
 
 class _Level0203State extends State<Level0203> {
   final levelController = LevelController(
-    showCollisionArea: false,
     initialCode: '''moveDown(9999);\n''',
     mapJsonPath: 'tiled/level_02_03.json',
     hintTextList: [
       '私はネクロマンサー、コマンドについてとっても詳しい！',
-      '大変だ、コードフィールドを見て！「moveDown(999)」だなんて…\nこのままだとディノロボくんは下に9999マス進もうとして、壁に激突してしまうよ！',
+      '大変だ、コードフィールドを見て！「moveDown(9999);」だなんて…\nこのままだとディノロボくんは下に9999マス進もうとして、壁に激突してしまうよ！',
       'なんてね！実はディノロボくんには衝突防止機能がついてるから、全然平気なんだ♩',
       '壁があってそれ以上進めなくなったら、ぶつかる前にピタッと止まってくれるから安心さ',
       'せっかくだから試してみるといいよ\nとにかく青いボタンを押せれば扉は開くから大丈夫だよ♩',

@@ -11,6 +11,10 @@ import 'package:codefire/levels/level_03_02.dart';
 import 'package:codefire/levels/level_03_03.dart';
 import 'package:codefire/levels/level_03_04.dart';
 import 'package:codefire/levels/level_09_01.dart';
+import 'package:codefire/levels/level_09_02.dart';
+import 'package:codefire/levels/level_09_03.dart';
+import 'package:codefire/levels/level_09_04.dart';
+import 'package:codefire/utilities/sounds.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final mainScreenControllerProvider = StateProvider<MainScreenController>((ref) {
@@ -18,6 +22,25 @@ final mainScreenControllerProvider = StateProvider<MainScreenController>((ref) {
 });
 
 class MainScreenController {
+  bool _playBgm = false;
+  // bool _playSe = false;
+
+  bool get playBgm => _playBgm;
+  // bool get playSe => _playSe;
+
+  void toggleBgmSetting() {
+    _playBgm = !_playBgm;
+    if (_playBgm) {
+      Sounds.playBgmTitle();
+    } else {
+      Sounds.pauseBackgroundSound();
+    }
+  }
+
+  // void toggleSeSetting() {
+  //   _playSe = !_playSe;
+  // }
+
   List<Map<String, dynamic>> levels = [
     {
       'name': 'レベル1',
@@ -51,7 +74,7 @@ class MainScreenController {
     },
     {
       'name': 'レベル4',
-      'description': '赤スイッチを避けよう',
+      'description': '赤ボタンを避けよう',
       'maps': [
         {'map': const Level0101(), 'star': 0},
         {'map': const Level0102(), 'star': 0},
@@ -101,7 +124,10 @@ class MainScreenController {
       'name': 'レベル9',
       'description': '難しいマップに挑戦しよう',
       'maps': [
-        {'map': const Level0901(), 'star': 0}
+        {'map': const Level0901(), 'star': 0},
+        {'map': const Level0902(), 'star': 0},
+        {'map': const Level0903(), 'star': 0},
+        {'map': const Level0904(), 'star': 0},
       ],
     },
   ];

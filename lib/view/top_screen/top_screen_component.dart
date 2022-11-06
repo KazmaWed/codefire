@@ -41,7 +41,7 @@ class CordfireLevelCard extends StatelessWidget {
                   color: Colors.blueGrey,
                   borderRadius: BorderRadius.all(Radius.circular(40)),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 6),
                 child: Text(description, style: descriptionStyle),
               ),
             ]),

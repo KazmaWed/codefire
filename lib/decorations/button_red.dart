@@ -1,6 +1,7 @@
 import 'package:codefire/npc/invisible_npc_for_camera.dart';
-import 'package:codefire/player/player_bandit.dart';
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/utilities/sounds.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
 
 class ButtonRedDecoration extends GameDecoration with Sensor {
   ButtonRedDecoration({
@@ -16,8 +17,8 @@ class ButtonRedDecoration extends GameDecoration with Sensor {
         ) {
     setupSensorArea(areaSensor: [
       CollisionArea.rectangle(
-        size: Vector2.all(tileSize) * 1 / 3,
-        align: Vector2.all(tileSize) * 1 / 3 - positionShift,
+        size: Vector2.all(tileSize) * 1 / 2,
+        align: Vector2.all(tileSize) * 1 / 4 - positionShift,
       ),
     ]);
   }
@@ -36,7 +37,8 @@ class ButtonRedDecoration extends GameDecoration with Sensor {
 
   @override
   void onContact(GameComponent component) async {
-    if (!activated && component is! CameraTarget) {
+    if (!activated && (component is NpcRoboDino || component is PlayerBandit)) {
+      Sounds.buttonOn();
       callback();
       sprite = await Sprite.load(imagePathOn);
       activated = true;

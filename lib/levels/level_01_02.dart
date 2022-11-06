@@ -1,8 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_01_03.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -23,7 +23,6 @@ class Level0102 extends StatefulWidget {
 
 class _Level0102State extends State<Level0102> {
   final levelController = LevelController(
-    showCollisionArea: false,
     initialCode: '''moveRight(2);\n''',
     mapJsonPath: 'tiled/level_01_02.json',
     hintTextList: [

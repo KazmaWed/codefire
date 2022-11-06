@@ -15,6 +15,8 @@ export 'package:codefire/player/player_bandit_sprite.dart';
 
 class LevelController {
   LevelController({
+    this.showCollisionArea = false,
+    this.hintTextList,
     required this.initialCode,
     required this.mapJsonPath,
     required this.playerPosition,
@@ -22,8 +24,6 @@ class LevelController {
     required this.nextMap,
     required this.minimumStep,
     required this.minimumCommand,
-    this.hintTextList,
-    this.showCollisionArea = false,
   });
   final String initialCode;
   final String mapJsonPath;
@@ -75,7 +75,7 @@ class LevelController {
     _activatedButtons.add(buttonId);
   }
 
-  clearLevel() {
+  void clearLevel() {
     robo.controller.succeed();
   }
 
@@ -186,8 +186,8 @@ class LevelController {
     final moveDown = RegExp(r'moveDown\([0-9]*\)').allMatches(code).length;
     final moveLeft = RegExp(r'moveLeft\([0-9]*\)').allMatches(code).length;
     final moveRight = RegExp(r'moveRight\([0-9]*\)').allMatches(code).length;
-    final forUsage = RegExp(r'for\(.+;.+;.+\)').allMatches(code).length;
-    final ifUsage = RegExp(r'if\(\)').allMatches(code).length;
+    final forUsage = RegExp(r'for.?\(.+\;.+\;.+\)').allMatches(code).length;
+    final ifUsage = RegExp(r'if.?\(.?\)').allMatches(code).length;
     final output = {
       'moveUp': moveUp,
       'moveDown': moveDown,

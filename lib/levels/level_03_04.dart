@@ -1,7 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen.dart';
@@ -23,20 +23,18 @@ class Level0304 extends StatefulWidget {
 
 class _Level0304State extends State<Level0304> {
   final levelController = LevelController(
-    showCollisionArea: false,
-    initialCode: '''move2Up;\n''',
+    initialCode: '',
     mapJsonPath: 'tiled/level_03_04.json',
     hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
-      'ねえ、コードフィールドを見てみて！なにかおかしいと思わない？',
-      'コマンドは必ず「moveUp(2)」みたいな形じゃないとダメなんだ\n「Up」は方向を、括弧の中の数字は進むマスの数を表しているよ',
-      'コマンドを正しく直して、ディノロボくんがボタンを押せる様にしてあげられるかな？',
-      'もちろん、コードフィールド上の矢印ボタンを使ってもいいよ♩'
+      '私はネクロマンサー、人の顔を見るのが苦手だよ！',
+      '今度は不思議な形にボタンが並んでいるね…どういう順番で押すのがいいか迷っちゃうね！',
+      '順番に関係なく、全てのボタンを押せば扉は開くから、どれが正解というわけではないんだ\nでも、同じ種類のコマンドを使わない方が、クリア後にもらえるスターの数が増えるよ♩',
+      '移動するマスの数が増えてもいいから、できるだけ同じコマンドを使わないでクリアすることはできるかな？\nよーく考えてみて！'
     ],
-    playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(3, 7),
-    minimumStep: 2,
-    minimumCommand: 1,
+    playerPosition: Vector2(8, 9),
+    roboDinoPosition: Vector2(5, 9),
+    minimumStep: 12,
+    minimumCommand: 3,
     nextMap: const TopScreen(),
   );
   final levelId = 2;

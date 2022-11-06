@@ -1,8 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_03_02.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -23,11 +23,13 @@ class Level0301 extends StatefulWidget {
 
 class _Level0301State extends State<Level0301> {
   final levelController = LevelController(
-    showCollisionArea: false,
     initialCode: '''moveLeft(3);\n''',
     mapJsonPath: 'tiled/level_03_01.json',
     hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
+      '私はネクロマンサー、人の顔を見るのが苦手だよ！',
+      '左の部屋を見てごらん、青いボタンがたくさん並んでいるね\nこの部屋の扉を開くには全てのボタンを押す必要があるよ',
+      'ディノロボくんはボタンを押しながら、上を突っ切って歩くことができるから\n今回は左に進むだけでうまく行くはずだ',
+      'ほら、試した見て！'
     ],
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 6),

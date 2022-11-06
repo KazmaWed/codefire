@@ -1,8 +1,8 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_03_04.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
-import 'package:codefire/view/common_component/level_controller.dart';
-import 'package:codefire/view/common_component/level_widget.dart';
+import 'package:codefire/view/level_screen/level_controller.dart';
+import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/npc/npc_robo_dino_controller.dart';
 import 'package:codefire/view/common_component/codefire_field.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -23,20 +23,23 @@ class Level0303 extends StatefulWidget {
 
 class _Level0303State extends State<Level0303> {
   final levelController = LevelController(
-    showCollisionArea: false,
-    initialCode: '''move2Up;\n''',
+    initialCode: '''
+moveUp(4);
+moveLeft(3);
+moveDown(4);
+''',
     mapJsonPath: 'tiled/level_03_03.json',
     hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
-      'ねえ、コードフィールドを見てみて！なにかおかしいと思わない？',
-      'コマンドは必ず「moveUp(2)」みたいな形じゃないとダメなんだ\n「Up」は方向を、括弧の中の数字は進むマスの数を表しているよ',
-      'コマンドを正しく直して、ディノロボくんがボタンを押せる様にしてあげられるかな？',
-      'もちろん、コードフィールド上の矢印ボタンを使ってもいいよ♩'
+      '私はネクロマンサー、人の顔を見るのが苦手だよ！',
+      '今度はボタンが３つあるけど、全てを１度に押すことはできなそうだね\nコマンドも３つ使う必要がありそうだ',
+      '既にコードフィールドにコマンドが書かれているから、扉を開くだけなら再生ボタンを押すだけで十分だ！\nでも、他にもっといい方法はないかな？',
+      '使ったコマンドの数が同じなら、ディノロボくんが動いたマスの数が少ない方が、クリア後にもらえるスターの数は増えるよ',
+      'クリアした後にもっといい方法が思い浮かんだら、巻き戻しボタンを押して何度でもやり直せるから、いっぱい試してみて♩',
     ],
-    playerPosition: Vector2(7, 9),
-    roboDinoPosition: Vector2(3, 7),
-    minimumStep: 2,
-    minimumCommand: 1,
+    playerPosition: Vector2(8, 9),
+    roboDinoPosition: Vector2(5, 8),
+    minimumStep: 10,
+    minimumCommand: 3,
     nextMap: const Level0304(),
   );
   final levelId = 2;

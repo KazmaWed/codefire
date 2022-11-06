@@ -16,8 +16,8 @@ class ButtonGreenDecoration extends GameDecoration with Sensor {
         ) {
     setupSensorArea(areaSensor: [
       CollisionArea.rectangle(
-        size: Vector2(tileSize, tileSize) * 1 / 3,
-        align: Vector2(tileSize, tileSize) * 1 / 3,
+        size: Vector2(tileSize, tileSize) * 1 / 2,
+        align: Vector2(tileSize, tileSize) * 1 / 4,
       ),
     ]);
   }

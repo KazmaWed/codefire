@@ -4,7 +4,7 @@ import 'package:codefire/player/player_bandit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class NpcNecromancer extends SimpleNpc with ObjectCollision {
+class NpcNecromancer extends SimpleNpc with ObjectCollision, MouseGesture {
   NpcNecromancer(
     Vector2 initialPosition, {
     required this.tileSize,
@@ -43,12 +43,40 @@ class NpcNecromancer extends SimpleNpc with ObjectCollision {
   final List<String>? hintTextList;
 
   static const spriteShift = 14.0;
+  final radiusVision = 1;
+  bool lookAtPlayer = false;
 
   @override
-  bool onCollision(GameComponent component, bool active) {
-    _showTalk();
-    return super.onCollision(component, active);
+  Vector2 get center => super.center + Vector2(0, tileSize * 4 / 16);
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    seePlayer(
+      observed: (player) {
+        if (!lookAtPlayer) {
+          lookAtPlayer = true;
+          _showTalk();
+        }
+      },
+      notObserved: () {
+        if (lookAtPlayer) {
+          lookAtPlayer = false;
+        }
+      },
+      radiusVision: tileSize * radiusVision,
+    );
   }
+
+  @override
+  void onMouseTap(MouseButton button) {
+    if (lookAtPlayer) {
+      _showTalk();
+    }
+  }
+
+  @override
+  void onMouseCancel() {}
 
   void _showTalk() {
     if (hintTextList != null) {
@@ -73,35 +101,9 @@ class NpcNecromancer extends SimpleNpc with ObjectCollision {
     }
   }
 
-  // final radiusVision = 1.5;
-  // bool lookAtPlayer = false;
-
   // @override
-  // void update(double dt) {
-  //   super.update(dt);
-  //   seePlayer(
-  //     observed: (player) {
-  //       if (!lookAtPlayer) {
-  //         lookAtPlayer = true;
-  //         _showTalk();
-  //       }
-  //     },
-  //     notObserved: () {
-  //       if (lookAtPlayer) {
-  //         lookAtPlayer = false;
-  //       }
-  //     },
-  //     radiusVision: tileSize * radiusVision,
-  //   );
-  // }
-
-  // @override
-  // void joystickAction(JoystickActionEvent event) {
-  //   if ((event.id == 1 || event.id == LogicalKeyboardKey.space.keyId) &&
-  //       event.event == ActionEvent.DOWN &&
-  //       lookAtPlayer) {
-  //     _showTalk();
-  //   }
-  //   super.joystickAction(event);
+  // bool onCollision(GameComponent component, bool active) {
+  //   _showTalk();
+  //   return super.onCollision(component, active);
   // }
 }
