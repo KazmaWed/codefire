@@ -38,7 +38,7 @@ class ButtonRedDecoration extends GameDecoration with Sensor {
   @override
   void onContact(GameComponent component) async {
     if (!activated && (component is NpcRoboDino || component is PlayerBandit)) {
-      Sounds.buttonOn();
+      Sounds.buttonOff();
       callback();
       sprite = await Sprite.load(imagePathOn);
       activated = true;

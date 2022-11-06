@@ -35,7 +35,7 @@ class Sounds {
   }
 
   static void interaction() {
-    FlameAudio.play('sfx_ui_menu_selections.mp3', volume: 1);
+    FlameAudio.play('se/sfx_ui_menu_selections.mp3', volume: 1);
   }
 
   static stopBackgroundSound() {
@@ -44,7 +44,7 @@ class Sounds {
 
   static void playBgmTitle() async {
     await FlameAudio.bgm.stop();
-    FlameAudio.bgm.play('bgm/ending.mp3', volume: 0.18);
+    FlameAudio.bgm.play('bgm/ending.mp3', volume: 0.15);
   }
 
   static void playBgmDungeon() async {
@@ -53,7 +53,11 @@ class Sounds {
   }
 
   static void buttonOn() async {
-    FlameAudio.play('se/sfx_ui_menu_open.mp3', volume: 1);
+    FlameAudio.play('se/sfx_ui_confirm.mp3', volume: 1);
+  }
+
+  static void buttonOff() async {
+    FlameAudio.play('se/sfx_ui_resume.mp3', volume: 1);
   }
 
   static void pauseBackgroundSound() {

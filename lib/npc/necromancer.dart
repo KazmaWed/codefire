@@ -1,6 +1,7 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/npc/necromancer_sprite.dart';
 import 'package:codefire/player/player_bandit.dart';
+import 'package:codefire/utilities/sounds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -80,21 +81,21 @@ class NpcNecromancer extends SimpleNpc with ObjectCollision, MouseGesture {
 
   void _showTalk() {
     if (hintTextList != null) {
-      gameRef.player!.idle();
+      // 効果音
+      Sounds.interaction();
+      // プレイヤー停止
       (gameRef.player! as PlayerBandit).controller.stopMoving();
+      gameRef.player!.idle();
       TalkDialog.show(
         gameRef.map.gameRef.context,
-        // [
-        hintTextList!.map((element) {
-          return Say(text: [TextSpan(text: element)]);
-        }).toList(),
-        logicalKeyboardKeysToNext: [
-          LogicalKeyboardKey.space,
-        ],
+        hintTextList!.map((element) => Say(text: [TextSpan(text: element)])).toList(),
+        logicalKeyboardKeysToNext: [LogicalKeyboardKey.space],
         style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white),
         padding:
             EdgeInsets.only(left: MediaQuery.of(context).size.width / 3) + const EdgeInsets.all(32),
+        onChangeTalk: (value) => Sounds.interaction(),
         onFinish: () {
+          Sounds.interaction();
           gameRef.camera.moveToTargetAnimated(cameraCenterComponent);
         },
       );

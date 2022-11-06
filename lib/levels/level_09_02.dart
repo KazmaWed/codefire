@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/levels/level_09_03.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
@@ -36,7 +37,7 @@ for (let idx = 1; idx <= 2; idx++) {
     roboDinoPosition: Vector2(9, 9),
     minimumStep: 20,
     minimumCommand: 4,
-    nextMap: const Level0902(),
+    nextMap: const Level0903(),
   );
   final levelId = 8;
   final stageId = 1;
