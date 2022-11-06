@@ -17,7 +17,7 @@ class CameraTarget extends SimpleNpc {
   void update(double dt) {
     super.update(dt);
 
-    final mapCenter = player.gameRef.map.center;
+    final mapCenter = Vector2(player.gameRef.map.center.x, player.gameRef.map.center.y * 0.7);
     var componentPositionSum = Vector2.zero();
     for (var component in components) {
       componentPositionSum += component.position;
