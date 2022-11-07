@@ -6,7 +6,6 @@ import 'package:codefire/utilities/exit_map_sensor.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:flutter/material.dart';
 import 'package:bonfire/bonfire.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LevelWidget extends StatefulWidget {
   const LevelWidget({
