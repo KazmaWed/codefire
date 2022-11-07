@@ -46,14 +46,14 @@ class MainScreenController {
   // }
 
   final String gameDiscription = '''
-恐竜型ロボット「ディノロボくん」をコードで操縦します。
-コードの詳しい書き方はレベル1-3で教えてもらえます。
+恐竜型ロボット「ディノロボくん」をコードで操縦して、ステージ内のスイッチを全て押すとステージクリアです
+コードの詳しい書き方はステージ内で教えてもらえます。
 
 主人公は、画面をタップすると
-タップした場所まで自動で歩きます。
+タップした場所まで自動で歩きます
 
-レベル4はヒントの準備中です。
 レベル5 - 8は未実装です。
+
 レベル9はステージ1と3が問題、2と4はそれぞれの解答例です''';
 
   List<Map<String, dynamic>> levels = [
@@ -89,7 +89,7 @@ class MainScreenController {
     },
     {
       'name': 'レベル4',
-      'description': '赤ボタンを避けよう',
+      'description': '赤スイッチを避けよう',
       'maps': [
         {'map': const Level0401(), 'star': 0},
         {'map': const Level0402(), 'star': 0},

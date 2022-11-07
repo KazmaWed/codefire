@@ -44,7 +44,7 @@ class NpcNecromancer extends SimpleNpc with ObjectCollision, MouseGesture {
   final List<String>? hintTextList;
 
   static const spriteShift = 14.0;
-  final radiusVision = 1;
+  final radiusVision = 0.9;
   bool lookAtPlayer = false;
 
   @override
