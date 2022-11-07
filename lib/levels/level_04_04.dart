@@ -34,11 +34,11 @@ for (idx = 1; idx <= 3; idx++) {
     ],
     playerPosition: Vector2(11, 9),
     roboDinoPosition: Vector2(2, 9),
-    minimumStep: 12,
-    minimumCommand: 3,
+    minimumStep: 36,
+    minimumCommand: 4,
     nextMap: const TopScreen(),
   );
-  final levelId = 2;
+  final levelId = 3;
   final stageId = 3;
 
   @override

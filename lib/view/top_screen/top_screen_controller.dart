@@ -10,6 +10,10 @@ import 'package:codefire/levels/level_03_01.dart';
 import 'package:codefire/levels/level_03_02.dart';
 import 'package:codefire/levels/level_03_03.dart';
 import 'package:codefire/levels/level_03_04.dart';
+import 'package:codefire/levels/level_04_01.dart';
+import 'package:codefire/levels/level_04_02.dart';
+import 'package:codefire/levels/level_04_03.dart';
+import 'package:codefire/levels/level_04_04.dart';
 import 'package:codefire/levels/level_09_01.dart';
 import 'package:codefire/levels/level_09_02.dart';
 import 'package:codefire/levels/level_09_03.dart';
@@ -40,6 +44,17 @@ class MainScreenController {
   // void toggleSeSetting() {
   //   _playSe = !_playSe;
   // }
+
+  final String gameDiscription = '''
+恐竜型ロボット「ディノロボくん」をコードで操縦します。
+コードの詳しい書き方はレベル1-3で教えてもらえます。
+
+主人公は、画面をタップすると
+タップした場所まで自動で歩きます。
+
+レベル4はヒントの準備中です。
+レベル5 - 8は未実装です。
+レベル9はステージ1と3が問題、2と4はそれぞれの解答例です''';
 
   List<Map<String, dynamic>> levels = [
     {
@@ -76,8 +91,10 @@ class MainScreenController {
       'name': 'レベル4',
       'description': '赤ボタンを避けよう',
       'maps': [
-        {'map': const Level0101(), 'star': 0},
-        {'map': const Level0102(), 'star': 0},
+        {'map': const Level0401(), 'star': 0},
+        {'map': const Level0402(), 'star': 0},
+        {'map': const Level0403(), 'star': 0},
+        {'map': const Level0404(), 'star': 0},
       ],
     },
     {

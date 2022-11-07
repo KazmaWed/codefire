@@ -42,16 +42,7 @@ class _TopScreenState extends State<TopScreen> {
                   Text('遊び方', style: titleStyle),
                   const SizedBox(height: 18),
                   Text(
-                    '''
-恐竜型ロボット「ディノロボくん」をコードで操縦します。
-コードの詳しい書き方はレベル1-3で教えてもらえます。
-
-主人公は、画面をタップすると
-タップした場所まで自動で歩きます。
-
-レベル4 - 8は準備中です。
-レベル9はステージ1と3が問題、2と4はそれぞれの解答例です
-                    ''',
+                    controller.gameDiscription,
                     style: bodyStyle,
                   ),
                   const Spacer(),

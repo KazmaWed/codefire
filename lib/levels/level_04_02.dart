@@ -39,8 +39,8 @@ for (idx = 1; idx <= 2; idx++) {
     minimumCommand: 4,
     nextMap: const Level0403(),
   );
-  final levelId = 2;
-  final stageId = 3;
+  final levelId = 3;
+  final stageId = 1;
 
   @override
   Widget build(BuildContext context) {

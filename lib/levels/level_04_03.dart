@@ -34,13 +34,13 @@ moveDown(6)\n''',
       '私はネクロマンサー、人の顔を見るのが苦手だよ！',
     ],
     playerPosition: Vector2(11, 9),
-    roboDinoPosition: Vector2(2, 9),
+    roboDinoPosition: Vector2(8, 7),
     minimumStep: 16,
     minimumCommand: 4,
     nextMap: const Level0404(),
   );
-  final levelId = 2;
-  final stageId = 3;
+  final levelId = 3;
+  final stageId = 2;
 
   @override
   Widget build(BuildContext context) {
