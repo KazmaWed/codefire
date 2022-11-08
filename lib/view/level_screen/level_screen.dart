@@ -72,7 +72,7 @@ class _LevelScreenState extends State<LevelScreen> {
 
     return Consumer(builder: (context, ref, child) {
       void onClear() {
-        final mainScreenController = ref.watch(mainScreenControllerProvider);
+        final mainScreenController = ref.watch(topScreenControllerProvider);
         final result = levelController.culcScore(context, codeController.text);
         if (mainScreenController.levels[widget.levelId]['maps'][widget.stageId]['star'] <
             result['star']) {

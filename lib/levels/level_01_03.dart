@@ -55,7 +55,7 @@ class _Level0103State extends State<Level0103> {
     final focus = FocusNode();
     return Consumer(builder: (context, ref, child) {
       void onClear() {
-        final mainScreenController = ref.watch(mainScreenControllerProvider);
+        final mainScreenController = ref.watch(topScreenControllerProvider);
         final result = levelController.culcScore(context, codeController.text);
         if (mainScreenController.levels[levelId]['maps'][stageId]['star'] < result['star']) {
           mainScreenController.levels[levelId]['maps'][stageId]['star'] = result['star'];

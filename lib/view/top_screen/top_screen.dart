@@ -1,3 +1,4 @@
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/utilities/sounds.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/top_screen/top_screen_component.dart';
@@ -21,7 +22,7 @@ class _TopScreenState extends State<TopScreen> {
         Theme.of(context).textTheme.titleLarge!.copyWith(color: Theme.of(context).primaryColor);
 
     return Consumer(builder: ((context, ref, child) {
-      final controller = ref.watch(mainScreenControllerProvider);
+      final controller = ref.watch(topScreenControllerProvider);
 
       // BGM
       if (controller.playBgm) {
@@ -39,7 +40,10 @@ class _TopScreenState extends State<TopScreen> {
               child: Container(
                 padding: const EdgeInsets.all(36),
                 child: Column(children: [
-                  Text('遊び方', style: titleStyle),
+                  Text(
+                    controller.language == Language.japanese ? '遊び方' : 'How to Play',
+                    style: titleStyle,
+                  ),
                   const SizedBox(height: 18),
                   Text(
                     controller.gameDiscription,
@@ -51,6 +55,8 @@ class _TopScreenState extends State<TopScreen> {
                       onPressed: () => controller.toggleBgmSetting(),
                       icon: Text('♫', style: buttonStyle),
                     ),
+                    const Spacer(),
+                    LanguageToggle(callback: () => setState(() {})),
                   ])
                 ]),
               ),
@@ -63,11 +69,11 @@ class _TopScreenState extends State<TopScreen> {
                   padding: const EdgeInsets.all(18),
                   itemCount: controller.levels.length,
                   itemBuilder: ((context, index) {
-                    final Map<String, dynamic> levelInfo = controller.levels[index];
+                    final Map<dynamic, dynamic> levelInfo = controller.levels[index];
                     return CordfireLevelCard(
                       context: context,
-                      name: levelInfo['name'],
-                      description: levelInfo['description'],
+                      name: levelInfo['name'][controller.language],
+                      description: levelInfo['description'][controller.language],
                       maps: levelInfo['maps'],
                     );
                   }),

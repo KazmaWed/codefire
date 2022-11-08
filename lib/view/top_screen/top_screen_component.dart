@@ -1,4 +1,5 @@
 import 'package:codefire/utilities/extentions.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/utilities/sounds.dart';
 import 'package:codefire/view/top_screen/top_screen.dart';
 import 'package:codefire/view/top_screen/top_screen_controller.dart';
@@ -107,7 +108,7 @@ class CordfireLevelCard extends StatelessWidget {
             ),
           ),
           onTap: () {
-            final controller = ref.watch(mainScreenControllerProvider);
+            final controller = ref.watch(topScreenControllerProvider);
             if (controller.playBgm) {
               Sounds.playBgmDungeon();
             } else {
@@ -131,6 +132,43 @@ class GoBackFloatingButton extends StatelessWidget {
       onPressed: () {
         context.goTo(const TopScreen());
       },
+    );
+  }
+}
+
+class LanguageToggle extends ConsumerWidget {
+  const LanguageToggle({super.key, required this.callback});
+  final Function callback;
+
+  @override
+  Widget build(context, ref) {
+    final controller = ref.watch(topScreenControllerProvider);
+    final TextStyle style = Theme.of(context).textTheme.titleMedium!.copyWith(
+          color: Theme.of(context).primaryColor,
+        );
+
+    return Wrap(
+      spacing: 8,
+      children: [
+        ChoiceChip(
+          label: Text('日本語', style: style),
+          selected: controller.language == Language.japanese,
+          onSelected: (value) {
+            controller.changeLanguageSetting(Language.japanese);
+            // ref.read(topScreenControllerProvider.notifier).state = controller;
+            callback();
+          },
+        ),
+        ChoiceChip(
+          label: Text('English', style: style),
+          selected: controller.language == Language.english,
+          onSelected: (value) {
+            controller.changeLanguageSetting(Language.english);
+            // ref.read(topScreenControllerProvider.notifier).state = controller;
+            callback();
+          },
+        ),
+      ],
     );
   }
 }
