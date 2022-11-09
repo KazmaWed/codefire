@@ -37,6 +37,13 @@ moveLeft(3);
         '今回は上に進んで右のスイッチを押してから、次に左に進む、という風にすればうまくいきそうだ！',
         'コマンドとコマンドの間にセミコロン(;)を打つか、改行を入れること忘れないでね！\nセミコロンや改行を忘れただけで、ディノロボくんがコマンドを理解できなくなることがあるんだ…',
       ],
+      Language.english: [
+        'I am Necrom. Just little too shy to talk face-to-face!',
+        'Look at the room on the left, now it looks like we can\'t press all the but†ons at once because they are too far apart...',
+        'In this case, let\'s see if we can string some commands together!\nDino-Robo-kun will move according to the commands from the first line.',
+        'In this case, we can move up first, press the right switch, then move left and press the next one.',
+        'Don\'t forget to put a semicolon or line break between commands!\nDino-Robo may not understand the commands if you forget to put a them between commands...',
+      ],
     },
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 8),

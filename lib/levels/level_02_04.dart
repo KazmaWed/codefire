@@ -33,6 +33,12 @@ class _Level0204State extends State<Level0204> {
         '括弧の種類が違うだけでも、ディノロボくんはコマンドを理解できなくなっちゃう\n他にもおかしいところはないかな？',
         '正しいコマンドに書き直して、ディノロボくんをスイッチまで動かしてあげて！',
       ],
+      Language.english: [
+        'I am Necrom. I know a lot about commands!',
+        'Look, there\'s a random command in the code field! Someone must have messed with it...',
+        'Even if the parentheses are incorrect, Dino-Robo can\'t understand the commands.',
+        'Is there anything else wrong? Fix the correct command and move Dino-Robo to the button!',
+      ],
     },
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(3, 9),

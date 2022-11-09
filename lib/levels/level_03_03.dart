@@ -38,6 +38,13 @@ moveDown(4);
         '使ったコマンドの数が同じなら、ディノロボくんが動いたマスの数が少ない方が、クリア後にもらえるスターの数は増えるよ',
         'クリアした後にもっといい方法が思い浮かんだら、巻き戻しボタンを押して何度でもやり直せるから、いっぱい試してみて♩',
       ],
+      Language.english: [
+        'I am Necrom. Just little too shy to talk face-to-face!',
+        'This time there are three blue buttons, but it seems that we can\'t press all of them at once, we need to use three different commands!',
+        'Since the commands are already written in the code field, just pressing the play button open the door! But I wonder if there\'s better way to do it?',
+        'If the number of commands used is the same, the fewer squares Dino-Robo moved, the more stars you will get after clearing the stage!',
+        'If you think of a better way after clearing the game, you can press the rewind button to redo it as many times as you like.',
+      ],
     },
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 8),

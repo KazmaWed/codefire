@@ -33,6 +33,13 @@ class _Level0304State extends State<Level0304> {
         '順番に関係なく、全てのスイッチを押せば扉は開くから、どれが正解というわけではないんだ\nでも、同じ種類のコマンドを使わない方が、クリア後にもらえるスターの数が増えるよ♩',
         '移動するマスの数が増えてもいいから、できるだけ同じコマンドを使わないでクリアすることはできるかな？\nよーく考えてみて！'
       ],
+      Language.english: [
+        'I am Necrom. Just little too shy to talk face-to-face!',
+        'Now the buttons are arranged in a strange way...\nI\'m not sure in what order I should press them!',
+        'Regardless of the order, when you press all the buttons, the door will open anyway. So there may be multiple right answers.',
+        'Can you clear the stage without using the same commands, even if it increases the number of squares you have to move?',
+        'Think smart!',
+      ],
     },
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 9),

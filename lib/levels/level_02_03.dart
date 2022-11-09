@@ -34,6 +34,13 @@ class _Level0203State extends State<Level0203> {
         '壁があってそれ以上進めなくなったら、ぶつかる前にピタッと止まってくれるから安心さ',
         'せっかくだから試してみるといいよ\nとにかく青いスイッチを押せれば扉は開くから大丈夫だよ♩',
       ],
+      Language.english: [
+        'I am Necrom. I know a lot about commands!',
+        'Oh god, look at the code field! "moveDown(9999);"!?\nDino-Robo will try to move down 9999 squares and crash into a wall!',
+        'What a surprise! Actually, Dino-Robo is equipped with an anti-collision function, so it is totally safe.',
+        'If there\'s a wall and he can\'t go any further, he\'ll stop before he hits it.',
+        'Anyway, you can press the play button and the door will open.',
+      ],
     },
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(3, 5),

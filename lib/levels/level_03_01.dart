@@ -33,6 +33,12 @@ class _Level0301State extends State<Level0301> {
         'ディノロボくんはスイッチを押しながら、上を突っ切って歩くことができるから\n今回は左に進むだけでうまく行くはずだ',
         'ほら、試した見て！'
       ],
+      Language.english: [
+        'I\'m Necrom. Just little too shy to talk face-to-face!',
+        'Look at the room on the left, there are many blue buttons in a row.',
+        'Actually Dino-Robo can walk through on the buttons pressing all of them. This time, just move him left and it should totally work!',
+        'Here, try and see it!',
+      ],
     },
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 6),
