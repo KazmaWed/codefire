@@ -74,6 +74,8 @@ To move the player charactor, click the destination on the screen.
 
 Levels from 5 to 8 are still under development.
 In Level 9, stage 1 & 3 are quizes and 2 & 4 are sample answers for each. 
+
+English scripts are available only for level 1, 2 and 3.
 ''';
 
   final List<Map<dynamic, dynamic>> levels = [
