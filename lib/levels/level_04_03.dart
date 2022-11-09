@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_04_04.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -30,14 +31,16 @@ for (idx = 1; idx <= 2; idx++) {
 }
 moveDown(6)\n''',
     mapJsonPath: 'tiled/level_04_03.json',
-    hintTextList: [
-      '私はネクロマンサー、実はメガネっ子だよ！',
-      '斜めに進むにはforループが便利、でも今回はスイッチが3つも斜めに並んでるよ！\nさっきと同じ様に、２回繰り返して進むだけだとスイッチを全部押せないね…',
-      'そんな時はforループをすこし書き換えてみよう！今回は３回分の繰り返しが必要そうだよね？',
-      '「for (idx = 1; idx <= 2; idx++)」の部分をよく見て！この真ん中の「idx <= 2」のところ\n実はこの右辺の「2」が、コマンドを繰り返す回数を表しているんだ♩',
-      '今回はコマンドを3回繰り返す必要があったね…\nだったら「idx <= 2」の部分を「idx <= 3」に書き換えてみよう！',
-      'そうすれば、ディノロボくんは左上に３回進んだ後に、下に進んで最後のスイッチも押してくれるはずだ^ ^'
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、実はメガネっ子だよ！',
+        '斜めに進むにはforループが便利、でも今回はスイッチが3つも斜めに並んでるよ！\nさっきと同じ様に、２回繰り返して進むだけだとスイッチを全部押せないね…',
+        'そんな時はforループをすこし書き換えてみよう！今回は３回分の繰り返しが必要そうだよね？',
+        '「for (idx = 1; idx <= 2; idx++)」の部分をよく見て！この真ん中の「idx <= 2」のところ\n実はこの右辺の「2」が、コマンドを繰り返す回数を表しているんだ♩',
+        '今回はコマンドを3回繰り返す必要があったね…\nだったら「idx <= 2」の部分を「idx <= 3」に書き換えてみよう！',
+        'そうすれば、ディノロボくんは左上に３回進んだ後に、下に進んで最後のスイッチも押してくれるはずだ^ ^'
+      ],
+    },
     playerPosition: Vector2(11, 9),
     roboDinoPosition: Vector2(8, 6),
     minimumStep: 15,

@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_09_04.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
@@ -27,9 +28,11 @@ class _Level0903State extends State<Level0903> {
 moveLeft(8);
 ''',
     mapJsonPath: 'tiled/level_09_03.json',
-    hintTextList: [
-      '私はネクロマンサー、自己紹介が好き',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、自己紹介が好き',
+      ],
+    },
     playerPosition: Vector2(11, 9),
     roboDinoPosition: Vector2(9, 9),
     minimumStep: 22,

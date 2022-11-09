@@ -55,23 +55,26 @@ class CordfireLevelCard extends StatelessWidget {
               runAlignment: WrapAlignment.start,
               spacing: 12,
               runSpacing: 8,
-              children: [
-                for (var index = 0; index < maps.length; index++) levelButton(maps[index], index),
-              ],
+              children: List<Widget>.generate(
+                maps.length,
+                (index) => levelButton(index),
+              ),
             ),
-            //   ],
-            // ),
           ],
         ),
       ),
     );
   }
 
-  Widget levelButton(Map<String, dynamic> map, int index) {
+  Widget levelButton(int index) {
+    final map = maps[index];
+
     final TextStyle style = Theme.of(context).textTheme.bodyMedium!.copyWith(
           color: Colors.black,
         );
-    final levelText = 'ステージ${index + 1}';
+    final levelTextJp = 'ステージ${index + 1}';
+    final levelTextEn = 'Stage ${index + 1}';
+
     final Widget mapWidget = map['map'];
     final int mapStar = map['star'];
 
@@ -89,6 +92,8 @@ class CordfireLevelCard extends StatelessWidget {
     }
 
     return Consumer(builder: (context, ref, child) {
+      final controller = ref.watch(topScreenControllerProvider);
+
       return Card(
         child: InkWell(
           borderRadius: borderRadius,
@@ -101,14 +106,16 @@ class CordfireLevelCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               child: Column(children: [
-                Text(levelText, style: style),
+                Text(
+                  controller.language == Language.japanese ? levelTextJp : levelTextEn,
+                  style: style,
+                ),
                 // const SizedBox(height: 4),
                 starIndicator(mapStar),
               ]),
             ),
           ),
           onTap: () {
-            final controller = ref.watch(topScreenControllerProvider);
             if (controller.playBgm) {
               Sounds.playBgmDungeon();
             } else {

@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -29,14 +30,16 @@ class _Level0404State extends State<Level0404> {
   moveLeft(6);
   moveUp(3);\n''',
     mapJsonPath: 'tiled/level_04_04.json',
-    hintTextList: [
-      '私はネクロマンサー、実はメガネっ子だよ！',
-      '今回はなんだか辺な形をしたステージだね！細い通路の奥にあるスイッチを押していかなきゃいけないよ…',
-      'ここでもforループが役に立ちそうだ！下のスイッチから順番に押して上がっていくのが良さそうだね',
-      'でもコードフィールドには、まだforループが書かれていないみたいだね…\nforループを追加して、全部のスイッチを押せるようにコマンドを書いてあげて！',
-      'forループの書き方なんて覚えてないって？大丈夫だよ！\nコマンドフィールドの右上「FOR」ボタンを押せばforループが自動で追加されるんだ',
-      '繰り返すコマンドは波括弧の中に書かなきゃいけなかったね\n他にも直す必要があるところがないか、よく見てみてね^ ^'
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、実はメガネっ子だよ！',
+        '今回はなんだか辺な形をしたステージだね！細い通路の奥にあるスイッチを押していかなきゃいけないよ…',
+        'ここでもforループが役に立ちそうだ！下のスイッチから順番に押して上がっていくのが良さそうだね',
+        'でもコードフィールドには、まだforループが書かれていないみたいだね…\nforループを追加して、全部のスイッチを押せるようにコマンドを書いてあげて！',
+        'forループの書き方なんて覚えてないって？大丈夫だよ！\nコマンドフィールドの右上「FOR」ボタンを押せばforループが自動で追加されるんだ',
+        '繰り返すコマンドは波括弧の中に書かなきゃいけなかったね\n他にも直す必要があるところがないか、よく見てみてね^ ^'
+      ],
+    },
     playerPosition: Vector2(11, 9),
     roboDinoPosition: Vector2(2, 9),
     minimumStep: 36,

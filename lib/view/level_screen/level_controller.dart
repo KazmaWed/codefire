@@ -5,6 +5,7 @@ import 'package:codefire/npc/invisible_npc_for_camera.dart';
 import 'package:codefire/npc/necromancer.dart';
 import 'package:codefire/npc/npc_robo_dino.dart';
 import 'package:codefire/player/player_bandit.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:flutter/material.dart';
 export 'package:codefire/player/player_bandit.dart';
 export 'package:codefire/decorations/arch_gate.dart';
@@ -27,7 +28,7 @@ class LevelController {
   });
   final String initialCode;
   final String mapJsonPath;
-  final List<String>? hintTextList;
+  final Map<Language, List<String>>? hintTextList;
   final bool showCollisionArea;
   final Vector2 playerPosition;
   final Vector2 roboDinoPosition;

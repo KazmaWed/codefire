@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
@@ -30,7 +31,7 @@ class LevelScreen extends StatefulWidget {
   final String? initialCode;
   final bool showCollisionArea;
   final String mapJsonPath;
-  final List<String> hintTextList;
+  final Map<Language, List<String>> hintTextList;
   final Vector2 playerPosition;
   final Vector2 roboDinoPosition;
   final int minimumStep;
@@ -57,18 +58,17 @@ class _LevelScreenState extends State<LevelScreen> {
       minimumCommand: widget.minimumCommand,
       nextMap: widget.nextMap,
     );
-
-    String defaultCode = widget.initialCode ?? levelController.initialCode;
     levelController.init();
 
+    String defaultCode = widget.initialCode ?? levelController.initialCode;
+
+    final focus = FocusNode();
     final codeController = CodeController(
       text: defaultCode,
       language: javascript,
       theme: CodefireField.codeTheme,
       patternMap: CodefireField.patternMap,
     );
-
-    final focus = FocusNode();
 
     return Consumer(builder: (context, ref, child) {
       void onClear() {

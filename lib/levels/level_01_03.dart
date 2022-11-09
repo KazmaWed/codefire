@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_01_04.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -25,12 +26,20 @@ class _Level0103State extends State<Level0103> {
   final levelController = LevelController(
     initialCode: '''moveUp(4);\n''',
     mapJsonPath: 'tiled/level_01_03.json',
-    hintTextList: [
-      '私はネクロマンサー、この世界のルールを知ってるよ！',
-      '今回のコマンド「moveUp();」は「上に進んで」という指示なんだ\n括弧の中の数字「4」は進むマスの数を表しているよ',
-      '再生ボタンを押せば、ディノロボットが「上に4マス」進んで、スイッチを押してくれるはず♩',
-      'さあ、実際に試してみて！\n巻き戻しボタンは何度でも押せるからね',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、この世界のルールを知ってるよ！',
+        '今回のコマンド「moveUp();」は「上に進んで」という指示なんだ\n括弧の中の数字「4」は進むマスの数を表しているよ',
+        '再生ボタンを押せば、ディノロボットが「上に4マス」進んで、スイッチを押してくれるはず♩',
+        'さあ、実際に試してみて！\n巻き戻しボタンは何度でも押せるからね',
+      ],
+      Language.english: [
+        'I am Necrom. I know the rules of this world!',
+        'This time, the command "moveUp();" tells Dino-Robo to step up♩\nThe number "4" in the parentheses indicates the number of squares to move on.',
+        'If you press the play button, Dino-Robo will move up 4 squares and press the switch.',
+        'Come on, try it out! \nYou can press the rewind and rewind buttons as many times as you like!',
+      ]
+    },
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(3, 8),
     minimumStep: 6,

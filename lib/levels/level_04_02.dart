@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_04_03.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -30,14 +31,16 @@ for (idx = 1; idx <= 2; idx++) {
   moveUp(3);
 }\n''',
     mapJsonPath: 'tiled/level_04_02.json',
-    hintTextList: [
-      '私はネクロマンサー、実はメガネっ子だよ！',
-      '今回のステージは、３つのスイッチが対角線上にならんでいるね\nさっきと同じ様にはいかなそうだ…！',
-      'forループは波括弧の間に書かれたコマンドを繰り返してくれるけど\nその前に書かれたコマンドは、いつも通り１度だけしか実行されないんだ！',
-      '例えばこのステージなら、まず左に進んでスイッチを押してから\nそのあと右上に上がっていくっていう方法が良さそうだね！',
-      '左に進むのは最初の１回だけでいいから、moveLeft()のコマンドはforループの外に書いてしまおう\n',
-      'moveRight()とmoveUp()はforループの中に書けば、ディノロボくんが上手にスイッチを押しながら進んでくれるはずだよ♩',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、実はメガネっ子だよ！',
+        '今回のステージは、３つのスイッチが対角線上にならんでいるね\nさっきと同じ様にはいかなそうだ…！',
+        'forループは波括弧の間に書かれたコマンドを繰り返してくれるけど\nその前に書かれたコマンドは、いつも通り１度だけしか実行されないんだ！',
+        '例えばこのステージなら、まず左に進んでスイッチを押してから\nそのあと右上に上がっていくっていう方法が良さそうだね！',
+        '左に進むのは最初の１回だけでいいから、moveLeft()のコマンドはforループの外に書いてしまおう\n',
+        'moveRight()とmoveUp()はforループの中に書けば、ディノロボくんが上手にスイッチを押しながら進んでくれるはずだよ♩',
+      ],
+    },
     playerPosition: Vector2(11, 9),
     roboDinoPosition: Vector2(8, 9),
     minimumStep: 18,

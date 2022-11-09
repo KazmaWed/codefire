@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_03_02.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -25,12 +26,14 @@ class _Level0301State extends State<Level0301> {
   final levelController = LevelController(
     initialCode: '''moveLeft(3);\n''',
     mapJsonPath: 'tiled/level_03_01.json',
-    hintTextList: [
-      '私はネクロマンサー、人の顔を見るのが苦手だよ！',
-      '左の部屋を見てごらん、青いスイッチがたくさん並んでいるね\nこの部屋の扉を開くには全てのスイッチを押す必要があるよ',
-      'ディノロボくんはスイッチを押しながら、上を突っ切って歩くことができるから\n今回は左に進むだけでうまく行くはずだ',
-      'ほら、試した見て！'
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、人の顔を見るのが苦手だよ！',
+        '左の部屋を見てごらん、青いスイッチがたくさん並んでいるね\nこの部屋の扉を開くには全てのスイッチを押す必要があるよ',
+        'ディノロボくんはスイッチを押しながら、上を突っ切って歩くことができるから\n今回は左に進むだけでうまく行くはずだ',
+        'ほら、試した見て！'
+      ],
+    },
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 6),
     minimumStep: 3,

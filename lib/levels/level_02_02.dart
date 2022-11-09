@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_02_03.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -25,13 +26,22 @@ class _Level0202State extends State<Level0202> {
   final levelController = LevelController(
     initialCode: '''moveleft(2);\n''',
     mapJsonPath: 'tiled/level_02_02.json',
-    hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
-      'コードフィールドを見てみて！またコマンドがおかしいと思わない？',
-      'コマンドが一文字間違っているだけでも、ディノロボくんは指示を理解できなくなってしまうんだ…',
-      'アルファベットの大文字と小文字が違ったり、数字が全角になってるだけでもダメだよ\nコマンドを正しく書くって大変だね！',
-      'さあ、コマンドを正しく直せるかな？\nうまくいかない時は、とにかく注意深く見なおしてみてね！',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、コマンドについてとっても詳しい！',
+        'コードフィールドを見てみて！またコマンドがおかしいと思わない？',
+        'コマンドが一文字間違っているだけでも、ディノロボくんは指示を理解できなくなってしまうんだ…',
+        'アルファベットの大文字と小文字が違ったり、数字が全角になってるだけでもダメだよ\nコマンドを正しく書くって大変だね！',
+        'さあ、コマンドを正しく直せるかな？\nうまくいかない時は、とにかく注意深く見なおしてみてね！',
+      ],
+      Language.english: [
+        'I am Necrom. I know a lot about commands!',
+        'Look at the code field! Don\'t you think the commands are wrong again?',
+        'Even one wrong letter in the command will make Dino-Robo unable to understand the meaning...',
+        'If you mixup upper cases and lower cases, the robot will not be able to understand the command at all. It\'s tough to type right commands!',
+        'Now, can you fix the command correctly? If it doesn\'t work, check carefully again and again!',
+      ],
+    },
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(4, 6),
     minimumStep: 2,

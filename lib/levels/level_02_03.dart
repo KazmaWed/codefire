@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_02_04.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -25,13 +26,15 @@ class _Level0203State extends State<Level0203> {
   final levelController = LevelController(
     initialCode: '''moveDown(9999);\n''',
     mapJsonPath: 'tiled/level_02_03.json',
-    hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
-      '大変だ、コードフィールドを見て！「moveDown(9999);」だなんて…\nこのままだとディノロボくんは下に9999マス進もうとして、壁に激突してしまうよ！',
-      'なんてね！実はディノロボくんには衝突防止機能がついてるから、全然平気なんだ♩',
-      '壁があってそれ以上進めなくなったら、ぶつかる前にピタッと止まってくれるから安心さ',
-      'せっかくだから試してみるといいよ\nとにかく青いスイッチを押せれば扉は開くから大丈夫だよ♩',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、コマンドについてとっても詳しい！',
+        '大変だ、コードフィールドを見て！「moveDown(9999);」だなんて…\nこのままだとディノロボくんは下に9999マス進もうとして、壁に激突してしまうよ！',
+        'なんてね！実はディノロボくんには衝突防止機能がついてるから、全然平気なんだ♩',
+        '壁があってそれ以上進めなくなったら、ぶつかる前にピタッと止まってくれるから安心さ',
+        'せっかくだから試してみるといいよ\nとにかく青いスイッチを押せれば扉は開くから大丈夫だよ♩',
+      ],
+    },
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(3, 5),
     minimumStep: 2,

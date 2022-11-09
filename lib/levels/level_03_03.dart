@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_03_04.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -29,13 +30,15 @@ moveLeft(3);
 moveDown(4);
 ''',
     mapJsonPath: 'tiled/level_03_03.json',
-    hintTextList: [
-      '私はネクロマンサー、人の顔を見るのが苦手だよ！',
-      '今度はスイッチが３つあるけど、全てを１度に押すことはできなそうだね\nコマンドも３つ使う必要がありそうだ',
-      '既にコードフィールドにコマンドが書かれているから、扉を開くだけなら再生ボタンを押すだけで十分だ！\nでも、他にもっといい方法はないかな？',
-      '使ったコマンドの数が同じなら、ディノロボくんが動いたマスの数が少ない方が、クリア後にもらえるスターの数は増えるよ',
-      'クリアした後にもっといい方法が思い浮かんだら、巻き戻しボタンを押して何度でもやり直せるから、いっぱい試してみて♩',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、人の顔を見るのが苦手だよ！',
+        '今度はスイッチが３つあるけど、全てを１度に押すことはできなそうだね\nコマンドも３つ使う必要がありそうだ',
+        '既にコードフィールドにコマンドが書かれているから、扉を開くだけなら再生ボタンを押すだけで十分だ！\nでも、他にもっといい方法はないかな？',
+        '使ったコマンドの数が同じなら、ディノロボくんが動いたマスの数が少ない方が、クリア後にもらえるスターの数は増えるよ',
+        'クリアした後にもっといい方法が思い浮かんだら、巻き戻しボタンを押して何度でもやり直せるから、いっぱい試してみて♩',
+      ],
+    },
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 8),
     minimumStep: 10,

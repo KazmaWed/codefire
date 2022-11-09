@@ -20,7 +20,6 @@ import 'package:codefire/levels/level_09_03.dart';
 import 'package:codefire/levels/level_09_04.dart';
 import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/utilities/sounds.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final topScreenControllerProvider = StateProvider<TopScreenController>((ref) {
@@ -133,7 +132,7 @@ In Level 9, stage 1 & 3 are quizes and 2 & 4 are sample answers for each.
       },
       'description': {
         Language.japanese: 'ループコマンドを使ってみよう',
-        Language.english: 'Power of for loops. 1',
+        Language.english: 'Power of for loops. #1',
       },
       'maps': [
         {'map': const Level0401(), 'star': 0},
@@ -149,7 +148,7 @@ In Level 9, stage 1 & 3 are quizes and 2 & 4 are sample answers for each.
       },
       'description': {
         Language.japanese: 'ループコマンドを使ってみよう 2',
-        Language.english: 'Power of for loops. 2',
+        Language.english: 'Power of for loops. #2',
       },
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -165,7 +164,7 @@ In Level 9, stage 1 & 3 are quizes and 2 & 4 are sample answers for each.
       },
       'description': {
         Language.japanese: 'if分岐を使ってみよう 1',
-        Language.english: 'Power of for loops. 2',
+        Language.english: 'Power of for loops. #2',
       },
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -181,7 +180,7 @@ In Level 9, stage 1 & 3 are quizes and 2 & 4 are sample answers for each.
       },
       'description': {
         Language.japanese: 'if分岐を使ってみよう 2',
-        Language.english: 'Power of for loops. 2',
+        Language.english: 'Power of for loops. #2',
       },
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -197,7 +196,7 @@ In Level 9, stage 1 & 3 are quizes and 2 & 4 are sample answers for each.
       },
       'description': {
         Language.japanese: '難しいステージに挑戦 1',
-        Language.english: 'Difficult stages. 1',
+        Language.english: 'Difficult stages. #1',
       },
       'maps': [
         {'map': const Level0101(), 'star': 0},
@@ -213,7 +212,7 @@ In Level 9, stage 1 & 3 are quizes and 2 & 4 are sample answers for each.
       },
       'description': {
         Language.japanese: '難しいステージに挑戦 2',
-        Language.english: 'Difficult stages. 2',
+        Language.english: 'Difficult stages. #2',
       },
       'maps': [
         {'map': const Level0901(), 'star': 0},

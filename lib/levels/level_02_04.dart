@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -25,12 +26,14 @@ class _Level0204State extends State<Level0204> {
   final levelController = LevelController(
     initialCode: '''MoveUp[5;]\n''',
     mapJsonPath: 'tiled/level_02_04.json',
-    hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
-      '見てよ、コードフィールドにでたらめなコマンドが書いてあるよ！\nひどいね、きっと誰かがいたずらしたんだ…',
-      '括弧の種類が違うだけでも、ディノロボくんはコマンドを理解できなくなっちゃう\n他にもおかしいところはないかな？',
-      '正しいコマンドに書き直して、ディノロボくんをスイッチまで動かしてあげて！',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、コマンドについてとっても詳しい！',
+        '見てよ、コードフィールドにでたらめなコマンドが書いてあるよ！\nひどいね、きっと誰かがいたずらしたんだ…',
+        '括弧の種類が違うだけでも、ディノロボくんはコマンドを理解できなくなっちゃう\n他にもおかしいところはないかな？',
+        '正しいコマンドに書き直して、ディノロボくんをスイッチまで動かしてあげて！',
+      ],
+    },
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(3, 9),
     minimumStep: 6,

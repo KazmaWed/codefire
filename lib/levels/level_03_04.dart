@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -25,12 +26,14 @@ class _Level0304State extends State<Level0304> {
   final levelController = LevelController(
     initialCode: '',
     mapJsonPath: 'tiled/level_03_04.json',
-    hintTextList: [
-      '私はネクロマンサー、人の顔を見るのが苦手だよ！',
-      '今度は不思議な形にスイッチが並んでいるね…どういう順番で押すのがいいか迷っちゃうね！',
-      '順番に関係なく、全てのスイッチを押せば扉は開くから、どれが正解というわけではないんだ\nでも、同じ種類のコマンドを使わない方が、クリア後にもらえるスターの数が増えるよ♩',
-      '移動するマスの数が増えてもいいから、できるだけ同じコマンドを使わないでクリアすることはできるかな？\nよーく考えてみて！'
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、人の顔を見るのが苦手だよ！',
+        '今度は不思議な形にスイッチが並んでいるね…どういう順番で押すのがいいか迷っちゃうね！',
+        '順番に関係なく、全てのスイッチを押せば扉は開くから、どれが正解というわけではないんだ\nでも、同じ種類のコマンドを使わない方が、クリア後にもらえるスターの数が増えるよ♩',
+        '移動するマスの数が増えてもいいから、できるだけ同じコマンドを使わないでクリアすることはできるかな？\nよーく考えてみて！'
+      ],
+    },
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 9),
     minimumStep: 12,

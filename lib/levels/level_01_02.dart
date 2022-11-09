@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_01_03.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -25,13 +26,22 @@ class _Level0102State extends State<Level0102> {
   final levelController = LevelController(
     initialCode: '''moveRight(2);\n''',
     mapJsonPath: 'tiled/level_01_02.json',
-    hintTextList: [
-      '私はネクロマンサー、この世界のルールを知ってるよ！',
-      'コードフィールドに書かれた「moveRight();」の文字は「コマンド」というんだ\n左の部屋にいるディノロボくんは、そのコマンド通りに動くよ',
-      '「moveRight();」のコマンドはディノロボくんに「右に動いて」と指示しているんだ',
-      'さて、今回も再生ボタンを押すだけで扉が開くはずだよ♩',
-      'もし失敗したら、いつでも巻き戻しボタンを押すんだよ！',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、この世界のルールを知ってるよ！',
+        'コードフィールドに書かれた「moveRight();」の文字は「コマンド」というんだ\n左の部屋にいるディノロボくんは、そのコマンド通りに動くよ',
+        '「moveRight();」のコマンドはディノロボくんに「右に動いて」と指示しているんだ',
+        'さて、今回も再生ボタンを押すだけで扉が開くはずだよ♩',
+        'もし失敗したら、いつでも巻き戻しボタンを押すんだよ！',
+      ],
+      Language.english: [
+        'I am Necrom, I know the rules of this world!',
+        'The letters "moveRight();" written in the code field is called "command" and Dino-Robo in the left room will move according to the command.',
+        'The "moveRight();" command tells DinoRobo to step to the right.',
+        'Now, you only have to press the play button again to open the door.',
+        'If it fails, you can always press the rewind button!',
+      ]
+    },
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(2, 6),
     minimumStep: 4,

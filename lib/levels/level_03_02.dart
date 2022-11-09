@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_03_03.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -28,13 +29,15 @@ moveUp(4);
 moveLeft(3);
 ''',
     mapJsonPath: 'tiled/level_03_02.json',
-    hintTextList: [
-      '私はネクロマンサー、人の顔を見るのが苦手だよ！',
-      '左の部屋をみて、今度はスイッチが離れたところにあって一度に全てのスイッチを押すことはできなさそうだね…',
-      'こんな時は、コマンドをいくつか繋げて見よう！\nディノロボくんは上から順番にコマンドの指示にしたがって動いてくれるよ♩',
-      '今回は上に進んで右のスイッチを押してから、次に左に進む、という風にすればうまくいきそうだ！',
-      'コマンドとコマンドの間にセミコロン(;)を打つか、改行を入れること忘れないでね！\nセミコロンや改行を忘れただけで、ディノロボくんがコマンドを理解できなくなることがあるんだ…',
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、人の顔を見るのが苦手だよ！',
+        '左の部屋をみて、今度はスイッチが離れたところにあって一度に全てのスイッチを押すことはできなさそうだね…',
+        'こんな時は、コマンドをいくつか繋げて見よう！\nディノロボくんは上から順番にコマンドの指示にしたがって動いてくれるよ♩',
+        '今回は上に進んで右のスイッチを押してから、次に左に進む、という風にすればうまくいきそうだ！',
+        'コマンドとコマンドの間にセミコロン(;)を打つか、改行を入れること忘れないでね！\nセミコロンや改行を忘れただけで、ディノロボくんがコマンドを理解できなくなることがあるんだ…',
+      ],
+    },
     playerPosition: Vector2(8, 9),
     roboDinoPosition: Vector2(5, 8),
     minimumStep: 7,

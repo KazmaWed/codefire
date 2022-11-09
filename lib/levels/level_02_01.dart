@@ -1,5 +1,6 @@
 import 'package:bonfire/bonfire.dart';
 import 'package:codefire/levels/level_02_02.dart';
+import 'package:codefire/utilities/languages.dart';
 import 'package:codefire/view/common_component/codefire_components.dart';
 import 'package:codefire/view/level_screen/level_controller.dart';
 import 'package:codefire/view/level_screen/level_widget.dart';
@@ -25,13 +26,22 @@ class _Level0201State extends State<Level0201> {
   final levelController = LevelController(
     initialCode: '''move2Up;\n''',
     mapJsonPath: 'tiled/level_02_01.json',
-    hintTextList: [
-      '私はネクロマンサー、コマンドについてとっても詳しい！',
-      'ねえ、コードフィールドを見てみて！なにかおかしいと思わない？',
-      'コマンドは必ず「moveUp(2)」みたいな形じゃないとダメなんだ\n「Up」は方向を、括弧の中の数字は進むマスの数を表しているよ',
-      'コマンドを正しく直して、ディノロボくんがスイッチを押せる様にしてあげられるかな？',
-      'もちろん、コードフィールド上の矢印ボタンを使ってもいいよ♩'
-    ],
+    hintTextList: {
+      Language.japanese: [
+        '私はネクロマンサー、コマンドについてとっても詳しい！',
+        'ねえ、コードフィールドを見てみて！なにかおかしいと思わない？',
+        'コマンドは必ず「moveUp(2)」みたいな形じゃないとダメなんだ\n「Up」は方向を、括弧の中の数字は進むマスの数を表しているよ',
+        'コマンドを正しく直して、ディノロボくんがスイッチを押せる様にしてあげられるかな？',
+        'もちろん、コードフィールド上の矢印ボタンを使ってもいいよ♩'
+      ],
+      Language.english: [
+        'I am Necrom. I know a lot about commands!',
+        'Hey, look at the code field! Don\'t you think something is wrong?',
+        'The command always has to look like "moveUp(2)".\nThe "Up" is the direction and the number in parentheses is the number of squares to move on.',
+        'Can you fix the command correctly so that Dino-Robo can press the button and open the door?',
+        'Of course, you can use arrow buttons on the code field.',
+      ],
+    },
     playerPosition: Vector2(7, 9),
     roboDinoPosition: Vector2(3, 7),
     minimumStep: 2,
